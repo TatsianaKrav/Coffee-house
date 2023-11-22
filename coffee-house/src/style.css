@@ -4,13 +4,13 @@
 }
 
 @font-face {
-  font-family: 'Inter-Regular';
+  font-family: "Inter-Regular";
   src: url(../assets/fonts/Inter-Regular.ttf);
   font-weight: 400;
 }
 
 @font-face {
-  font-family: 'Inter-Bold';
+  font-family: "Inter-Bold";
   src: url(../assets/fonts/Inter-Bold.ttf);
   font-weight: 600;
 }
@@ -27,13 +27,16 @@ body {
 }
 
 .header {
-  padding: 20px 40px;
+  box-sizing: border-box;
+  padding: 20px 0;
 }
 
 .header .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0 40px;
+  box-sizing: border-box;
 }
 
 .header-menu-list nav ul {
@@ -62,4 +65,57 @@ body {
   text-decoration: none;
   color: #403f3d;
   font-size: 16px;
+}
+
+.coffee-enjoy .container {
+  box-sizing: border-box;
+  padding: 0 40px;
+}
+
+.coffee-enjoy-wrapper {
+  max-width: 1360px;
+  background-image: url(../assets/images/home-page/enjoy-bg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 40px;
+}
+
+.coffee-enjoy-info {
+  max-width: 530px;
+  padding: 100px 0 100px 100px;
+}
+
+.coffee-enjoy-head {
+  color: #e1d4c9;
+  font-size: 72px;
+  line-height: 105%;
+  margin-bottom: 40px;
+}
+
+.coffee-enjoy-head span {
+  color: #b0907a;
+  font-style: italic;
+}
+
+.coffee-enjoy-description {
+  color: #e1d4c9;
+  font-family: Inter-Regular, sans-serif;
+  font-size: 16px;
+  line-height: 150%;
+  margin-bottom: 40px;
+}
+
+.button {
+  width: 200px;
+  padding: 20px 78px;
+  border-radius: 100px;
+  background: #e1d4c9;
+  color: #403f3d;
+  text-align: center;
+  font-family: Inter-Bold, sans-serif;
+  font-size: 16px;
+  border: none;
+  box-sizing: border-box;
+  cursor: pointer;
 }
