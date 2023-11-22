@@ -6,24 +6,21 @@
 @font-face {
   font-family: "Inter-Regular";
   src: url(../assets/fonts/Inter-Regular.ttf);
-  font-weight: 400;
 }
 
 @font-face {
-  font-family: "Inter-Bold";
-  src: url(../assets/fonts/Inter-Bold.ttf);
-  font-weight: 600;
+  font-family: "Inter-SemiBold";
+  src: url(../assets/fonts/Inter-SemiBold.ttf);
 }
 
 body {
   background-color: #e1d4c9;
-  font-family: Inter-Bold, sans-serif;
+  font-family: Inter-SemiBold, sans-serif;
 }
 
 .container {
   width: 1360px;
   margin: 0 auto;
-  font-family: Inter-Bold, sans-serif;
 }
 
 .header {
@@ -193,4 +190,44 @@ body {
   position: absolute;
   left: 0;
   top: calc(50% + 30px);
+}
+
+.resource-place-images-head {
+  color: #403f3d;
+  font-size: 60px;
+  line-height: 125%; /* 75px */
+  margin-bottom: 40px;
+}
+
+.resource-place-images-head span {
+  color: #b0907a;
+  font-style: italic;
+}
+
+.resource-images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 430px 200px 430px;
+  grid-column-gap: 40px;
+}
+
+.resource-image img {
+  border-radius: 20px;
+}
+
+.first-img {
+  grid-area: 1/1/2/3;
+}
+
+.second-img {
+  grid-area: 1/2/2/3;
+}
+
+.third-img {
+  grid-area: 3/1/4/3;
+}
+
+.fourth-img {
+  grid-area: 2/2/4/3;
+  align-self: end;
 }
