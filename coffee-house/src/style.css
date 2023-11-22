@@ -184,12 +184,14 @@ body {
   position: absolute;
   right: 0;
   top: calc(50% + 30px);
+  cursor: pointer;
 }
 
 .arrow-back {
   position: absolute;
   left: 0;
   top: calc(50% + 30px);
+  cursor: pointer;
 }
 
 .resource-place-images-head {
@@ -230,4 +232,81 @@ body {
 .fourth-img {
   grid-area: 2/2/4/3;
   align-self: end;
+}
+
+.download {
+  padding: 100px 0;
+}
+
+.download .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.download-info {
+  max-width: 630px;
+}
+
+.download-info-head {
+  color: #403f3d;
+  font-size: 60px;
+  line-height: 125%;
+  margin-bottom: 40px;
+}
+
+.download-info-head span {
+  color: #b0907a;
+}
+
+.download-info-description {
+  color: #403f3d;
+  font-family: Inter-Regular, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 150%;
+  margin-bottom: 40px;
+}
+
+.download-info-actions {
+  display: flex;
+  align-items: center;
+}
+
+.button.btn {
+  width: 200px;
+  padding: 12px 20px;
+  align-items: center;
+  border-radius: 100px;
+  border: 1px solid #665f55;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-family: Inter-SemiBold, sans-serif;
+}
+
+.button.btn:first-child {
+  margin-right: 20px;
+}
+
+.button-logo {
+  margin-right: 8px;
+}
+
+.button-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.button-text span {
+  color: #403f3d;
+  font-size: 16px;
+}
+
+.button-text span:first-child {
+  color: #403f3d;
+  text-align: center;
+  font-size: 10px;
+  margin-bottom: 2px;
 }
