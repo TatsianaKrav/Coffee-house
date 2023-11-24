@@ -82,6 +82,7 @@ body {
   font-size: 16px;
   display: flex;
   align-items: center;
+  cursor: default;
 }
 
 .header-menu a span {
@@ -181,10 +182,30 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  border-radius: 40px;
 }
 
 .coffee-item-image img {
   border-radius: 40px;
+  transform: scale(1.1);
+}
+
+.coffee-item:hover img {
+    animation: animation 2s linear;
+  }
+
+@keyframes animation {
+  from {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.1);
+  }
 }
 
 .coffee-item-info {
