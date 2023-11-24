@@ -5,12 +5,12 @@
 
 @font-face {
   font-family: "Inter-Regular";
-  src: url(../assets/fonts/Inter-Regular.ttf);
+  src: url(../../assets/fonts/Inter-Regular.ttf);
 }
 
 @font-face {
   font-family: "Inter-SemiBold";
-  src: url(../assets/fonts/Inter-SemiBold.ttf);
+  src: url(../../assets/fonts/Inter-SemiBold.ttf);
 }
 
 html {
@@ -88,6 +88,124 @@ body {
 
 .header-menu:hover {
   border-bottom: 2px solid #403f3d;
+}
+
+.menu-main {
+  padding: 20px 0 100px 0;
+}
+
+.menu-main-title {
+  color: #403f3d;
+  text-align: center;
+  font-size: 60px;
+  line-height: 125%; /* 75px */
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.menu-main-title span {
+  color: #b0907a;
+  font-style: italic;
+}
+
+.menu-list-drinks {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.menu-list-drinks nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-list-drinks nav ul li {
+  padding: 8px 16px 8px 8px;
+  margin-right: 16px;
+  border-radius: 100px;
+  border: 1px solid #c1b6ad;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.menu-list-drinks nav ul li:last-child {
+  margin-right: 0;
+}
+
+.menu-list-drinks nav ul li.active {
+  background: #665f55;
+}
+
+.menu-list-drinks nav ul li.active span {
+  color: #e1d4c9;
+  font-size: 16px;
+}
+
+.menu-list-drinks nav ul li a {
+  text-decoration: none;
+  color: #403f3d;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu-list-drinks nav ul li a svg {
+  margin-right: 8px;
+}
+
+.coffee-items {
+  display: grid;
+  grid-template-columns: repeat(4, 310px);
+  grid-template-rows: repeat(2, 1fr);
+  grid-gap: 40px;
+}
+
+.coffee-item {
+  border-radius: 40px;
+  border: 1px solid #c1b6ad;
+  height: 506px;
+  box-sizing: border-box;
+}
+
+.coffee-item-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.coffee-item-image img {
+  border-radius: 40px;
+}
+
+.coffee-item-info {
+  padding: 20px;
+ /*  display: flex;
+  flex-direction: column;
+  justify-content: space-between; */
+}
+
+.coffee-item-title {
+  color: #403f3d;
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.coffee-item-description {
+  color: #403f3d;
+  font-family: Inter-Regular, sans-serif;
+  font-size: 16px;
+  line-height: 150%; /* 24px */
+  height: 72px;
+}
+
+.coffee-item-price {
+  margin-top: 12px;
+  color: #403f3d;
+  font-size: 24px;
 }
 
 .footer {
