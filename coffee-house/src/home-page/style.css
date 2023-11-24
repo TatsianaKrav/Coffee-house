@@ -365,6 +365,8 @@ body {
   box-sizing: border-box;
   cursor: pointer;
   font-family: Inter-SemiBold, sans-serif;
+  transition: all 0.7s linear;
+  position: relative;
 }
 
 .btn:first-child {
@@ -373,23 +375,104 @@ body {
 
 .btn-logo {
   margin-right: 8px;
+  visibility: hidden;
+}
+
+.btn.app-store-btn::after {
+  content: " ";
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  background-image: url("../../assets/images/home-page/app-store-icon.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: all 0.7s linear;
+}
+
+.btn.app-store-btn::before {
+  content: " ";
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  background-image: url("../../assets/images/home-page/app-store-icon-hover.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.btn.google-play-btn::after {
+  content: " ";
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  background-image: url("../../assets/images/home-page/google-play.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: all 0.7s linear;
+}
+
+.btn.google-play-btn::before {
+  content: " ";
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  background-image: url("../../assets/images/home-page/google-play-hover.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .btn-text {
+  color: #403f3d;
   display: flex;
   flex-direction: column;
+  transition: all 0.7s linear;
 }
 
 .btn-text span {
-  color: #403f3d;
   font-size: 16px;
+  line-height: 150%; /* 24px */
 }
 
 .btn-text span:first-child {
-  color: #403f3d;
   text-align: center;
   font-size: 10px;
   margin-bottom: 2px;
+  line-height: 140%; /* 14px */
+}
+
+.btn:hover {
+  background-color: #665f55;
+}
+
+.btn:hover .btn-text {
+  color: #e1d4c9;
+}
+
+.btn.app-store-btn:hover {
+  transition: all 1.5s ease;
+}
+
+.btn.app-store-btn:hover::after {
+  opacity: 0;
+}
+
+.btn.app-store-btn:hover::before {
+  opacity: 1;
+}
+
+.btn.google-play-btn:hover {
+  transition: all 1.5s ease;
+}
+
+.btn.google-play-btn:hover::after {
+  opacity: 0;
+}
+
+.btn.google-play-btn:hover::before {
+  opacity: 1;
 }
 
 .footer {
