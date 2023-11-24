@@ -271,6 +271,24 @@ body {
 
 .about-image img {
   border-radius: 20px;
+  animation: scale 1s;
+}
+
+.about-image:hover img {
+  animation: animation 1s linear;
+}
+
+@keyframes animation {
+  from {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.95);
+  }
+
+  to {
+    transform: scale(1);
+  }
 }
 
 .first-img {
@@ -330,7 +348,7 @@ body {
   align-items: center;
 }
 
-.button.btn {
+.btn {
   width: 200px;
   padding: 12px 20px;
   align-items: center;
@@ -343,25 +361,25 @@ body {
   font-family: Inter-SemiBold, sans-serif;
 }
 
-.button.btn:first-child {
+.btn:first-child {
   margin-right: 20px;
 }
 
-.button-logo {
+.btn-logo {
   margin-right: 8px;
 }
 
-.button-text {
+.btn-text {
   display: flex;
   flex-direction: column;
 }
 
-.button-text span {
+.btn-text span {
   color: #403f3d;
   font-size: 16px;
 }
 
-.button-text span:first-child {
+.btn-text span:first-child {
   color: #403f3d;
   text-align: center;
   font-size: 10px;
@@ -403,12 +421,33 @@ body {
   align-items: center;
 }
 
-.footer-socials a {
+.footer-socials-icon {
   margin-right: 12px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 1px solid #c1b6ad;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s linear;
+  background: transparent;
 }
 
-.footer-socials a:last-child {
+.footer-socials-icon:last-child {
   margin-right: 0;
+}
+
+.footer-socials-icon:hover path {
+  stroke: #403f3d;
+}
+
+.footer-socials-icon:hover svg {
+  fill: #e1d4c9;
+}
+
+.footer-socials-icon:hover {
+  background-color: #e1d4c9;
 }
 
 .footer-contacts-head {
@@ -449,6 +488,7 @@ body {
   font-size: 16px;
 }
 
-.footer-contacts-schedule a {
-  cursor: default;
+.footer-contacts-schedule {
+  display: flex;
+  align-items: center;
 }
