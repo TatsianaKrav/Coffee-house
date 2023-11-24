@@ -289,23 +289,11 @@ body {
 .about-image img {
   border-radius: 20px;
   transform: scale(1.1);
+  transition: all 0.7s linear;
 }
 
 .about-image:hover img {
-  animation: animation 2s linear;
-}
-
-@keyframes animation {
-  from {
-    transform: scale(1.1);
-  }
-  50% {
-    transform: scale(1);
-  }
-
-  to {
-    transform: scale(1.1);
-  }
+  transform: scale(1);
 }
 
 .about-image.first-img {
