@@ -1,0 +1,163 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+@font-face {
+  font-family: "Inter-Regular";
+  src: url(../assets/fonts/Inter-Regular.ttf);
+}
+
+@font-face {
+  font-family: "Inter-SemiBold";
+  src: url(../assets/fonts/Inter-SemiBold.ttf);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #e1d4c9;
+  font-family: Inter-SemiBold, sans-serif;
+}
+
+.container {
+  width: 1360px;
+  margin: 0 auto;
+}
+
+.header {
+  box-sizing: border-box;
+  padding: 20px 0;
+}
+
+.header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-menu-list nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu-item {
+  margin-right: 40px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  box-sizing: border-box;
+  padding-bottom: 4px;
+}
+
+.menu-item:last-child {
+  margin-right: 0;
+}
+
+.menu-item a {
+  color: #403f3d;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.menu-item:hover {
+  border-bottom: 2px solid #403f3d;
+}
+
+.header-menu {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid transparent;
+  box-sizing: border-box;
+  padding-bottom: 4px;
+}
+
+.header-menu a {
+  text-decoration: none;
+  color: #403f3d;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.header-menu a span {
+  margin-right: 8px;
+}
+
+.header-menu:hover {
+  border-bottom: 2px solid #403f3d;
+}
+
+.footer {
+  padding-bottom: 40px;
+}
+
+.footer .container {
+  padding: 100px;
+  border-radius: 40px;
+  background: #665f55;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.footer-info {
+  max-width: 530px;
+  margin-right: 100px;
+}
+
+.footer-title {
+  color: #e1d4c9;
+  font-size: 60px;
+  line-height: 125%; /* 75px */
+  margin-bottom: 40px;
+}
+
+.footer-title span {
+  color: #b0907a;
+  font-style: italic;
+}
+
+.footer-socials {
+  display: flex;
+  align-items: center;
+}
+
+.footer-socials a {
+  margin-right: 12px;
+}
+
+.footer-socials a:last-child {
+  margin-right: 0;
+}
+
+.footer-contacts-head {
+  color: #e1d4c9;
+  font-size: 24px;
+  margin-bottom: 40px;
+}
+
+.footer-contact-block {
+  margin-bottom: 16px;
+}
+
+.footer-contact-block:last-child {
+  margin-bottom: 0;
+}
+
+.footer-contact-block svg {
+  margin-right: 8px;
+}
+
+.footer-contact {
+  color: #e1d4c9;
+  font-size: 16px;
+}
+
+.footer-contact-block a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
