@@ -50,6 +50,7 @@ body {
   border-bottom: 2px solid transparent;
   box-sizing: border-box;
   padding-bottom: 4px;
+  transition: all 0.5s linear;
 }
 
 .menu-item:last-child {
@@ -72,6 +73,7 @@ body {
   border-bottom: 2px solid transparent;
   box-sizing: border-box;
   padding-bottom: 4px;
+  transition: all 0.5s linear;
 }
 
 .header-menu a {
@@ -86,10 +88,10 @@ body {
   margin-right: 8px;
 }
 
-.header-menu:hover {
+/* .header-menu:hover {
   border-bottom: 2px solid #403f3d;
 }
-
+ */
 .header-menu.active {
   border-bottom: 2px solid #403f3d;
 }

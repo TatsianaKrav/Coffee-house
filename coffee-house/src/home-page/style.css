@@ -50,6 +50,7 @@ body {
   border-bottom: 2px solid transparent;
   box-sizing: border-box;
   padding-bottom: 4px;
+  transition: all 0.5s linear;
 }
 
 .menu-item:last-child {
@@ -72,6 +73,7 @@ body {
   border-bottom: 2px solid transparent;
   box-sizing: border-box;
   padding-bottom: 4px;
+  transition: all 0.5s linear;
 }
 
 .header-menu a {
@@ -417,6 +419,7 @@ body {
 
 .footer-contact-block {
   margin-bottom: 16px;
+  position: relative;
 }
 
 .footer-contact-block:last-child {
@@ -425,6 +428,20 @@ body {
 
 .footer-contact-block svg {
   margin-right: 8px;
+  vertical-align: baseline;
+}
+
+.footer-contact-block a {
+  text-decoration: none;
+  display: inline-block;
+  border-bottom: 2px solid transparent;
+  box-sizing: border-box;
+  padding-bottom: 4px;
+  transition: all 0.5s linear;
+}
+
+.footer-contact-block a:hover {
+  border-bottom: 2px solid #e1d4c9;
 }
 
 .footer-contact {
@@ -432,8 +449,6 @@ body {
   font-size: 16px;
 }
 
-.footer-contact-block a {
-  text-decoration: none;
-  display: flex;
-  align-items: center;
+.footer-contacts-schedule a {
+  cursor: default;
 }
