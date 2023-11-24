@@ -90,6 +90,10 @@ body {
   border-bottom: 2px solid #403f3d;
 }
 
+.header-menu.active {
+  border-bottom: 2px solid #403f3d;
+}
+
 .menu-main {
   padding: 20px 0 100px 0;
 }
