@@ -23,7 +23,7 @@ body {
 }
 
 .container {
-  width: 1360px;
+  max-width: 1360px;
   margin: 0 auto;
 }
 
@@ -182,16 +182,20 @@ body {
 }
 
 .coffee-items {
-  display: grid;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  /* display: grid;
   grid-template-columns: repeat(4, 310px);
   grid-template-rows: repeat(2, 1fr);
-  grid-gap: 40px;
+  grid-gap: 40px; */
 }
 
 .coffee-item {
   border-radius: 40px;
   border: 1px solid #c1b6ad;
   height: 506px;
+  max-width: 310px;
   box-sizing: border-box;
 }
 
