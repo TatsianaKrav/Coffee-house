@@ -90,6 +90,7 @@ body {
   align-items: center;
   box-sizing: border-box;
   transition: all 0.5s linear;
+  position: relative;
 }
 
 .header-menu a {
@@ -107,6 +108,15 @@ body {
 
 .header-menu a {
   cursor: default;
+}
+
+.header-menu::after {
+  content: " ";
+  position: absolute;
+  bottom: -4px;
+  width: 100%;
+  height: 2px;
+  background-color: #403F3D;
 }
 
 .menu-main {

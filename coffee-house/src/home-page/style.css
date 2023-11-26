@@ -155,7 +155,7 @@ body {
 
 .button span {
   line-height: 150%; /* 24px */
-  transition: all 0.7s linear;
+  transition: all 0.5s linear;
 }
 
 .button::after {
