@@ -50,7 +50,8 @@ body {
   border-bottom: 2px solid transparent;
   box-sizing: border-box;
   padding-bottom: 4px;
-  transition: all 0.5s linear;
+  transition: all 0.3s linear;
+  position: relative;
 }
 
 .menu-item:last-child {
@@ -63,8 +64,22 @@ body {
   text-decoration: none;
 }
 
-.menu-item:hover {
-  border-bottom: 2px solid #403f3d;
+.menu-item::after {
+  content: " ";
+  position: absolute;
+  height: 2px;
+  background-color: #403f3d;
+  width: 0;
+  opacity: 0.3;
+  right: 50%;
+  bottom: 0;
+  transition: all 0.8s ease;
+}
+
+.menu-item:hover::after {
+  right: 0;
+  width: 100%;
+  opacity: 1;
 }
 
 .header-menu {
@@ -86,10 +101,6 @@ body {
 
 .header-menu a span {
   margin-right: 8px;
-}
-
-.header-menu:hover {
-  border-bottom: 2px solid #403f3d;
 }
 
 .coffee-enjoy .container {
@@ -566,17 +577,30 @@ body {
   vertical-align: baseline;
 }
 
+.footer-contact-block a::after {
+  content: " ";
+  position: absolute;
+  height: 2px;
+  background-color: #e1d4c9;
+  width: 0;
+  opacity: 0.3;
+  right: 65%;
+  bottom: 0;
+  transition: all 0.8s ease;
+}
+
+.footer-contact-block a:hover::after {
+  right: 30%;
+  width: 70%;
+  opacity: 1;
+}
+
 .footer-contact-block a {
   text-decoration: none;
   display: inline-block;
   border-bottom: 2px solid transparent;
   box-sizing: border-box;
   padding-bottom: 4px;
-  transition: all 0.5s linear;
-}
-
-.footer-contact-block a:hover {
-  border-bottom: 2px solid #e1d4c9;
 }
 
 .footer-contact {
