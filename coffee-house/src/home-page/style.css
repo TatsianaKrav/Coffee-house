@@ -13,6 +13,11 @@
   src: url(../../assets/fonts/Inter-SemiBold.ttf);
 }
 
+@font-face {
+  font-family: "Inter-SemiBold-Italic";
+  src: url(../../assets/fonts/Inter-semi-bold-italic.otf);
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -125,7 +130,7 @@ body {
 
 .coffee-enjoy-head span {
   color: #b0907a;
-  font-style: italic;
+  font-family: Inter-SemiBold-Italic, sans-serif;
 }
 
 .coffee-enjoy-description {
@@ -205,7 +210,7 @@ body {
 
 .favorite-coffee-head span {
   color: #b0907a;
-  font-style: italic;
+  font-family: Inter-SemiBold-Italic, sans-serif;
 }
 
 .favorite-coffee-name {
@@ -252,15 +257,15 @@ body {
 
 .favorite-arrow.arrow-next {
   position: absolute;
-  right: 0;
-  top: calc(50% + 30px);
+  right: 5px;
+  top: calc(50% + 5px);
   cursor: pointer;
 }
 
 .favorite-arrow.arrow-back {
   position: absolute;
-  left: 0;
-  top: calc(50% + 30px);
+  left: 5px;
+  top: calc(50% + 5px);
   cursor: pointer;
 }
 
@@ -269,6 +274,7 @@ body {
   height: 60px;
   border-radius: 50%;
   border: 1px solid #665f55;
+  box-sizing: border-box;
   transition: all 0.7s linear;
 }
 
@@ -289,7 +295,7 @@ body {
 
 .about-head span {
   color: #b0907a;
-  font-style: italic;
+  font-family: Inter-SemiBold-Italic, sans-serif;
 }
 
 .about-images {
@@ -355,7 +361,7 @@ body {
 
 .mobile-apps-info-head span {
   color: #b0907a;
-  font-style: italic;
+  font-family: Inter-SemiBold-Italic, sans-serif;
 }
 
 .mobile-apps-info-description {
@@ -446,6 +452,7 @@ body {
   color: #403f3d;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   transition: all 0.7s linear;
 }
 
@@ -520,7 +527,7 @@ body {
 
 .footer-title span {
   color: #b0907a;
-  font-style: italic;
+  font-family: Inter-SemiBold-Italic, sans-serif;
 }
 
 .footer-socials {
@@ -539,6 +546,7 @@ body {
   justify-content: center;
   transition: all 0.5s linear;
   background: transparent;
+  box-sizing: border-box;
 }
 
 .footer-socials-icon:last-child {
@@ -557,14 +565,19 @@ body {
   background-color: #e1d4c9;
 }
 
+.footer-contacts {
+  /* padding-bottom: 11px; */
+}
+
 .footer-contacts-head {
   color: #e1d4c9;
   font-size: 24px;
   margin-bottom: 40px;
+  line-height: 125%; /* 30px */
 }
 
 .footer-contact-block {
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   position: relative;
 }
 
@@ -585,7 +598,7 @@ body {
   width: 0;
   opacity: 0.3;
   right: 65%;
-  bottom: 0;
+  bottom: -4px;
   transition: all 0.8s ease;
 }
 
@@ -597,15 +610,16 @@ body {
 
 .footer-contact-block a {
   text-decoration: none;
-  display: inline-block;
-  border-bottom: 2px solid transparent;
+  display: flex;
+  align-items: center;
   box-sizing: border-box;
-  padding-bottom: 4px;
 }
+
 
 .footer-contact {
   color: #e1d4c9;
   font-size: 16px;
+  line-height: 150%; /* 24px */
 }
 
 .footer-contacts-schedule {

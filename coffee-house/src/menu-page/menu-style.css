@@ -301,6 +301,7 @@ body {
   justify-content: center;
   transition: all 0.5s linear;
   background: transparent;
+  box-sizing: border-box;
 }
 
 .footer-socials-icon:last-child {
@@ -317,6 +318,10 @@ body {
 
 .footer-socials-icon:hover {
   background-color: #e1d4c9;
+}
+
+.footer-contacts {
+  padding-bottom: 16px;
 }
 
 .footer-contacts-head {
@@ -344,7 +349,6 @@ body {
   display: inline-block;
   border-bottom: 2px solid transparent;
   box-sizing: border-box;
-  padding-bottom: 4px;
   transition: all 0.5s linear;
 }
 
@@ -356,7 +360,7 @@ body {
     width: 0;
     opacity: 0.3;
     right: 65%;
-    bottom: 0;
+    bottom: -4px;
     transition: all 0.8s ease;
   }
   
@@ -369,6 +373,7 @@ body {
 .footer-contact {
   color: #e1d4c9;
   font-size: 16px;
+  line-height: 150%; /* 24px */
 }
 
 .footer-contacts-schedule {
