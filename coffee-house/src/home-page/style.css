@@ -81,7 +81,7 @@ body {
   width: 0;
   opacity: 0.3;
   right: 50%;
-  bottom: 0;
+  bottom: -4px;
   transition: all 0.8s ease;
 }
 
