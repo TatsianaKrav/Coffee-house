@@ -43,10 +43,15 @@ body {
   justify-content: space-between;
 }
 
+.header-logo {
+  max-height: 60px;
+}
+
 .header-menu-list nav ul {
   list-style: none;
   display: flex;
   justify-content: space-between;
+  padding-bottom: 4px;
 }
 
 .menu-item {
@@ -65,6 +70,7 @@ body {
   color: #403f3d;
   font-size: 16px;
   text-decoration: none;
+  line-height: 150%; /* 24px */
 }
 
 .menu-item::after {
@@ -89,6 +95,7 @@ body {
   display: flex;
   align-items: center;
   box-sizing: border-box;
+  padding-bottom: 4px;
   transition: all 0.5s linear;
 }
 
@@ -102,6 +109,11 @@ body {
 
 .header-menu a span {
   margin-right: 8px;
+  line-height: 150%;
+}
+
+.header-menu a svg {
+  align-self: start;
 }
 
 .coffee-enjoy .container {
@@ -120,7 +132,7 @@ body {
 .coffee-enjoy-head {
   color: #e1d4c9;
   font-size: 72px;
-  line-height: 105%;
+  line-height: 76px;
   margin-bottom: 40px;
 }
 
@@ -202,6 +214,7 @@ body {
   text-align: center;
   font-size: 60px;
   margin-bottom: 40px;
+  line-height: 125%;
 }
 
 .favorite-coffee-head span {
@@ -209,10 +222,15 @@ body {
   font-family: Inter-SemiBold-Italic, sans-serif;
 }
 
+.favorite-coffee-image img {
+  width: 100%;
+}
+
 .favorite-coffee-name {
   text-align: center;
   font-size: 24px;
-  margin-top: 20px;
+  margin-top: 16px;
+  line-height: 125%;
 }
 
 .favorite-coffee-description {
@@ -227,6 +245,7 @@ body {
   text-align: center;
   font-size: 24px;
   margin-bottom: 40px;
+  line-height: 125%;
 }
 
 .favorite-coffee-pagination {
@@ -296,17 +315,22 @@ body {
 
 .about-images {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 430px 200px 430px;
-  grid-column-gap: 40px;
+  grid-template-columns: repeat(2, (min-content, 660px));
+  grid-template-rows: 430px 120px 430px;
+  grid-gap: 40px;
 }
 
 .about-image {
   overflow: hidden;
   border-radius: 20px;
+  width: 100%;
+  height: 100%;
 }
 
 .about-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 20px;
   transform: scale(1.1);
   transition: all 0.7s linear;
@@ -342,6 +366,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .mobile-apps-info {
@@ -376,7 +401,7 @@ body {
 
 .btn {
   width: 200px;
-  padding: 12px 20px;
+  padding: 11px 20px;
   align-items: center;
   border-radius: 100px;
   border: 1px solid #665f55;
@@ -496,6 +521,14 @@ body {
   opacity: 1;
 }
 
+.mobile-apps-image {
+  max-height: 630px;
+}
+
+.mobile-apps-image img {
+  width: 100%;
+}
+
 .footer {
   padding-bottom: 40px;
 }
@@ -580,6 +613,7 @@ body {
 .footer-contact-block svg {
   margin-right: 8px;
   vertical-align: baseline;
+  align-self: flex-start;
 }
 
 .footer-contact-block a {
