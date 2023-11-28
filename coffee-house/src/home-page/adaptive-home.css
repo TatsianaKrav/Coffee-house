@@ -9,6 +9,14 @@
     margin-left: 16px;
     margin-right: 16px;
   }
+
+  .favorite-arrow.arrow-back {
+    left: 21px;
+  }
+
+  .favorite-arrow.arrow-next {
+    right: 21px;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -49,5 +57,13 @@
   .coffee-enjoy-head {
     font-size: 42px;
     line-height: 115%; /* 48.3px */
+  }
+
+  .favorite-coffee-head {
+    font-size: 60px;
+  }
+
+  .favorite-arrow {
+    display: none;
   }
 }
