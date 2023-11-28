@@ -20,6 +20,17 @@
 }
 
 @media screen and (max-width: 768px) {
+  .container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .coffee-enjoy .container,
+  .footer .container {
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+
   .header-menu-list,
   .header-menu {
     display: none;
@@ -71,9 +82,30 @@
     flex-direction: column;
     gap: 100px;
   }
+
+  .footer .container {
+    flex-direction: column;
+    gap: 100px;
+    padding: 100px 60px;
+  }
+
+  .footer-contacts {
+    align-self: flex-start;
+  }
 }
 
 @media screen and (max-width: 380px) {
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .coffee-enjoy .container,
+  .footer .container {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+
   .coffee-enjoy-info {
     padding: 60px 16px;
     max-width: 316px;
@@ -92,11 +124,28 @@
     display: none;
   }
 
+  .mobile-apps .container {
+    gap: 40px;
+  }
+
   .mobile-apps-info-head {
     font-size: 32px;
   }
 
-  .mobile-apps .container {
+  .mobile-apps-info-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+  .footer .container {
+    flex-direction: column;
     gap: 40px;
+    padding: 60px 16px;
+  }
+
+  .footer-title {
+    font-size: 32px;
   }
 }
