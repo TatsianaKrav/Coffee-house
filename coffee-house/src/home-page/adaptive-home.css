@@ -1,0 +1,53 @@
+@media screen and (max-width: 1389px) {
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .coffee-enjoy .container,
+  .footer .container {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header-menu-list,
+  .header-menu {
+    display: none;
+  }
+
+  .burger {
+    display: block;
+    cursor: pointer;
+  }
+
+  .button span {
+    margin-right: 18px;
+  }
+
+  .button::after {
+    content: " ";
+    position: absolute;
+    right: 62px;
+    width: 20px;
+    height: 20px;
+    opacity: 1;
+    background-image: url("../../assets/images/home-page/coffee-cup.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .coffee-enjoy-info {
+    padding: 60px 16px;
+    max-width: 316px;
+  }
+
+  .coffee-enjoy-head {
+    font-size: 42px;
+    line-height: 115%; /* 48.3px */
+  }
+}

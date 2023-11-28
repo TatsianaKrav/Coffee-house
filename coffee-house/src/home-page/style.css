@@ -116,7 +116,6 @@ body {
   align-self: start;
 }
 
-
 .header-menu::after {
   content: " ";
   position: absolute;
@@ -134,6 +133,11 @@ body {
   width: 100%;
   opacity: 1;
 }
+
+.burger {
+  display: none;
+}
+
 .coffee-enjoy .container {
   background-image: url(../../assets/images/home-page/enjoy-bg.jpg);
   background-repeat: no-repeat;
