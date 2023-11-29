@@ -264,6 +264,14 @@ body {
   line-height: 125%; /* 30px */
 }
 
+.more-items {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
+}
+
 .footer {
   padding-bottom: 40px;
 }

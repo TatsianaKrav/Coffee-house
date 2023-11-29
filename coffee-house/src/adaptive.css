@@ -17,6 +17,11 @@
   .favorite-arrow.arrow-next {
     right: 21px;
   }
+
+  .coffee-items {
+    /* gap: 20px; */
+    justify-content: center;
+  }
 }
 
 @media screen and (max-width: 1291px) {
@@ -51,7 +56,7 @@
   }
 
   .mobile-apps-image {
-        max-width: 560px;
+    max-width: 560px;
   }
 }
 
@@ -81,7 +86,8 @@
     padding-right: 40px;
   }
 
-  .coffee-enjoy .container, .footer .container {
+  .coffee-enjoy .container,
+  .footer .container {
     margin-left: 40px;
     margin-right: 40px;
     padding-left: 0;
@@ -150,16 +156,33 @@
   }
 
   .mobile-apps-info {
-     max-width: 688px;
-   }
+    max-width: 688px;
+  }
 
   .mobile-apps-image {
     max-width: 630px;
+  }
+
+  .footer .container {
+    padding: 100px 60px;
+  }
+
+  .coffee-item:nth-child(5),
+  .coffee-item:nth-child(6),
+  .coffee-item:nth-child(7),
+  .coffee-item:nth-child(8) {
+    display: none;
+  }
+
+  .more-items {
+    display: flex;
+  }
 }
 
-.footer .container {
-    padding: 100px 60px;
-}
+@media screen and (max-width: 739px) {
+  .coffee-items {
+    gap: 15px;
+  }
 }
 
 @media screen and (max-width: 728px) {
@@ -184,6 +207,12 @@
   }
 }
 
+@media screen and (max-width: 714px) {
+  .coffee-items {
+    gap: 40px;
+  }
+}
+
 @media screen and (max-width: 557px) {
   .coffee-enjoy-info {
     padding: 60px 16px;
@@ -198,6 +227,7 @@
   .favorite-coffee-head,
   .about-head,
   .mobile-apps-info-head,
+  .menu-main-title,
   .footer-title {
     font-size: 32px;
   }
@@ -255,13 +285,11 @@
 
   .about-image img {
     transform: scale(1.2);
-}
+  }
 
   .mobile-apps-image {
     max-height: 348px;
   }
-
-
 
   .footer-title {
     font-size: 32px;
