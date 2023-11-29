@@ -337,7 +337,8 @@ body {
 
 .about-images {
   display: grid;
-  grid-template-columns: repeat(2, (min-content, 660px));
+ /*  grid-template-columns: repeat(2, (min-content, 660px)); */
+  grid-template-columns: repeat(2, (minmax(min-content, 660px)));
   grid-template-rows: 430px 120px 430px;
   grid-gap: 40px;
 }

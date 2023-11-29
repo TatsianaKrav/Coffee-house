@@ -19,6 +19,12 @@
   }
 }
 
+@media screen and (max-width: 899px) {
+    .about-images {
+        gap: 20px;
+    }
+}
+
 @media screen and (max-width: 799px) {
   .coffee-enjoy-info {
     padding: 100px 60px;
@@ -112,12 +118,19 @@
 
 @media screen and (max-width: 728px) {
   .coffee-enjoy-head {
-    font-size: 40px;
+    font-size: 50px;
     line-height: 105%;
   }
 
   .coffee-enjoy-info {
     max-width: 400px;
+  }
+
+  .favorite-coffee-head,
+  .about-head,
+  .mobile-apps-info-head,
+  .footer-title {
+    font-size: 40px;
   }
 }
 
@@ -132,16 +145,16 @@
     line-height: 115%; /* 48.3px */
   }
 
-  .favorite-coffee-head {
+  .favorite-coffee-head,
+  .about-head,
+  .mobile-apps-info-head,
+  .footer-title {
     font-size: 32px;
   }
 
   .favorite-arrow {
     display: none;
   }
-}
-
-@media screen and (max-width: 503px) {
 }
 
 @media screen and (max-width: 412px) {
