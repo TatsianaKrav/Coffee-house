@@ -207,7 +207,7 @@
   }
 
   .footer-info {
-    max-width: 300px;
+    max-width: 327px;
   }
 }
 
@@ -248,6 +248,20 @@
     padding-left: 16px;
     padding-right: 16px;
   }
+
+  .button span {
+    margin-right: 27px;
+  }
+
+  .about-image img {
+    transform: scale(1.2);
+}
+
+  .mobile-apps-image {
+    max-height: 348px;
+  }
+
+
 
   .footer-title {
     font-size: 32px;
