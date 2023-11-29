@@ -294,4 +294,9 @@
   .footer-title {
     font-size: 32px;
   }
+
+  .menu-choice {
+    margin-right: 8px;
+    padding: 7px 16px 7px 6px;
+  }
 }
