@@ -85,10 +85,12 @@ body {
   transition: all 0.8s ease;
 }
 
-.menu-item:hover::after {
-  right: 0;
-  width: 100%;
-  opacity: 1;
+@media (hover: hover) and (pointer: fine) {
+  .menu-item:hover::after {
+    right: 0;
+    width: 100%;
+    opacity: 1;
+  }
 }
 
 .header-menu {
@@ -128,10 +130,12 @@ body {
   transition: all 0.8s ease;
 }
 
-.menu-item:hover::after {
-  right: 0;
-  width: 100%;
-  opacity: 1;
+@media (hover: hover) and (pointer: fine) {
+  .menu-item:hover::after {
+    right: 0;
+    width: 100%;
+    opacity: 1;
+  }
 }
 
 .burger {
@@ -206,12 +210,16 @@ body {
   transition: all 1s ease;
 }
 
-.button:hover span {
-  transform: translateX(-8px);
+@media (hover: hover) and (pointer: fine) {
+  .button:hover span {
+    transform: translateX(-8px);
+  }
 }
 
-.button:hover::after {
-  opacity: 1;
+@media (hover: hover) and (pointer: fine) {
+  .button:hover::after {
+    opacity: 1;
+  }
 }
 
 .favorite-coffee {
@@ -315,12 +323,16 @@ body {
   transition: all 0.7s linear;
 }
 
-.favorite-arrow:hover {
-  background-color: #665f55;
+@media (hover: hover) and (pointer: fine) {
+  .favorite-arrow:hover {
+    background-color: #665f55;
+  }
 }
 
-.favorite-arrow:hover svg path {
-  stroke: #e1d4c9;
+@media (hover: hover) and (pointer: fine) {
+  .favorite-arrow:hover svg path {
+    stroke: #e1d4c9;
+  }
 }
 
 .about-head {
@@ -337,7 +349,7 @@ body {
 
 .about-images {
   display: grid;
- /*  grid-template-columns: repeat(2, (min-content, 660px)); */
+  /*  grid-template-columns: repeat(2, (min-content, 660px)); */
   grid-template-columns: repeat(2, (minmax(min-content, 660px)));
   grid-template-rows: 430px 120px 430px;
   grid-gap: 40px;
@@ -359,8 +371,10 @@ body {
   transition: all 0.7s linear;
 }
 
-.about-image:hover img {
-  transform: scale(1);
+@media (hover: hover) and (pointer: fine) {
+  .about-image:hover img {
+    transform: scale(1);
+  }
 }
 
 .about-image.first-img {
@@ -512,36 +526,52 @@ body {
   line-height: 140%; /* 14px */
 }
 
-.btn:hover {
-  background-color: #665f55;
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover {
+    background-color: #665f55;
+  }
 }
 
-.btn:hover .btn-text {
-  color: #e1d4c9;
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover .btn-text {
+    color: #e1d4c9;
+  }
 }
 
-.btn.app-store-btn:hover {
-  transition: all 1.5s ease;
+@media (hover: hover) and (pointer: fine) {
+  .btn.app-store-btn:hover {
+    transition: all 1.5s ease;
+  }
 }
 
-.btn.app-store-btn:hover::after {
-  opacity: 0;
+@media (hover: hover) and (pointer: fine) {
+  .btn.app-store-btn:hover::after {
+    opacity: 0;
+  }
 }
 
-.btn.app-store-btn:hover::before {
-  opacity: 1;
+@media (hover: hover) and (pointer: fine) {
+  .btn.app-store-btn:hover::before {
+    opacity: 1;
+  }
 }
 
-.btn.google-play-btn:hover {
-  transition: all 1.5s ease;
+@media (hover: hover) and (pointer: fine) {
+  .btn.google-play-btn:hover {
+    transition: all 1.5s ease;
+  }
 }
 
-.btn.google-play-btn:hover::after {
-  opacity: 0;
+@media (hover: hover) and (pointer: fine) {
+  .btn.google-play-btn:hover::after {
+    opacity: 0;
+  }
 }
 
-.btn.google-play-btn:hover::before {
-  opacity: 1;
+@media (hover: hover) and (pointer: fine) {
+  .btn.google-play-btn:hover::before {
+    opacity: 1;
+  }
 }
 
 .mobile-apps-image {
@@ -605,16 +635,22 @@ body {
   margin-right: 0;
 }
 
-.footer-socials-icon:hover path {
-  stroke: #403f3d;
+@media (hover: hover) and (pointer: fine) {
+  .footer-socials-icon:hover path {
+    stroke: #403f3d;
+  }
 }
 
-.footer-socials-icon:hover svg {
-  fill: #e1d4c9;
+@media (hover: hover) and (pointer: fine) {
+  .footer-socials-icon:hover svg {
+    fill: #e1d4c9;
+  }
 }
 
-.footer-socials-icon:hover {
-  background-color: #e1d4c9;
+@media (hover: hover) and (pointer: fine) {
+  .footer-socials-icon:hover {
+    background-color: #e1d4c9;
+  }
 }
 
 .footer-contacts-head {
@@ -658,11 +694,14 @@ body {
   transition: all 0.8s ease;
 }
 
-.footer-contact-block a:hover::after {
-  right: 30%;
-  width: 70%;
-  opacity: 1;
+@media (hover: hover) and (pointer: fine) {
+  .footer-contact-block a:hover::after {
+    right: 30%;
+    width: 70%;
+    opacity: 1;
+  }
 }
+
 
 .footer-contact {
   color: #e1d4c9;
