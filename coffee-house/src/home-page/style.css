@@ -138,8 +138,66 @@ body {
   }
 }
 
+.menu-in-burger {
+  display: none;
+}
+
 .burger {
   display: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid #665f55;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.burger::before,
+.burger::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 1.5px;
+  background-color: #403f3d;
+  left: calc(50% - 8px);
+  transition: all 0.4s ease;
+}
+
+.burger::before {
+  top: 18px;
+}
+
+.burger::after {
+  bottom: 18px;
+}
+
+.burger.active::before {
+  transform: rotate(45deg);
+  top: calc(50%);
+}
+
+.burger.active::after {
+  transform: rotate(-45deg);
+  bottom: calc(50% - 1px);
+}
+
+/* .burger-line {
+  width: 16px;
+  height: 1.5px;
+  background-color: #403F3D;
+}
+
+.first-line {
+  margin-bottom: 6px;
+}
+
+.first-line.active {
+  transform: rotate(-45deg);
+  margin: 0;
+} */
+
+.second-line.active {
+  transform: rotate(45deg);
 }
 
 .coffee-enjoy .container {
@@ -701,7 +759,6 @@ body {
     opacity: 1;
   }
 }
-
 
 .footer-contact {
   color: #e1d4c9;
