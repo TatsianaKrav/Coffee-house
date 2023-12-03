@@ -101,6 +101,10 @@ body {
   transition: all 0.5s linear;
 }
 
+.header-menu.menu-item {
+  margin: 0;
+}
+
 .header-menu a {
   text-decoration: none;
   color: #403f3d;
@@ -684,7 +688,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.5s linear;
+  transition: all 0.4s ease;
   background: transparent;
   box-sizing: border-box;
 }
