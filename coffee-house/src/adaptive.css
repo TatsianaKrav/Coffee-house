@@ -114,7 +114,7 @@
   }
 
   .button span {
-    margin-right: 18px;
+    margin-right: 26px;
     transition: none;
   }
 
@@ -125,12 +125,12 @@
 
   .favorite-arrow.arrow-back {
     left: 40px;
-    top: calc(50% + 40px);
+    top: calc(50% + 43px);
   }
 
   .favorite-arrow.arrow-next {
     right: 40px;
-    top: calc(50% + 40px);
+    top: calc(50% + 43px);
   }
 
   .about-image.second-img,

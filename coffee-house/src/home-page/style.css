@@ -157,18 +157,18 @@ body {
   content: "";
   position: absolute;
   width: 16px;
-  height: 1.5px;
+  height: 1.6px;
   background-color: #403f3d;
   left: calc(50% - 8px);
   transition: all 0.4s ease;
 }
 
 .burger::before {
-  top: 18px;
+  top: 16px;
 }
 
 .burger::after {
-  bottom: 18px;
+  bottom: 16px;
 }
 
 .burger.active::before {
