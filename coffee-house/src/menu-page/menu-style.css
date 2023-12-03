@@ -85,10 +85,12 @@ body {
   transition: all 0.8s ease;
 }
 
-.menu-item:hover::after {
-  right: 0;
-  width: 100%;
-  opacity: 1;
+@media (hover: hover) and (pointer: fine) {
+  .menu-item:hover::after {
+    right: 0;
+    width: 100%;
+    opacity: 1;
+  }
 }
 
 .header-menu {
@@ -115,6 +117,10 @@ body {
 
 .header-menu a span {
   margin-right: 8px;
+}
+
+.burger {
+  display: none;
 }
 
 .menu-main {
@@ -191,12 +197,16 @@ body {
   transition: all 0.7s linear;
 }
 
-.menu-choice:hover {
-  background: #665f55;
+@media (hover: hover) and (pointer: fine) {
+  .menu-choice:hover {
+    background: #665f55;
+  }
 }
 
-.menu-choice:hover span {
-  color: #e1d4c9;
+@media (hover: hover) and (pointer: fine) {
+  .menu-choice:hover span {
+    color: #e1d4c9;
+  }
 }
 
 .coffee-items {
@@ -230,8 +240,10 @@ body {
   transition: all 0.7s linear;
 }
 
-.coffee-item:hover img {
-  transform: scale(1);
+@media (hover: hover) and (pointer: fine) {
+  .coffee-item:hover img {
+    transform: scale(1);
+  }
 }
 
 .coffee-item-info {
@@ -258,6 +270,14 @@ body {
   color: #403f3d;
   font-size: 24px;
   line-height: 125%; /* 30px */
+}
+
+.more-items {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
 }
 
 .footer {
@@ -313,16 +333,22 @@ body {
   margin-right: 0;
 }
 
-.footer-socials-icon:hover path {
-  stroke: #403f3d;
+@media (hover: hover) and (pointer: fine) {
+  .footer-socials-icon:hover path {
+    stroke: #403f3d;
+  }
 }
 
-.footer-socials-icon:hover svg {
-  fill: #e1d4c9;
+@media (hover: hover) and (pointer: fine) {
+  .footer-socials-icon:hover svg {
+    fill: #e1d4c9;
+  }
 }
 
-.footer-socials-icon:hover {
-  background-color: #e1d4c9;
+@media (hover: hover) and (pointer: fine) {
+  .footer-socials-icon:hover {
+    background-color: #e1d4c9;
+  }
 }
 
 .footer-contacts-head {
@@ -366,10 +392,12 @@ body {
   transition: all 0.8s ease;
 }
 
-.footer-contact-block a:hover::after {
-  right: 30%;
-  width: 70%;
-  opacity: 1;
+@media (hover: hover) and (pointer: fine) {
+  .footer-contact-block a:hover::after {
+    right: 30%;
+    width: 70%;
+    opacity: 1;
+  }
 }
 
 .footer-contact {
