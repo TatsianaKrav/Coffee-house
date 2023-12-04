@@ -133,8 +133,13 @@
     top: calc(50% + 43px);
   }
 
-  .about-image.second-img,
+  /*  .about-image.second-img,
   .about-image.third-img {
+    display: none;
+  } */
+
+  .about-image:nth-child(2),
+  .about-image:nth-child(3) {
     display: none;
   }
 
@@ -169,10 +174,7 @@
     padding: 100px 60px;
   }
 
-  .coffee-item:nth-child(5),
-  .coffee-item:nth-child(6),
-  .coffee-item:nth-child(7),
-  .coffee-item:nth-child(8) {
+  .coffee-item:nth-child(n + 5) {
     display: none;
   }
 
