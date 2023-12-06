@@ -76,7 +76,9 @@
 
 @media screen and (max-width: 799px) {
   .coffee-enjoy-info {
-    padding: 100px 60px;
+   /*  padding: 100px 60px; */
+   top: 100px;
+   left: 60px;
   }
 }
 
@@ -261,7 +263,9 @@
 
 @media screen and (max-width: 557px) {
   .coffee-enjoy-info {
-    padding: 60px 16px;
+    /* padding: 60px 16px; */
+    top: 60px;
+    left: 16px;
     max-width: 316px;
   }
 
