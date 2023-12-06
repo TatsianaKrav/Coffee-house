@@ -4,7 +4,6 @@
     padding-right: 16px;
   }
 
-  .coffee-enjoy .container,
   .footer .container {
     margin-left: 16px;
     margin-right: 16px;
@@ -76,9 +75,9 @@
 
 @media screen and (max-width: 799px) {
   .coffee-enjoy-info {
-   /*  padding: 100px 60px; */
-   top: 100px;
-   left: 60px;
+    /*  padding: 100px 60px; */
+    top: 100px;
+    left: 60px;
   }
 }
 
@@ -95,7 +94,6 @@
     padding-left: 0;
     padding-right: 0;
   }
-
 
   .header-menu {
     display: none;

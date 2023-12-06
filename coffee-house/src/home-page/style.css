@@ -32,7 +32,7 @@ body {
   margin: 0 auto;
 }
 
-.header {
+/* .header {
   box-sizing: border-box;
   padding: 20px 0;
 }
@@ -53,10 +53,10 @@ body {
   display: flex;
   justify-content: space-between;
   padding-bottom: 4px;
-}
+} */
 
 
-.menu-item {
+/* .menu-item {
   margin-right: 40px;
   cursor: pointer;
   box-sizing: border-box;
@@ -72,7 +72,7 @@ body {
   color: #403f3d;
   font-size: 16px;
   text-decoration: none;
-  line-height: 150%; /* 24px */
+  line-height: 150%; 
 }
 
 .menu-item::after {
@@ -187,24 +187,9 @@ body {
   bottom: calc(50% - 2px);
 }
 
-/* .burger-line {
-  width: 16px;
-  height: 1.5px;
-  background-color: #403F3D;
-}
-
-.first-line {
-  margin-bottom: 6px;
-}
-
-.first-line.active {
-  transform: rotate(-45deg);
-  margin: 0;
-} */
-
 .second-line.active {
   transform: rotate(45deg);
-}
+} */
 
 .coffee-enjoy .container {
  /*  background-image: url(../../assets/images/home-page/enjoy-bg.jpg);
@@ -221,6 +206,7 @@ body {
   width: 100%;
   height: 644px;
   object-fit: cover;
+
 }
 
 .coffee-enjoy-info {
