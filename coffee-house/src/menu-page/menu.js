@@ -12,7 +12,7 @@ function filterDrinks() {
     const chosenDrink = e.target.innerText;
 
     menuTabs.forEach((tab) => tab.classList.remove("active"));
-    e.target.classList.add('active');
+    e.target.classList.add("active");
     showDrinks(chosenDrink);
   });
 }
@@ -21,13 +21,13 @@ function showDrinks(drink) {
   const coffeItemsElement = document.getElementsByClassName("coffee-items")[0];
   coffeItemsElement.innerHTML = "";
 
+  let count = 1;
   if (allProducts && allProducts.length > 0) {
     const products = allProducts.filter(
       (product) =>
         product.category.toLocaleLowerCase() === drink.toLocaleLowerCase()
     );
 
-    let count = 1;
     products.forEach((item) => {
       const coffeeItemElement = document.createElement("div");
       coffeeItemElement.className = "coffee-item";
@@ -77,6 +77,39 @@ function showDrinks(drink) {
       count++;
     });
   }
+
+  const mediaQuery = window.matchMedia("(max-width: 768px)");
+
+  if (count <= 5) {
+    document.getElementById("load").style.display = "none";
+  } else if (count > 5 && mediaQuery.matches) {
+    document.getElementById("load").style.display = "flex";
+  }
 }
 
 filterDrinks();
+
+const loadProductsButton = document.getElementById("load");
+
+loadProductsButton.onclick = () => {
+  const hiddenProducts = document.querySelectorAll(
+    ".coffee-item:nth-child(n+5)"
+  );
+  hiddenProducts.forEach((product) => (product.style.display = "block"));
+  loadProductsButton.style.display = "none";
+};
+
+/* 
+function handleTabletChange(e) {
+    // Check if the media query is true
+    if (e.matches) {
+      // Then log the following message to the console
+      console.log('Media Query Matched!')
+    }
+  }
+   
+  // Register event listener
+  mediaQuery.addListener(handleTabletChange)
+  
+  // Initial check
+  handleTabletChange(mediaQuery) */
