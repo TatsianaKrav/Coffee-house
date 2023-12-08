@@ -129,13 +129,11 @@ window.onload = () => {
     const product = products.find(
       (product) => product.name === elem.dataset.name
     );
+    const productImgPath = elem.dataset.img;
 
     modalWindowElement.innerHTML = `
-     <div class="product-image">
-    <img
-      src="../../assets/images/menu-page/${product.category}/${product.category}-1.png"
-      alt=${product.name}
-    />
+    <div class="product-image">
+    <img src="${productImgPath}" ; alt="${product.name}" />
   </div>
   <div class="product-info">
     <div class="product-name">${product.name}</div>
@@ -144,60 +142,53 @@ window.onload = () => {
       <div class="product-size">
         <span>Size</span>
         <div class="size-choice">
-        <div class="tabs">
-          <div class="tab">
-            <input type="radio" id="one" value="200" name="size" />
-            <span>S</span>
-            <label for="one">${product.sizes.s.size}</label>
-          </div>
+          <div class="tabs">
+            <div class="tab">
+              <input type="radio" id="one" value="200" name="size" />
+              <span>S</span>
+              <label for="one">${product.sizes.s.size}</label>
+            </div>
 
-          <div class="tab">
-            <input type="radio" id="two" value="300" name="size" />
-            <span>M</span>
-            <label for="two">${product.sizes.m.size}</label>
+            <div class="tab">
+              <input type="radio" id="two" value="300" name="size" />
+              <span>M</span>
+              <label for="two">${product.sizes.m.size}</label>
+            </div>
+            <div class="tab">
+              <input type="radio" id="three" value="400" name="size" />
+              <span>L</span>
+              <label for="three">${product.sizes.l.size}</label>
+            </div>
           </div>
-          <div class="tab">
-            <input
-              type="radio"
-              id="three"
-              value="400"
-              name="size"
-            />
-            <span>L</span>
-            <label for="three">${product.sizes.l.size}</label>
-        </div>
-      </div>
-
         </div>
       </div>
       <div class="product-additives">
         <span>Additives</span>
         <div class="additives-choice">
-        <div class="tabs">
-        <div class="tab">
-          <input type="radio" id="one" />
-          <span>1</span>
-          <label for="one">${product.additives[0].name}</label>
-        </div>
+          <div class="tabs">
+            <div class="tab">
+              <input type="radio" id="one" />
+              <span>1</span>
+              <label for="one">${product.additives[0].name}</label>
+            </div>
 
-        <div class="tab">
-          <input type="radio" id="two" />
-          <span>2</span>
-          <label for="two">${product.additives[1].name}</label>
-        </div>
-        <div class="tab">
-          <input
-            type="radio"
-            id="three"
-          />
-          <span>3</span>
-          <label for="three">${product.additives[2].name}</label>
-      </div>
+            <div class="tab">
+              <input type="radio" id="two" />
+              <span>2</span>
+              <label for="two">${product.additives[1].name}</label>
+            </div>
+            <div class="tab">
+              <input type="radio" id="three" />
+              <span>3</span>
+              <label for="three">${product.additives[2].name}</label>
+            </div>
+          </div>
         </div>
       </div>
       <div class="total">
         <span>Total:</span>
-        <span class="total-price">$
+        <span class="total-price"
+          >$
           <span id="price">${product.price}</span>
         </span>
       </div>
@@ -236,39 +227,33 @@ window.onload = () => {
           </defs>
         </svg>
         <p>
-          The cost is not final. Download our mobile app to see the
-          final price and place your order. Earn loyalty points and
-          enjoy your favorite coffee with up to 20% discount.
+          The cost is not final. Download our mobile app to see the final
+          price and place your order. Earn loyalty points and enjoy your
+          favorite coffee with up to 20% discount.
         </p>
       </div>
       <button id="modal-close">Close</button>
     </div>
-  </div> 
+  </div>
   `;
 
+    //сделать запрет повторного клика на чекбокс, если уже выбран при переключении
 
+    document.querySelectorAll(".tab").forEach((tab) => {
+      tab.onchange = (e) => {
+        e.stopPropogation;
+        const targetElem = e.currentTarget.children[0];
+        console.log(e.target);
 
-
-//сделать запрет повторного клика на чекбокс, если уже выбран при переключении
-
-document.querySelectorAll(".tab").forEach((tab) => {
-  tab.onchange = (e) => {
-    e.stopPropogation;
-    const targetElem = e.currentTarget.children[0];
-    console.log(e.target);
-
-    if (targetElem.checked && targetElem.value === "300") {
-      const price = document.getElementById("price");
-      price.innerText = (+price.innerText + 0.5).toFixed(2);
-    } else if (targetElem.checked && targetElem.value === "400") {
-      const price = document.getElementById("price");
-      price.innerText = (+price.innerText + 1.0).toFixed(2);
-    }
-  };
-});
-
-
-
+        if (targetElem.checked && targetElem.value === "300") {
+          const price = document.getElementById("price");
+          price.innerText = (+price.innerText + 0.5).toFixed(2);
+        } else if (targetElem.checked && targetElem.value === "400") {
+          const price = document.getElementById("price");
+          price.innerText = (+price.innerText + 1.0).toFixed(2);
+        }
+      };
+    });
 
     handleModal();
   }
@@ -297,8 +282,6 @@ document.querySelectorAll(".tab").forEach((tab) => {
     modalCloseButton.addEventListener("click", closeModal);
   }
 };
-
-
 
 /* function showModal(elem) {
   modal.innerHTML = "";
