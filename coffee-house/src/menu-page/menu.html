@@ -395,7 +395,7 @@
         </div>
         <div class="modal" id="modal">
           <div class="modal-window" id="modal-window">
-            <!--   <div class="product-image">
+            <!-- <div class="product-image">
               <img
                 src="../../assets/images/menu-page/coffee/coffee-1.png"
                 alt="coffee-1"
@@ -411,6 +411,29 @@
                 <div class="product-size">
                   <span>Size</span>
                   <div class="size-choice">
+                    <div class="tabs">
+                      <div class="tab">
+                        <input type="radio" id="one" value="200" name="size" />
+                        <span>S</span>
+                        <label for="one">200ml</label>
+                      </div>
+
+                      <div class="tab">
+                        <input type="radio" id="two" value="300" name="size" />
+                        <span>M</span>
+                        <label for="two">300ml</label>
+                      </div>
+                      <div class="tab">
+                        <input
+                          type="radio"
+                          id="three"
+                          value="400"
+                          name="size"
+                        />
+                        <span>L</span>
+                        <label for="three">400ml</label>
+                      </div>
+                    </div>
                     <ul class="tabs">
                       <li class="tab">
                         <div class="size">S</div>
@@ -448,7 +471,8 @@
                 </div>
                 <div class="total">
                   <span>Total:</span>
-                  <span class="total-price">$7.00</span>
+                  <span class="total-price">$
+                    <span id="price">7.00</span></span>
                 </div>
                 <div class="note">
                   <svg

@@ -372,9 +372,44 @@ body {
 .tab {
   margin-right: 0;
   cursor: pointer;
+/*   padding: 8px 16px 8px 8px; */
 }
 
-.tab .size {
+
+
+.tab input[type=radio] {
+  display: none;
+}
+
+/* .tab::after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #c1b6ad;
+} */
+
+
+.tab input {
+  cursor: pointer;
+ /*  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #c1b6ad;
+  color: #403f3d;
+  text-align: center;
+  font-size: 16px;
+  line-height: 150%; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+  box-sizing: border-box; */
+}
+
+/* .tab span {
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -382,13 +417,19 @@ body {
   color: #403f3d;
   text-align: center;
   font-size: 16px;
-  line-height: 150%; /* 24px */
+  line-height: 150%; 
   display: flex;
   align-items: center;
   justify-content: center;
   margin-right: 8px;
   box-sizing: border-box;
+} */
+
+.tab label {
+  cursor: pointer;
 }
+
+
 
 .total {
   display: flex;

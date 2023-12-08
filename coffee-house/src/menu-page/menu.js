@@ -11,7 +11,6 @@ window.onload = () => {
   showDrinks("coffee");
   filterDrinks();
   loadMoreProducts();
-  /* handleModal(); */
 
   function filterDrinks() {
     listOfDrinks.addEventListener("click", (e) => {
@@ -39,6 +38,16 @@ window.onload = () => {
         const coffeeItemElement = document.createElement("div");
         coffeeItemElement.className = "coffee-item";
         coffeeItemElement.setAttribute("data-name", item.name);
+        coffeeItemElement.setAttribute(
+          "data-img",
+          "../../assets/images/menu-page/" +
+            item.category +
+            "/" +
+            item.category +
+            "-" +
+            count +
+            ".png"
+        );
 
         const coffeeItemImageElement = document.createElement("div");
         coffeeItemImageElement.className = "coffee-item-image";
@@ -124,7 +133,7 @@ window.onload = () => {
     modalWindowElement.innerHTML = `
      <div class="product-image">
     <img
-      src="../../assets/images/menu-page/coffee/coffee-1.png"
+      src="../../assets/images/menu-page/${product.category}/${product.category}-1.png"
       alt=${product.name}
     />
   </div>
@@ -135,44 +144,62 @@ window.onload = () => {
       <div class="product-size">
         <span>Size</span>
         <div class="size-choice">
-          <ul class="tabs">
-            <li class="tab">
-              <div class="size">S</div>
-              <div class="btn-text">200 ml</div>
-            </li>
-            <li class="tab">
-              <div class="size">M</div>
-              <div class="btn-text">300 ml</div>
-            </li>
-            <li class="tab">
-              <div class="size">L</div>
-              <div class="btn-text">400 ml</div>
-            </li>
-          </ul>
+        <div class="tabs">
+          <div class="tab">
+            <input type="radio" id="one" value="200" name="size" />
+            <span>S</span>
+            <label for="one">${product.sizes.s.size}</label>
+          </div>
+
+          <div class="tab">
+            <input type="radio" id="two" value="300" name="size" />
+            <span>M</span>
+            <label for="two">${product.sizes.m.size}</label>
+          </div>
+          <div class="tab">
+            <input
+              type="radio"
+              id="three"
+              value="400"
+              name="size"
+            />
+            <span>L</span>
+            <label for="three">${product.sizes.l.size}</label>
+        </div>
+      </div>
+
         </div>
       </div>
       <div class="product-additives">
         <span>Additives</span>
         <div class="additives-choice">
-          <ul class="tabs">
-            <li class="tab">
-              <div class="size">1</div>
-              <div class="btn-text">Sugar</div>
-            </li>
-            <li class="tab">
-              <div class="size">2</div>
-              <div class="btn-text">Cinnamon</div>
-            </li>
-            <li class="tab">
-              <div class="size">3</div>
-              <div class="btn-text">Syrup</div>
-            </li>
-          </ul>
+        <div class="tabs">
+        <div class="tab">
+          <input type="radio" id="one" />
+          <span>1</span>
+          <label for="one">${product.additives[0].name}</label>
+        </div>
+
+        <div class="tab">
+          <input type="radio" id="two" />
+          <span>2</span>
+          <label for="two">${product.additives[1].name}</label>
+        </div>
+        <div class="tab">
+          <input
+            type="radio"
+            id="three"
+          />
+          <span>3</span>
+          <label for="three">${product.additives[2].name}</label>
+      </div>
         </div>
       </div>
       <div class="total">
         <span>Total:</span>
-        <span class="total-price">$${product.price}</span>
+        <span class="total-price">$
+          <span id="price">${product.price}</span>
+        </span>
       </div>
       <div class="note">
         <svg
@@ -219,6 +246,30 @@ window.onload = () => {
   </div> 
   `;
 
+
+
+
+//сделать запрет повторного клика на чекбокс, если уже выбран при переключении
+
+document.querySelectorAll(".tab").forEach((tab) => {
+  tab.onchange = (e) => {
+    e.stopPropogation;
+    const targetElem = e.currentTarget.children[0];
+    console.log(e.target);
+
+    if (targetElem.checked && targetElem.value === "300") {
+      const price = document.getElementById("price");
+      price.innerText = (+price.innerText + 0.5).toFixed(2);
+    } else if (targetElem.checked && targetElem.value === "400") {
+      const price = document.getElementById("price");
+      price.innerText = (+price.innerText + 1.0).toFixed(2);
+    }
+  };
+});
+
+
+
+
     handleModal();
   }
 
@@ -234,7 +285,7 @@ window.onload = () => {
 
   function handleModal() {
     const modalCloseButton = document.getElementById("modal-close");
-    
+
     function closeModal(e) {
       if (e.target === modal || e.target === modalCloseButton) {
         modal.style.display = "none";
@@ -246,6 +297,8 @@ window.onload = () => {
     modalCloseButton.addEventListener("click", closeModal);
   }
 };
+
+
 
 /* function showModal(elem) {
   modal.innerHTML = "";
