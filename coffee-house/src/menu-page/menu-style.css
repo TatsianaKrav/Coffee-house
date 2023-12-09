@@ -377,10 +377,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.4s linear;
+  transition: all 0.3s linear;
 }
 
-.modal-tab input[type="radio"] {
+.modal-tab input {
   display: none;
 }
 
@@ -407,7 +407,7 @@ label span:first-child {
   margin-right: 8px;
 }
 
-input:checked {
+input[type="radio"]:checked ~ label{
   cursor: default;
 }
 

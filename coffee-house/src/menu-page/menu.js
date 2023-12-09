@@ -174,21 +174,27 @@ window.onload = () => {
         <span>Additives</span>
         <div class="additives-choice">
           <div class="tabs">
-            <div class="tab">
-              <input type="radio" id="one" />
-              <span>1</span>
-              <label for="one">${product.additives[0].name}</label>
+            <div class="modal-tab modal-tab-add">
+              <input type="checkbox" id="one" value="1" data-price="${product.additives[0]["add-price"]}" name="adds[]" />
+              <label for="one">
+                <span>1</span>
+                <span>${product.additives[0].name}</span>
+              </label>
             </div>
 
-            <div class="tab">
-              <input type="radio" id="two" />
-              <span>2</span>
-              <label for="two">${product.additives[1].name}</label>
+            <div class="modal-tab modal-tab-add">
+              <input type="checkbox" id="two" value="2" data-price="${product.additives[1]["add-price"]}" name="adds[]"/>
+              <label for="two">
+                <span>2</span>
+                <span>${product.additives[1].name} </span>
+              </label>
             </div>
-            <div class="tab">
-              <input type="radio" id="three" />
-              <span>3</span>
-              <label for="three">${product.additives[2].name}</label>
+            <div class="modal-tab modal-tab-add">
+              <input type="checkbox" id="three" value="3" data-price="${product.additives[2]["add-price"]}" name="adds[]" />
+              <label for="three">
+                <span>3</span>
+                <span>${product.additives[2].name}</span>
+              </label>
             </div>
           </div>
         </div>
@@ -244,48 +250,8 @@ window.onload = () => {
     </div>
   </div>
   `;
-
-    const allTabsElems = document.querySelectorAll(".modal-tab.modal-tab-size");
-    const inputElems = document.querySelectorAll(".radio");
-    let prevChosenTab = null;
-    inputElems.forEach((input) => {
-      if (input.checked) {
-        prevChosenTab = input;
-      }
-    });
-
-    allTabsElems.forEach((tab) => {
- /*      tab.style.backgroundColor = "#e1d4c9"; */
-
-      tab.onchange = (e) => {
-        e.stopPropogation;
-        const targetElem = e.currentTarget.children[0];
-       /*  e.currentTarget.style.backgroundColor = "#403f3d"; */
-
-        if (targetElem.checked) {
-          
-          const price = document.getElementById("price");
-          const tabValue = targetElem.id.toLocaleLowerCase();
-          let priceAdd = 0;
-          
-
-          for (let item in product.sizes) {
-            if (item === tabValue) {
-              priceAdd = +product.sizes[item]["add-price"];
-            }
-          }
-
-          price.innerText = (
-            +price.innerText +
-            priceAdd -
-            +prevChosenTab.value
-          ).toFixed(2);
-        }
-
-        prevChosenTab = targetElem;
-      };
-    });
-
+    calcSizeSum(product);
+    calcAddsSum(product);
     handleModal();
   }
 
@@ -311,6 +277,68 @@ window.onload = () => {
 
     modal.addEventListener("click", closeModal);
     modalCloseButton.addEventListener("click", closeModal);
+  }
+
+  function calcSizeSum(product) {
+    const allTabsElems = document.querySelectorAll(".modal-tab.modal-tab-size");
+    const inputElems = document.querySelectorAll(".radio");
+    let prevChosenTab = null;
+    inputElems.forEach((input) => {
+      if (input.checked) {
+        prevChosenTab = input;
+      }
+    });
+
+    allTabsElems.forEach((tab) => {
+      tab.onchange = (e) => {
+        e.stopPropagation();
+        const targetElem = e.currentTarget.children[0];
+
+        if (targetElem.checked) {
+          const price = document.getElementById("price");
+          const tabValue = targetElem.id.toLocaleLowerCase();
+          let priceAdd = 0;
+
+          for (let item in product.sizes) {
+            if (item === tabValue) {
+              priceAdd = +product.sizes[item]["add-price"];
+            }
+          }
+
+          price.innerText = (
+            +price.innerText +
+            priceAdd -
+            +prevChosenTab.value
+          ).toFixed(2);
+        }
+
+        prevChosenTab = targetElem;
+      };
+    });
+  }
+
+  function calcAddsSum(product) {
+    const inputElems = document.querySelectorAll("input[type='checkbox']");
+
+    inputElems.forEach((tab) => {
+      tab.onchange = (e) => {
+        e.stopPropagation();
+        const targetElem = e.target;
+
+        const price = document.getElementById("price");
+        const tabValue = targetElem.nextElementSibling.children[1].innerText;
+        let priceAdd = 0;
+
+        for (let item of product.additives) {
+          if (item.name === tabValue && targetElem.checked) {
+            priceAdd = +item["add-price"];
+          } else if (item.name === tabValue && !targetElem.checked) {
+            priceAdd = -item["add-price"];
+          }
+        }
+        price.innerText = (+price.innerText + priceAdd).toFixed(2);
+      };
+    });
   }
 };
 
