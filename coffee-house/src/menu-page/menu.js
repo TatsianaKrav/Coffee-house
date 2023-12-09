@@ -243,14 +243,28 @@ window.onload = () => {
       tab.onchange = (e) => {
         e.stopPropogation;
         const targetElem = e.currentTarget.children[0];
-        console.log(e.target);
 
-        if (targetElem.checked && targetElem.value === "300") {
+        /*      if (targetElem.checked && targetElem.value === "300") {
           const price = document.getElementById("price");
           price.innerText = (+price.innerText + 0.5).toFixed(2);
         } else if (targetElem.checked && targetElem.value === "400") {
           const price = document.getElementById("price");
           price.innerText = (+price.innerText + 1.0).toFixed(2);
+        } */
+
+        if (targetElem.checked) {
+          const price = document.getElementById("price");
+          const tabValue =
+            targetElem.nextElementSibling.innerText.toLocaleLowerCase();
+          let priceAdd = 0;
+
+          for (let item in product.sizes) {
+            if (item === tabValue) {
+              priceAdd = +product.sizes[item]["add-price"];
+            }
+          }
+
+          price.innerText = (+price.innerText + priceAdd).toFixed(2);
         }
       };
     });
