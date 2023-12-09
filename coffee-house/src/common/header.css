@@ -109,7 +109,7 @@ header {
   }
 }
 
-.menu-in-burger {
+.header-menu.menu-in-burger {
   display: none;
 }
 
@@ -141,7 +141,6 @@ header {
 .burger::after {
   bottom: 16px;
 }
-
 
 .burger.active::before {
   transform: rotate(45deg);
