@@ -95,19 +95,16 @@ window.onload = () => {
       });
 
       const allCards = document.querySelectorAll(".coffee-item");
-      /*    modal.style.cssText = `
+      modal.style.cssText = `
         display: flex;
         visibility: hidden;
         opacity: 0;
-        transition: opacity 0.5s ease`; */
+        transition: opacity 0.3s linear`;
 
       allCards.forEach((card) => {
         card.onclick = (e) => {
-          /*   modal.style.visibility = "visible";
-        modal.style.opacity = 1; */
-
           const targetElement = e.currentTarget;
-          modal.style.display = "flex";
+          /* modal.style.display = "flex"; */
 
           showModal(targetElement);
           document.getElementsByTagName("body")[0].style.overflowY = "hidden";
@@ -130,6 +127,9 @@ window.onload = () => {
       (product) => product.name === elem.dataset.name
     );
     const productImgPath = elem.dataset.img;
+
+    modal.style.visibility = "visible";
+    modal.style.opacity = 1;
 
     modalWindowElement.innerHTML = `
     <div class="product-image">
@@ -250,6 +250,7 @@ window.onload = () => {
     </div>
   </div>
   `;
+
     calcSizeSum(product);
     calcAddsSum(product);
     handleModal();
@@ -270,7 +271,9 @@ window.onload = () => {
 
     function closeModal(e) {
       if (e.target === modal || e.target === modalCloseButton) {
-        modal.style.display = "none";
+        /* modal.style.display = "none"; */
+        modal.style.visibility = "hidden";
+        modal.style.opacity = 0;
         document.getElementsByTagName("body")[0].style.overflowY = "auto";
       }
     }

@@ -223,6 +223,12 @@
   .more-items {
     display: flex;
   }
+
+  .product-image img {
+    border-radius: 40px;
+    width: 310px;
+    height: 310px;
+  }
 }
 
 @media screen and (max-width: 739px) {
@@ -258,6 +264,15 @@
     gap: 40px;
   }
 }
+
+
+@media screen and (max-width: 630px) {
+  .product-image {
+    display: none;
+  }
+  
+}
+
 
 @media screen and (max-width: 557px) {
   .coffee-enjoy-info {
