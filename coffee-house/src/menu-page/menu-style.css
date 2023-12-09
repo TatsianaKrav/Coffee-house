@@ -400,7 +400,7 @@ label span:first-child {
   margin-right: 8px;
 }
 
-input[type="radio"]:checked ~ label{
+input[type="radio"]:checked ~ label {
   cursor: default;
 }
 
@@ -440,7 +440,7 @@ input:checked ~ label span:last-child {
 .total span {
   color: #403f3d;
   font-size: 24px;
-  line-height: 125%; 
+  line-height: 125%;
 }
 
 .note {

@@ -265,14 +265,11 @@
   }
 }
 
-
 @media screen and (max-width: 630px) {
   .product-image {
     display: none;
   }
-  
 }
-
 
 @media screen and (max-width: 557px) {
   .coffee-enjoy-info {

@@ -142,6 +142,7 @@ header {
   bottom: 16px;
 }
 
+
 .burger.active::before {
   transform: rotate(45deg);
   top: calc(50%);
