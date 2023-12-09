@@ -377,6 +377,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.4s linear;
 }
 
 .modal-tab input[type="radio"] {
@@ -404,29 +405,31 @@ label span:first-child {
   border-radius: 50%;
   background: #c1b6ad;
   margin-right: 8px;
-  
 }
 
-/* .tab.modal-tab label::after {
-  content: "";
-  display: block;
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: #c1b6ad;
-  top: 59px;
+input:checked {
+  cursor: default;
 }
 
-.tab.modal-tab label::before {
-  content: "S";
-  display: block;
-  position: absolute;
-  top: 63px;
-  left: 5px;
-  z-index: 5;
-}  
- */
+.modal-tab:has(input:checked) {
+  background-color: #403f3d;
+}
+
+.modal-tab:hover,
+input:checked ~ .modal-tab {
+  background-color: #403f3d;
+}
+
+.modal-tab:hover label span:first-child,
+input:checked ~ label span:first-child {
+  background-color: #e1d4c9;
+}
+
+.modal-tab:hover label span:last-child,
+input:checked ~ label span:last-child {
+  color: #e1d4c9;
+}
+
 .modal-tab input {
   cursor: pointer;
 }
@@ -444,7 +447,7 @@ label span:first-child {
 .total span {
   color: #403f3d;
   font-size: 24px;
-  line-height: 125%; /* 30px */
+  line-height: 125%; 
 }
 
 .note {

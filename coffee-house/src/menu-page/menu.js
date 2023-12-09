@@ -245,7 +245,6 @@ window.onload = () => {
   </div>
   `;
 
- 
     const allTabsElems = document.querySelectorAll(".modal-tab.modal-tab-size");
     const inputElems = document.querySelectorAll(".radio");
     let prevChosenTab = null;
@@ -256,16 +255,19 @@ window.onload = () => {
     });
 
     allTabsElems.forEach((tab) => {
-      
+ /*      tab.style.backgroundColor = "#e1d4c9"; */
+
       tab.onchange = (e) => {
         e.stopPropogation;
         const targetElem = e.currentTarget.children[0];
+       /*  e.currentTarget.style.backgroundColor = "#403f3d"; */
 
         if (targetElem.checked) {
+          
           const price = document.getElementById("price");
-          const tabValue =
-          targetElem.id.toLocaleLowerCase();
+          const tabValue = targetElem.id.toLocaleLowerCase();
           let priceAdd = 0;
+          
 
           for (let item in product.sizes) {
             if (item === tabValue) {
