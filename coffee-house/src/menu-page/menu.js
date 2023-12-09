@@ -144,18 +144,18 @@ window.onload = () => {
         <div class="size-choice">
           <div class="tabs">
             <div class="tab">
-              <input type="radio" id="one" value="200" name="size" />
-              <span>S</span>
+              <input type="radio" id="one" value="${product.sizes.s["add-price"]}" name="size" checked/>
+              <span >S</span>
               <label for="one">${product.sizes.s.size}</label>
             </div>
 
             <div class="tab">
-              <input type="radio" id="two" value="300" name="size" />
+              <input type="radio" id="two" value="${product.sizes.m["add-price"]}" name="size" />
               <span>M</span>
               <label for="two">${product.sizes.m.size}</label>
             </div>
             <div class="tab">
-              <input type="radio" id="three" value="400" name="size" />
+              <input type="radio" id="three" value="${product.sizes.l["add-price"]}" name="size" />
               <span>L</span>
               <label for="three">${product.sizes.l.size}</label>
             </div>
@@ -238,19 +238,19 @@ window.onload = () => {
   `;
 
     //сделать запрет повторного клика на чекбокс, если уже выбран при переключении
+    const allTabsElems = document.querySelectorAll(".tab");
+    const inputElems = document.querySelectorAll("input");
+    let prevChosenTab = null;
+    inputElems.forEach((input) => {
+      if (input.checked) {
+        prevChosenTab = input;
+      }
+    });
 
-    document.querySelectorAll(".tab").forEach((tab) => {
+    allTabsElems.forEach((tab) => {
       tab.onchange = (e) => {
         e.stopPropogation;
         const targetElem = e.currentTarget.children[0];
-
-        /*      if (targetElem.checked && targetElem.value === "300") {
-          const price = document.getElementById("price");
-          price.innerText = (+price.innerText + 0.5).toFixed(2);
-        } else if (targetElem.checked && targetElem.value === "400") {
-          const price = document.getElementById("price");
-          price.innerText = (+price.innerText + 1.0).toFixed(2);
-        } */
 
         if (targetElem.checked) {
           const price = document.getElementById("price");
@@ -264,8 +264,14 @@ window.onload = () => {
             }
           }
 
-          price.innerText = (+price.innerText + priceAdd).toFixed(2);
+          price.innerText = (
+            +price.innerText +
+            priceAdd -
+            +prevChosenTab.value
+          ).toFixed(2);
         }
+
+        prevChosenTab = targetElem;
       };
     });
 
