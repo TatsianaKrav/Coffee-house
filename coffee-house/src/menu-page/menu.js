@@ -143,22 +143,30 @@ window.onload = () => {
         <span>Size</span>
         <div class="size-choice">
           <div class="tabs">
-            <div class="tab">
-              <input type="radio" id="one" value="${product.sizes.s["add-price"]}" name="size" checked/>
-              <span >S</span>
-              <label for="one">${product.sizes.s.size}</label>
+            <div class="modal-tab modal-tab-size">
+              <input type="radio" id="S" class="radio" value="${product.sizes.s["add-price"]}" name="size" checked/>
+              <label for="S">
+                <span >S</span>
+                <span > ${product.sizes.s.size}</span>
+              </label>
             </div>
 
-            <div class="tab">
-              <input type="radio" id="two" value="${product.sizes.m["add-price"]}" name="size" />
-              <span>M</span>
-              <label for="two">${product.sizes.m.size}</label>
+            <div class="modal-tab modal-tab-size">
+              <input type="radio" id="M" class="radio"  value="${product.sizes.m["add-price"]}" name="size" />
+              <label for="M">
+                <span>M</span>
+                <span>${product.sizes.m.size}</span>
+              </label>
             </div>
-            <div class="tab">
-              <input type="radio" id="three" value="${product.sizes.l["add-price"]}" name="size" />
-              <span>L</span>
-              <label for="three">${product.sizes.l.size}</label>
+
+            <div class="modal-tab modal-tab-size">
+              <input type="radio" id="L" class="radio"  value="${product.sizes.l["add-price"]}" name="size" />
+              <label for="L">
+                <span>L</span>
+                <span>${product.sizes.l.size}</span>
+              </label>
             </div>
+
           </div>
         </div>
       </div>
@@ -237,9 +245,9 @@ window.onload = () => {
   </div>
   `;
 
-    //сделать запрет повторного клика на чекбокс, если уже выбран при переключении
-    const allTabsElems = document.querySelectorAll(".tab");
-    const inputElems = document.querySelectorAll("input");
+ 
+    const allTabsElems = document.querySelectorAll(".modal-tab.modal-tab-size");
+    const inputElems = document.querySelectorAll(".radio");
     let prevChosenTab = null;
     inputElems.forEach((input) => {
       if (input.checked) {
@@ -248,6 +256,7 @@ window.onload = () => {
     });
 
     allTabsElems.forEach((tab) => {
+      
       tab.onchange = (e) => {
         e.stopPropogation;
         const targetElem = e.currentTarget.children[0];
@@ -255,7 +264,7 @@ window.onload = () => {
         if (targetElem.checked) {
           const price = document.getElementById("price");
           const tabValue =
-            targetElem.nextElementSibling.innerText.toLocaleLowerCase();
+          targetElem.id.toLocaleLowerCase();
           let priceAdd = 0;
 
           for (let item in product.sizes) {

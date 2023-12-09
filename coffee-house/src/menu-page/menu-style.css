@@ -274,7 +274,7 @@ body {
   color: #403f3d;
   font-family: Inter-Regular, sans-serif;
   font-size: 16px;
-  line-height: 150%; /* 24px */
+  line-height: 150%;
   height: 72px;
 }
 
@@ -282,7 +282,7 @@ body {
   margin-top: 12px;
   color: #403f3d;
   font-size: 24px;
-  line-height: 125%; /* 30px */
+  line-height: 125%;
 }
 
 .more-items {
@@ -311,7 +311,7 @@ body {
 }
 
 .modal-window {
-  max-width: 688px;
+  max-width: 800px;
   padding: 16px;
   border-radius: 40px;
   background: #e1d4c9;
@@ -333,7 +333,7 @@ body {
 .product-name {
   color: #403f3d;
   font-size: 24px;
-  line-height: 125%; /* 30px */
+  line-height: 125%;
   margin-bottom: 12px;
 }
 
@@ -347,9 +347,8 @@ body {
   color: #403f3d;
   font-family: Inter-Regular, sans-serif;
   font-size: 16px;
-  font-style: normal;
   font-weight: 400;
-  line-height: 150%; /* 24px */
+  line-height: 150%;
 }
 
 .product-size span,
@@ -359,7 +358,7 @@ body {
   font-family: Inter-Regular, sans-serif;
   font-size: 16px;
   font-weight: 400;
-  line-height: 150%; /* 24px */
+  line-height: 150%;
 }
 
 .tabs {
@@ -369,67 +368,72 @@ body {
   gap: 8px;
 }
 
-.tab {
+.modal-tab {
   margin-right: 0;
   cursor: pointer;
-/*   padding: 8px 16px 8px 8px; */
+  padding: 8px 16px 8px 8px;
+  border-radius: 100px;
+  border: 1px solid #c1b6ad;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-
-
-.tab input[type=radio] {
+.modal-tab input[type="radio"] {
   display: none;
 }
 
-/* .tab::after {
-  content: '';
+label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+label span {
+  font-family: Inter-SemiBold, sans-serif !important;
+  color: #403f3d;
+  font-size: 16px;
+}
+
+label span:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #c1b6ad;
+  margin-right: 8px;
+  
+}
+
+/* .tab.modal-tab label::after {
+  content: "";
   display: block;
   position: absolute;
   width: 30px;
   height: 30px;
   border-radius: 50%;
   background: #c1b6ad;
-} */
-
-
-.tab input {
-  cursor: pointer;
- /*  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: #c1b6ad;
-  color: #403f3d;
-  text-align: center;
-  font-size: 16px;
-  line-height: 150%; 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 8px;
-  box-sizing: border-box; */
+  top: 59px;
 }
 
-/* .tab span {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: #c1b6ad;
-  color: #403f3d;
-  text-align: center;
-  font-size: 16px;
-  line-height: 150%; 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 8px;
-  box-sizing: border-box;
-} */
-
-.tab label {
+.tab.modal-tab label::before {
+  content: "S";
+  display: block;
+  position: absolute;
+  top: 63px;
+  left: 5px;
+  z-index: 5;
+}  
+ */
+.modal-tab input {
   cursor: pointer;
 }
 
-
+.modal-tab label {
+  cursor: pointer;
+}
 
 .total {
   display: flex;
