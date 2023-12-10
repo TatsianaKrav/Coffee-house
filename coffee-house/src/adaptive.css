@@ -317,7 +317,7 @@
       left: -100%;
     }
   }
-  
+
   @keyframes next2 {
     from {
       left: 100%;
@@ -326,7 +326,7 @@
       left: calc(50% - 174px);
     }
   }
-  
+
   @keyframes prev1 {
     from {
       left: calc(50% - 174px);
@@ -335,7 +335,7 @@
       left: 100%;
     }
   }
-  
+
   @keyframes prev2 {
     from {
       left: -100%;

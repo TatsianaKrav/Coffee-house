@@ -71,10 +71,12 @@ slidersList.forEach((slide) => {
   });
 
   slide.addEventListener("mouseout", function () {
-   /*  console.log(diff); */
+    /*  console.log(diff); */
     document.querySelector(".line.active").style.animationPlayState = "running";
-    document.querySelector(".line.active").style.animation = `moveBars ${1500 - diff}ms linear infinite forwards`;
-    
+    document.querySelector(".line.active").style.animation = `moveBars ${
+      1500 - diff
+    }ms linear infinite forwards`;
+
     start = 0;
   });
 
