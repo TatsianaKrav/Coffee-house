@@ -7,21 +7,10 @@ const arrowNextElement = document.getElementById("arrow-next");
 const bars = document.querySelectorAll(".line");
 let countSlider = 0;
 
-/* function nextSlider() {
-  if (countSlider === sliders.children.length - 1) {
-    sliders.children[countSlider].style.display = "none";
-    countSlider = 0;
-    sliders.children[0].style.display = "block";
-  } else {
-    sliders.children[countSlider].style.display = "none";
-    sliders.children[countSlider + 1].style.display = "block";
-    countSlider++;
-  }
-} */
-
-/* setInterval(nextSlider, 2000); */
-
 arrowNextElement.addEventListener("click", nextSlider);
+
+let start = 0;
+let end = 0;
 
 function nextSlider() {
   slidersList[countSlider].style.animation = "next1 0.5s linear forwards";
@@ -31,6 +20,13 @@ function nextSlider() {
     countSlider++;
   }
   slidersList[countSlider].style.animation = "next2 0.5s linear forwards";
+
+  if (start >= 1500) {
+    start = 0;
+    end = 0;
+  }
+  start = Date.now();
+
   handleBars();
 }
 
@@ -48,20 +44,42 @@ function prevSlider() {
 }
 
 function autoSliding() {
+  interval = setInterval(function () {
+    nextSlider();
+    handleBars();
+  }, 1500);
+  /* 
   interval = setInterval(timer, 1500);
+
   function timer() {
     nextSlider();
     handleBars();
-  }
+  } */
 }
 
 autoSliding();
 
-sliderContainer.addEventListener("mouseover", function () {
-  clearInterval(interval);
-});
+let diff = 0;
+slidersList.forEach((slide) => {
+  slide.addEventListener("mouseover", function (e) {
+    e.preventDefault();
+    end = Date.now();
+    let diff = end - start;
+    console.log(diff);
+    clearInterval(interval);
+    document.querySelector(".line.active").style.animationPlayState = "paused";
+  });
 
-sliderContainer.addEventListener("mouseout", autoSliding);
+  slide.addEventListener("mouseout", function () {
+   /*  console.log(diff); */
+    document.querySelector(".line.active").style.animationPlayState = "running";
+    document.querySelector(".line.active").style.animation = `moveBars ${1500 - diff}ms linear infinite forwards`;
+    
+    start = 0;
+  });
+
+  slide.addEventListener("mouseout", autoSliding);
+});
 
 function handleBars() {
   for (let i = 0; i < bars.length; i++) {
