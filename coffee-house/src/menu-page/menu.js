@@ -1,152 +1,148 @@
 import products from "../../data/products.json" assert { type: "json" };
 
-window.onload = () => {
-  const allProducts = products;
-  const menuTabs = document.querySelectorAll(".menu-choice");
-  const listOfDrinks = document.getElementsByClassName("menu-list-drinks")[0];
-  const loadProductsButton = document.getElementById("load");
-  const modal = document.getElementById("modal");
-  const modalWindowElement = document.getElementById("modal-window");
+/* window.onload = () => { */
+const allProducts = products;
+const menuTabs = document.querySelectorAll(".menu-choice");
+const listOfDrinks = document.getElementsByClassName("menu-list-drinks")[0];
+const loadProductsButton = document.getElementById("load");
+const modal = document.getElementById("modal");
+const modalWindowElement = document.getElementById("modal-window");
 
-  showDrinks("coffee");
-  filterDrinks();
-  loadMoreProducts();
+showDrinks("coffee");
+filterDrinks();
+loadMoreProducts();
 
-  function filterDrinks() {
-    listOfDrinks.addEventListener("click", (e) => {
-      const chosenDrink = e.target.innerText;
+function filterDrinks() {
+  listOfDrinks.addEventListener("click", (e) => {
+    const chosenDrink = e.target.innerText;
 
-      menuTabs.forEach((tab) => tab.classList.remove("active"));
-      e.target.classList.add("active");
-      showDrinks(chosenDrink);
-    });
-  }
+    menuTabs.forEach((tab) => tab.classList.remove("active"));
+    e.target.classList.add("active");
+    showDrinks(chosenDrink);
+  });
+}
 
-  function showDrinks(drink) {
-    const coffeItemsElement =
-      document.getElementsByClassName("coffee-items")[0];
-    coffeItemsElement.innerHTML = "";
+function showDrinks(drink) {
+  const coffeItemsElement = document.getElementsByClassName("coffee-items")[0];
+  coffeItemsElement.innerHTML = "";
 
-    let count = 1;
-    if (allProducts && allProducts.length > 0) {
-      const products = allProducts.filter(
-        (product) =>
-          product.category.toLocaleLowerCase() === drink.toLocaleLowerCase()
+  let count = 1;
+  if (allProducts && allProducts.length > 0) {
+    const products = allProducts.filter(
+      (product) =>
+        product.category.toLocaleLowerCase() === drink.toLocaleLowerCase()
+    );
+
+    products.forEach((item) => {
+      const coffeeItemElement = document.createElement("div");
+      coffeeItemElement.className = "coffee-item";
+      coffeeItemElement.setAttribute("data-name", item.name);
+      coffeeItemElement.setAttribute(
+        "data-img",
+        "../../assets/images/menu-page/" +
+          item.category +
+          "/" +
+          item.category +
+          "-" +
+          count +
+          ".png"
       );
 
-      products.forEach((item) => {
-        const coffeeItemElement = document.createElement("div");
-        coffeeItemElement.className = "coffee-item";
-        coffeeItemElement.setAttribute("data-name", item.name);
-        coffeeItemElement.setAttribute(
-          "data-img",
-          "../../assets/images/menu-page/" +
-            item.category +
-            "/" +
-            item.category +
-            "-" +
-            count +
-            ".png"
-        );
+      const coffeeItemImageElement = document.createElement("div");
+      coffeeItemImageElement.className = "coffee-item-image";
 
-        const coffeeItemImageElement = document.createElement("div");
-        coffeeItemImageElement.className = "coffee-item-image";
+      const imageElement = document.createElement("img");
+      imageElement.setAttribute(
+        "src",
+        "../../assets/images/menu-page/" +
+          item.category +
+          "/" +
+          item.category +
+          "-" +
+          count +
+          ".png"
+      );
+      imageElement.setAttribute("alt", "coffee1");
 
-        const imageElement = document.createElement("img");
-        imageElement.setAttribute(
-          "src",
-          "../../assets/images/menu-page/" +
-            item.category +
-            "/" +
-            item.category +
-            "-" +
-            count +
-            ".png"
-        );
-        imageElement.setAttribute("alt", "coffee1");
+      coffeeItemImageElement.appendChild(imageElement);
 
-        coffeeItemImageElement.appendChild(imageElement);
+      const coffeeItemInfoElement = document.createElement("div");
+      coffeeItemInfoElement.className = "coffee-item-info";
 
-        const coffeeItemInfoElement = document.createElement("div");
-        coffeeItemInfoElement.className = "coffee-item-info";
+      const coffeeItemTitle = document.createElement("div");
+      coffeeItemTitle.className = "coffee-item-title";
+      coffeeItemTitle.innerText = item.name;
 
-        const coffeeItemTitle = document.createElement("div");
-        coffeeItemTitle.className = "coffee-item-title";
-        coffeeItemTitle.innerText = item.name;
+      const coffeeItemDescription = document.createElement("div");
+      coffeeItemDescription.className = "coffee-item-description";
+      coffeeItemDescription.innerText = item.description;
 
-        const coffeeItemDescription = document.createElement("div");
-        coffeeItemDescription.className = "coffee-item-description";
-        coffeeItemDescription.innerText = item.description;
+      const coffeeItemPrice = document.createElement("div");
+      coffeeItemPrice.className = "coffee-item-price";
+      coffeeItemPrice.innerText = "$" + item.price;
 
-        const coffeeItemPrice = document.createElement("div");
-        coffeeItemPrice.className = "coffee-item-price";
-        coffeeItemPrice.innerText = "$" + item.price;
+      coffeeItemInfoElement.append(coffeeItemTitle);
+      coffeeItemInfoElement.append(coffeeItemDescription);
+      coffeeItemInfoElement.append(coffeeItemPrice);
 
-        coffeeItemInfoElement.append(coffeeItemTitle);
-        coffeeItemInfoElement.append(coffeeItemDescription);
-        coffeeItemInfoElement.append(coffeeItemPrice);
+      coffeeItemElement.appendChild(coffeeItemImageElement);
+      coffeeItemElement.appendChild(coffeeItemInfoElement);
 
-        coffeeItemElement.appendChild(coffeeItemImageElement);
-        coffeeItemElement.appendChild(coffeeItemInfoElement);
+      coffeItemsElement.append(coffeeItemElement);
 
-        coffeItemsElement.append(coffeeItemElement);
+      count++;
+    });
 
-        count++;
-      });
-
-      const allCards = document.querySelectorAll(".coffee-item");
-      modal.style.cssText = `
+    const allCards = document.querySelectorAll(".coffee-item");
+    modal.style.cssText = `
         display: flex;
         visibility: hidden;
         opacity: 0;
         transition: opacity 0.3s linear`;
 
-      allCards.forEach((card) => {
-        card.onclick = (e) => {
-          const targetElement = e.currentTarget;
-          /* modal.style.display = "flex"; */
+    allCards.forEach((card) => {
+      card.onclick = (e) => {
+        const targetElement = e.currentTarget;
+        /* modal.style.display = "flex"; */
 
-          showModal(targetElement);
-          document.getElementsByTagName("body")[0].style.overflowY = "hidden";
-        };
-      });
-    }
-
-    const mediaQuery = window.matchMedia("(max-width: 768px)");
-    let isNotDesktop = false;
-
-    function handleTabletChange(e) {
-      if (e.matches) {
-        return (isNotDesktop = true);
-      }
-      return false;
-    }
-
-    mediaQuery.addEventListener("change", handleTabletChange);
-
-    handleTabletChange(mediaQuery);
-    console.log(handleTabletChange(mediaQuery));
-
-    if (count <= 5) {
-      document.getElementById("load").style.display = "none";
-    } else if (count > 5 && handleTabletChange(mediaQuery)) {
-      document.getElementById("load").style.display = "flex";
-    }
-
-    isNotDesktop = false;
+        showModal(targetElement);
+        document.getElementsByTagName("body")[0].style.overflowY = "hidden";
+      };
+    });
   }
 
-  function showModal(elem) {
-    modalWindowElement.innerHTML = "";
-    const product = products.find(
-      (product) => product.name === elem.dataset.name
-    );
-    const productImgPath = elem.dataset.img;
+  const mediaQuery = window.matchMedia("(max-width: 768px)");
+  let isNotDesktop = false;
 
-    modal.style.visibility = "visible";
-    modal.style.opacity = 1;
+  function handleTabletChange(e) {
+    if (e.matches) {
+      return (isNotDesktop = true);
+    }
+    return false;
+  }
 
-    modalWindowElement.innerHTML = `
+  mediaQuery.addEventListener("change", handleTabletChange);
+
+  if (count <= 5) {
+    document.getElementById("load").style.display = "none";
+  } else if (count > 5 && handleTabletChange(mediaQuery)) {
+    document.getElementById("load").style.display = "flex";
+  }
+
+  isNotDesktop = false;
+}
+
+function showModal(elem) {
+  modalWindowElement.innerHTML = "";
+  const product = products.find(
+    (product) => product.name === elem.dataset.name
+  );
+  const productImgPath = elem.dataset.img;
+
+  modal.style.visibility = "visible";
+  modal.style.opacity = 1;
+
+  modalWindowElement.innerHTML = `
     <div class="product-image">
     <img src="${productImgPath}" ; alt="${product.name}" />
   </div>
@@ -266,98 +262,98 @@ window.onload = () => {
   </div>
   `;
 
-    calcSizeSum(product);
-    calcAddsSum(product);
-    handleModal();
-  }
+  calcSizeSum(product);
+  calcAddsSum(product);
+  handleModal();
+}
 
-  function loadMoreProducts() {
-    loadProductsButton.onclick = () => {
-      const hiddenProducts = document.querySelectorAll(
-        ".coffee-item:nth-child(n+5)"
-      );
-      hiddenProducts.forEach((product) => (product.style.display = "block"));
-      loadProductsButton.style.display = "none";
-    };
-  }
+function loadMoreProducts() {
+  loadProductsButton.onclick = () => {
+    const hiddenProducts = document.querySelectorAll(
+      ".coffee-item:nth-child(n+5)"
+    );
+    hiddenProducts.forEach((product) => (product.style.display = "block"));
+    loadProductsButton.style.display = "none";
+  };
+}
 
-  function handleModal() {
-    const modalCloseButton = document.getElementById("modal-close");
+function handleModal() {
+  const modalCloseButton = document.getElementById("modal-close");
 
-    function closeModal(e) {
-      if (e.target === modal || e.target === modalCloseButton) {
-        modal.style.visibility = "hidden";
-        modal.style.opacity = 0;
-        document.getElementsByTagName("body")[0].style.overflowY = "auto";
-      }
+  function closeModal(e) {
+    if (e.target === modal || e.target === modalCloseButton) {
+      modal.style.visibility = "hidden";
+      modal.style.opacity = 0;
+      document.getElementsByTagName("body")[0].style.overflowY = "auto";
     }
-
-    modal.addEventListener("click", closeModal);
-    modalCloseButton.addEventListener("click", closeModal);
   }
 
-  function calcSizeSum(product) {
-    const allTabsElems = document.querySelectorAll(".modal-tab.modal-tab-size");
-    const inputElems = document.querySelectorAll(".radio");
-    let prevChosenTab = null;
-    inputElems.forEach((input) => {
-      if (input.checked) {
-        prevChosenTab = input;
-      }
-    });
+  modal.addEventListener("click", closeModal);
+  modalCloseButton.addEventListener("click", closeModal);
+}
 
-    allTabsElems.forEach((tab) => {
-      tab.onchange = (e) => {
-        e.stopPropagation();
-        const targetElem = e.currentTarget.children[0];
+function calcSizeSum(product) {
+  const allTabsElems = document.querySelectorAll(".modal-tab.modal-tab-size");
+  const inputElems = document.querySelectorAll(".radio");
+  let prevChosenTab = null;
+  inputElems.forEach((input) => {
+    if (input.checked) {
+      prevChosenTab = input;
+    }
+  });
 
-        if (targetElem.checked) {
-          const price = document.getElementById("price");
-          const tabValue = targetElem.id.toLocaleLowerCase();
-          let priceAdd = 0;
+  allTabsElems.forEach((tab) => {
+    tab.onchange = (e) => {
+      e.stopPropagation();
+      const targetElem = e.currentTarget.children[0];
 
-          for (let item in product.sizes) {
-            if (item === tabValue) {
-              priceAdd = +product.sizes[item]["add-price"];
-            }
-          }
-
-          price.innerText = (
-            +price.innerText +
-            priceAdd -
-            +prevChosenTab.value
-          ).toFixed(2);
-        }
-
-        prevChosenTab = targetElem;
-      };
-    });
-  }
-
-  function calcAddsSum(product) {
-    const inputElems = document.querySelectorAll("input[type='checkbox']");
-
-    inputElems.forEach((tab) => {
-      tab.onchange = (e) => {
-        e.stopPropagation();
-        const targetElem = e.target;
-
+      if (targetElem.checked) {
         const price = document.getElementById("price");
-        const tabValue = targetElem.nextElementSibling.children[1].innerText;
+        const tabValue = targetElem.id.toLocaleLowerCase();
         let priceAdd = 0;
 
-        for (let item of product.additives) {
-          if (item.name === tabValue && targetElem.checked) {
-            priceAdd = +item["add-price"];
-          } else if (item.name === tabValue && !targetElem.checked) {
-            priceAdd = -item["add-price"];
+        for (let item in product.sizes) {
+          if (item === tabValue) {
+            priceAdd = +product.sizes[item]["add-price"];
           }
         }
-        price.innerText = (+price.innerText + priceAdd).toFixed(2);
-      };
-    });
-  }
-};
+
+        price.innerText = (
+          +price.innerText +
+          priceAdd -
+          +prevChosenTab.value
+        ).toFixed(2);
+      }
+
+      prevChosenTab = targetElem;
+    };
+  });
+}
+
+function calcAddsSum(product) {
+  const inputElems = document.querySelectorAll("input[type='checkbox']");
+
+  inputElems.forEach((tab) => {
+    tab.onchange = (e) => {
+      e.stopPropagation();
+      const targetElem = e.target;
+
+      const price = document.getElementById("price");
+      const tabValue = targetElem.nextElementSibling.children[1].innerText;
+      let priceAdd = 0;
+
+      for (let item of product.additives) {
+        if (item.name === tabValue && targetElem.checked) {
+          priceAdd = +item["add-price"];
+        } else if (item.name === tabValue && !targetElem.checked) {
+          priceAdd = -item["add-price"];
+        }
+      }
+      price.innerText = (+price.innerText + priceAdd).toFixed(2);
+    };
+  });
+}
+/* }; */
 
 /* function showModal(elem) {
   modal.innerHTML = "";
