@@ -37,6 +37,7 @@ function prevSlider() {
 }
 
 //set interval for autosliding
+let interval = 0;
 function autoSliding() {
   interval = setInterval(timer, 5000);
 
@@ -46,55 +47,62 @@ function autoSliding() {
   }
 }
 
-/* autoSliding();
- */
+autoSliding();
+
 //hover effect - stop animation
 function handleAnimation() {
   slidersList.forEach((slide) => {
-    let leftTimeAnimation = 0;
-    let fulledBarArea = 0;
-
     slide.addEventListener("mouseover", function (e) {
       e.stopPropagation();
       clearInterval(interval);
 
-      /* let list = e.currentTarget.parentNode.nextElementSibling.children;
-          let activeBar = null;
-          Array.from(list).forEach((item) => {
-            if (item.children[0].classList.contains("active")) {
-              activeBar = item.children[0];
-            }
-          });
-          let styles = getComputedStyle(activeBar);
-          let activeBarWidth = parseInt(styles.width);
-      
-          fulledBarArea = (activeBarWidth * 100) / 40;
-          let leftFullBarArea = 100 - fulledBarArea;
-      
-          leftTimeAnimation = (leftFullBarArea * 1500) / 100;
-       */
       document.querySelector(".line.active").style.animationPlayState =
         "paused";
     });
 
-    /* const removeBars = `
-      @keyframes removeBars {
-          from {
-            width: ${fulledBarArea}%;
-          }
-          to {
-            width: 100%;
-          }
-        }
-      `; */
-
-    slide.addEventListener("mouseout", function () {
+    slide.addEventListener("mouseout", function (e) {
       document.querySelector(".line.active").style.animationPlayState =
         "running";
-      /*  document.querySelector(
-            ".line.active"
-          ).style.animation = `removeBars ${450}ms linear infinite `; */
-      /*  document
+
+      /*  let list = e.currentTarget.parentNode.nextElementSibling.children;
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      console.log(list);
+      let activeBar = null;
+      Array.from(list).forEach((item) => {
+        if (item.children[0].classList.contains("active")) {
+          activeBar = item.children[0];
+          if (activeBar != null) return;
+        }
+      });
+      console.log(activeBar);
+      let styles = getComputedStyle(activeBar);
+      let activeBarWidth = parseInt(styles.width);
+
+      fulledBarArea = (activeBarWidth * 100) / 40;
+
+      let leftFullBarArea = 100 - fulledBarArea;
+
+      leftTimeAnimation = (leftFullBarArea * 1500) / 100;
+
+      const removeBars = `
+            @keyframes removeBars {
+                from {
+                  width: ${fulledBarArea}%;
+                }
+                to {
+                  width: 100%;
+                }
+              }
+            `; */
+
+      /*  console.log(leftTimeAnimation); */
+      /* document.querySelector(
+        ".line.active"
+      ).style.animation = `removeBars ${leftTimeAnimation}ms linear infinite `; */
+      /* document
             .querySelector(".line.active")
             .animate([
               { width: `${fulledBarArea}`},
@@ -167,11 +175,9 @@ document.getElementsByClassName("favorite-coffee-sliders")[0].addEventListener(
     if (xAbs > 20 || yAbs > 20) {
       if (xAbs > yAbs) {
         if (finalPoint.pageX < initialPoint.pageX) {
-          console.log("right");
           nextSlider();
           clearInterval(interval);
         } else {
-          console.log("left");
           prevSlider();
           clearInterval(interval);
         }
