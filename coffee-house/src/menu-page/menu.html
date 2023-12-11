@@ -18,7 +18,6 @@
             <img src="../../assets/images/logo.png" alt="logo" />
           </a>
         </div>
-        <!-- <div class="header-menu-list"> -->
         <nav class="header-menu-list" id="menu">
           <ul class="header-menu-links">
             <li class="menu-item">
@@ -34,8 +33,19 @@
               <a href="#contact">Contact us</a>
             </li>
           </ul>
+          <div class="header-menu menu-item menu-in-burger">
+            <a href="javascript:void(0)">
+              <span>Menu</span>
+              <svg width="41" height="40" viewBox="0 0 41 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M28.8333 18.9333V25C28.8333 30.5228 24.3561 35 18.8332 35H15.4999C9.97707 35 5.49992 30.5228 5.49992 25V18.9333C5.49992 18.602 5.76855 18.3333 6.09992 18.3333H28.2333C28.5646 18.3333 28.8333 18.602 28.8333 18.9333Z" stroke="#403F3D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M20.4999 15C20.4999 13.3334 21.6904 11.6667 24.0713 11.6667C24.5919 11.6667 25.2136 11.6667 25.8333 11.6667C27.4901 11.6667 28.8333 10.3236 28.8333 8.66671V5.83337" stroke="#403F3D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M13.8334 15V12.1667C13.8334 10.5098 15.1766 9.16667 16.8334 9.16667H20.1667C21.2713 9.16667 22.1667 8.27124 22.1667 7.16667V5" stroke="#403F3D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M27.1667 18.3334H31.3334C33.6346 18.3334 35.5001 20.1989 35.5001 22.5C35.5001 24.8012 33.6346 26.6667 31.3334 26.6667H28.8334" stroke="#403F3D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                
+            </a>
+          </div>
         </nav>
-        <!-- </div> -->
         <div class="header-menu active">
           <a href="javascript:void(0)">
             <span>Menu</span>
@@ -77,7 +87,7 @@
             </svg>
           </a>
         </div>
-        <div class="burger" id="burger">  </div>
+        <div class="burger" id="burger"></div>
       </div>
     </header>
     <div class="menu-main">
@@ -86,11 +96,9 @@
           <h1 class="menu-main-title">
             Behind each of our cups hides an <span>amazing surprise</span>
           </h1>
-          <!-- <div class="menu-list-drinks"> -->
           <nav>
             <ul class="menu-list-drinks">
               <li class="menu-choice tab active">
-                <!--  <a href="javascript:void(0)"> -->
                 <svg
                   width="31"
                   height="30"
@@ -125,10 +133,8 @@
                   </defs>
                 </svg>
                 <span>Coffee</span>
-                <!-- </a> -->
               </li>
               <li class="menu-choice tab">
-                <!--  <a href="javascript:void(0)"> -->
                 <svg
                   width="31"
                   height="30"
@@ -164,10 +170,8 @@
                 </svg>
 
                 <span>Tea</span>
-                <!--  </a> -->
               </li>
               <li class="menu-choice tab">
-                <!--    <a href="javascript:void(0)"> -->
                 <svg
                   width="31"
                   height="30"
@@ -203,11 +207,9 @@
                 </svg>
 
                 <span>Dessert</span>
-                <!-- </a> -->
               </li>
             </ul>
           </nav>
-          <!--   </div> -->
         </div>
         <div class="coffee-items">
           <!--     <div class="coffee-item">
@@ -363,130 +365,7 @@
           </svg>
         </div>
         <div class="modal" id="modal">
-          <div class="modal-window" id="modal-window">
-            <!-- <div class="product-image">
-              <img
-                src="../../assets/images/menu-page/coffee/coffee-1.png"
-                alt="coffee-1"
-              />
-            </div>
-            <div class="product-info">
-              <div class="product-name">Irish coffee</div>
-              <div class="product-info-wrap">
-                <div class="product-description">
-                  Fragrant black coffee with Jameson Irish whiskey and whipped
-                  milk
-                </div>
-                <div class="product-size">
-                  <span>Size</span>
-                  <div class="size-choice">
-                    <div class="tabs">
-                      <div class="tab">
-                        <input type="radio" id="one" value="200" name="size" />
-                        <span>S</span>
-                        <label for="one">200ml</label>
-                      </div>
-
-                      <div class="tab">
-                        <input type="radio" id="two" value="300" name="size" />
-                        <span>M</span>
-                        <label for="two">300ml</label>
-                      </div>
-                      <div class="tab">
-                        <input
-                          type="radio"
-                          id="three"
-                          value="400"
-                          name="size"
-                        />
-                        <span>L</span>
-                        <label for="three">400ml</label>
-                      </div>
-                    </div>
-                    <ul class="tabs">
-                      <li class="tab">
-                        <div class="size">S</div>
-                        <div class="btn-text">200 ml</div>
-                      </li>
-                      <li class="tab">
-                        <div class="size">M</div>
-                        <div class="btn-text">300 ml</div>
-                      </li>
-                      <li class="tab">
-                        <div class="size">L</div>
-                        <div class="btn-text">400 ml</div>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="product-additives">
-                  <span>Additives</span>
-                  <div class="additives-choice">
-                    <ul class="tabs">
-                      <li class="tab">
-                        <div class="size">1</div>
-                        <div class="btn-text">Sugar</div>
-                      </li>
-                      <li class="tab">
-                        <div class="size">2</div>
-                        <div class="btn-text">Cinnamon</div>
-                      </li>
-                      <li class="tab">
-                        <div class="size">3</div>
-                        <div class="btn-text">Syrup</div>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="total">
-                  <span>Total:</span>
-                  <span class="total-price">$
-                    <span id="price">7.00</span></span>
-                </div>
-                <div class="note">
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g clip-path="url(#clip0_268_9647)">
-                      <path
-                        d="M8 7.66663V11"
-                        stroke="#403F3D"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                      <path
-                        d="M8 5.00667L8.00667 4.99926"
-                        stroke="#403F3D"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                      <path
-                        d="M7.99992 14.6667C11.6818 14.6667 14.6666 11.6819 14.6666 8.00004C14.6666 4.31814 11.6818 1.33337 7.99992 1.33337C4.31802 1.33337 1.33325 4.31814 1.33325 8.00004C1.33325 11.6819 4.31802 14.6667 7.99992 14.6667Z"
-                        stroke="#403F3D"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </g>
-                    <defs>
-                      <clipPath id="clip0_268_9647">
-                        <rect width="16" height="16" fill="white" />
-                      </clipPath>
-                    </defs>
-                  </svg>
-                  <p>
-                    The cost is not final. Download our mobile app to see the
-                    final price and place your order. Earn loyalty points and
-                    enjoy your favorite coffee with up to 20% discount.
-                  </p>
-                </div>
-                <button id="modal-close">Close</button>
-              </div>
-            </div> -->
-          </div>
+          <div class="modal-window" id="modal-window"></div>
         </div>
       </div>
     </div>
@@ -659,7 +538,6 @@
         </div>
       </div>
     </footer>
-
 
     <script src="../common/index.js"></script>
     <script type="module" src="menu.js"></script>
