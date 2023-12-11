@@ -38,7 +38,7 @@ function prevSlider() {
 
 //set interval for autosliding
 function autoSliding() {
-  interval = setInterval(timer, 1500);
+  interval = setInterval(timer, 5000);
 
   function timer() {
     nextSlider();

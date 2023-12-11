@@ -268,7 +268,7 @@ body {
 
 .line.active {
   background: #665f55;
-  animation: moveBars 1500ms linear infinite forwards;
+  animation: moveBars 5000ms linear infinite forwards;
 }
 
 .favorite-arrow.arrow-next {
