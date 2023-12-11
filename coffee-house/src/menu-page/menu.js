@@ -113,12 +113,27 @@ window.onload = () => {
     }
 
     const mediaQuery = window.matchMedia("(max-width: 768px)");
+    let isNotDesktop = false;
+
+    function handleTabletChange(e) {
+      if (e.matches) {
+        return (isNotDesktop = true);
+      }
+      return false;
+    }
+
+    mediaQuery.addEventListener("change", handleTabletChange);
+
+    handleTabletChange(mediaQuery);
+    console.log(handleTabletChange(mediaQuery));
 
     if (count <= 5) {
       document.getElementById("load").style.display = "none";
-    } else if (count > 5 && mediaQuery.matches) {
+    } else if (count > 5 && handleTabletChange(mediaQuery)) {
       document.getElementById("load").style.display = "flex";
     }
+
+    isNotDesktop = false;
   }
 
   function showModal(elem) {
@@ -271,7 +286,6 @@ window.onload = () => {
 
     function closeModal(e) {
       if (e.target === modal || e.target === modalCloseButton) {
-        /* modal.style.display = "none"; */
         modal.style.visibility = "hidden";
         modal.style.opacity = 0;
         document.getElementsByTagName("body")[0].style.overflowY = "auto";
@@ -528,18 +542,3 @@ The cost is not final. Download our mobile app to see the
 
 
  /*  handleModal(); */
-
-/* 
-function handleTabletChange(e) {
-    // Check if the media query is true
-    if (e.matches) {
-      // Then log the following message to the console
-      console.log('Media Query Matched!')
-    }
-  }
-  
-  // Register event listener
-  mediaQuery.addListener(handleTabletChange)
-  
-  // Initial check
-  handleTabletChange(mediaQuery) */
