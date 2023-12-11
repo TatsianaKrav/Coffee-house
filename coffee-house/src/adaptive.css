@@ -304,6 +304,7 @@
 
   .favorite-coffee-slider {
     max-width: 348px;
+    left: calc(50% - 174px);
   }
 
   .favorite-arrow {

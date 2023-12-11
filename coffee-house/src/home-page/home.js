@@ -46,8 +46,8 @@ function autoSliding() {
   }
 }
 
-autoSliding();
-
+/* autoSliding();
+ */
 //hover effect - stop animation
 function handleAnimation() {
   slidersList.forEach((slide) => {
@@ -144,3 +144,43 @@ function switchSlider() {
 }
 
 switchSlider();
+
+var initialPoint;
+var finalPoint;
+document.getElementsByClassName("favorite-coffee-sliders")[0].addEventListener(
+  "touchstart",
+  function (event) {
+    event.preventDefault();
+    event.stopPropagation();
+    initialPoint = event.changedTouches[0];
+  },
+  false
+);
+document.getElementsByClassName("favorite-coffee-sliders")[0].addEventListener(
+  "touchend",
+  function (event) {
+    event.preventDefault();
+    event.stopPropagation();
+    finalPoint = event.changedTouches[0];
+    var xAbs = Math.abs(initialPoint.pageX - finalPoint.pageX);
+    var yAbs = Math.abs(initialPoint.pageY - finalPoint.pageY);
+    if (xAbs > 20 || yAbs > 20) {
+      if (xAbs > yAbs) {
+        if (finalPoint.pageX < initialPoint.pageX) {
+          console.log("right");
+          nextSlider();
+          clearInterval(interval);
+        } else {
+          console.log("left");
+          prevSlider();
+          clearInterval(interval);
+        }
+      }
+    }
+  },
+  false
+);
+
+document
+  .getElementsByClassName("favorite-coffee-sliders")[0]
+  .addEventListener("touchend", autoSliding);
