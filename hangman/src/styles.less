@@ -134,12 +134,21 @@
       .underscore {
         border-bottom: 4px solid black;
         width: 30px;
+        font-size: 30px;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &.right {
+          border: 0;
+        }
       }
     }
 
     .question {
       display: flex;
-      font-size: 26px;
+      font-size: 30px;
       font-weight: bold;
       margin-bottom: 30px;
 
@@ -150,7 +159,7 @@
 
     .incorrect-score {
       display: flex;
-      font-size: 26px;
+      font-size: 30px;
       font-weight: bold;
       margin-bottom: 30px;
 
@@ -167,6 +176,8 @@
       max-width: 600px;
 
       .letter {
+        outline: none;
+        border: 0;
         width: 35px;
         height: 35px;
         padding: 3px;

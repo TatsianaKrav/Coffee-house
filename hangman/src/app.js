@@ -3,6 +3,7 @@ import { questions } from "../questions-list.js";
 const bodyElem = document.body;
 let random = randomQuesion(questions.length) - 1;
 let { question, answer } = questions[random];
+let incorrectCounter = 0;
 
 const alphabet = [
   "А",
@@ -112,13 +113,9 @@ function showQuiz() {
   const questionElem = document.createElement("div");
   questionElem.classList.add("question");
 
-  const questionSpanElem = document.createElement("span");
-  questionSpanElem.innerText = "Вопрос: ";
-
   const questionTaskElem = document.createElement("p");
-  questionTaskElem.innerText = question;
+  questionTaskElem.innerText = `Вопрос: ${question}`;
 
-  questionElem.appendChild(questionSpanElem);
   questionElem.appendChild(questionTaskElem);
 
   const incorrectScoreElem = document.createElement("div");
@@ -129,9 +126,9 @@ function showQuiz() {
 
   const scoreElem = document.createElement("div");
 
-  //insert counter
   scoreElem.classList.add("score");
   scoreElem.classList.add("incorrect");
+  scoreElem.innerText = incorrectCounter;
 
   const delimElem = document.createElement("div");
   delimElem.classList.add("delim");
@@ -152,9 +149,26 @@ function showQuiz() {
   keyboardElem.classList.add("keyboard");
 
   for (let i = 0; i < alphabet.length; i++) {
-    const letterElem = document.createElement("div");
+    const letterElem = document.createElement("button");
     letterElem.classList.add("letter");
     letterElem.innerText = alphabet[i];
+
+    letterElem.addEventListener("click", (e) => {
+      const chosenLetter = e.target.innerText.toLowerCase();
+      if (answer.includes(chosenLetter)) {
+        const answArr = answer.split("");
+        answArr.forEach((item, index) => {
+          if (item === chosenLetter) {
+            const upperElems = document.getElementsByClassName("underscore");
+            upperElems[index].innerText = chosenLetter.toUpperCase();
+            upperElems[index].classList.add("right");
+          }
+        });
+      } else {
+        incorrectCounter++;
+        scoreElem.innerText = incorrectCounter;
+      }
+    });
 
     keyboardElem.appendChild(letterElem);
   }
