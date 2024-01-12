@@ -1,0 +1,121 @@
+@black-color: #000000;
+@grey-color: #909090;
+.rect {
+  width: 42px;
+  border-radius: 5px;
+  border: 3px solid #fffefe;
+  background: @black-color;
+}
+
+.arm-leg {
+  width: 5px;
+  height: 80px;
+  background-color: @grey-color;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  padding: 50px 50px;
+  border: 1px solid black;
+
+  .gallow {
+    position: relative;
+
+    .rect1 {
+      .rect();
+      height: 581px;
+    }
+
+    .rect2 {
+      .rect();
+      height: 353px;
+      transform: rotate(90deg);
+      position: absolute;
+      top: -120px;
+      left: 130px;
+    }
+
+    .rect3 {
+      .rect();
+      height: 202.598px;
+      transform: rotate(45deg);
+      position: absolute;
+      top: 25px;
+      left: 63px;
+      z-index: -1;
+    }
+
+    .rect4 {
+      width: 10px;
+      height: 74px;
+      background: @black-color;
+      position: absolute;
+      top: 80px;
+      left: 275px;
+    }
+
+    .head {
+      width: 101px;
+      height: 101px;
+      border: 5px solid @grey-color;
+      border-radius: 50%;
+      position: absolute;
+      top: 153px;
+      left: 226px;
+      display: none;
+    }
+
+    .body {
+      width: 5px;
+      height: 131px;
+      background-color: @grey-color;
+      position: absolute;
+      top: 258px;
+      left: 276px;
+      display: none;
+    }
+
+    .left-arm,
+    .left-leg {
+      .arm-leg();
+      transform: rotate(45deg);
+    }
+
+    .left-arm {
+      position: absolute;
+      top: 280px;
+      left: 247px;
+      display: none;
+    }
+
+    .left-leg {
+      position: absolute;
+      top: 376px;
+      left: 247px;
+      display: none;
+    }
+
+    .right-arm,
+    .right-leg {
+      .arm-leg();
+      transform: rotate(-45deg);
+    }
+
+    .right-arm {
+      position: absolute;
+      top: 280px;
+      left: 306px;
+      display: none;
+    }
+
+    .right-leg {
+      position: absolute;
+      top: 376px;
+      left: 304px;
+      display: none;
+    }
+  }
+}
