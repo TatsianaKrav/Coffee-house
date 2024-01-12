@@ -1,4 +1,9 @@
+import { questions } from "../questions-list.js";
+
 const bodyElem = document.body;
+let random = randomQuesion(questions.length) - 1;
+let { question, answer } = questions[random];
+
 const alphabet = [
   "А",
   "Б",
@@ -86,6 +91,11 @@ function showGallow() {
   gallowElem.appendChild(rightLegElem);
 }
 
+function randomQuesion(max) {
+  // случайное число от 1 до (max+1)
+  return Math.floor(1 + Math.random() * max);
+}
+
 function showQuiz() {
   const quizElem = document.createElement("div");
   quizElem.classList.add("quiz");
@@ -93,11 +103,11 @@ function showQuiz() {
   const secretWordElem = document.createElement("div");
   secretWordElem.classList.add("secret-word");
 
-  const underscoreElem = document.createElement("div");
-  underscoreElem.classList.add("underscore");
-
-  //loop
-  secretWordElem.appendChild(underscoreElem);
+  for (let i = 0; i < answer.length; i++) {
+    const underscoreElem = document.createElement("div");
+    underscoreElem.classList.add("underscore");
+    secretWordElem.appendChild(underscoreElem);
+  }
 
   const questionElem = document.createElement("div");
   questionElem.classList.add("question");
@@ -106,8 +116,7 @@ function showQuiz() {
   questionSpanElem.innerText = "Вопрос: ";
 
   const questionTaskElem = document.createElement("p");
-  //insert question
-  questionTaskElem.innerText = "";
+  questionTaskElem.innerText = question;
 
   questionElem.appendChild(questionSpanElem);
   questionElem.appendChild(questionTaskElem);
