@@ -1,4 +1,39 @@
 const bodyElem = document.body;
+const alphabet = [
+  "А",
+  "Б",
+  "В",
+  "Г",
+  "Д",
+  "Е",
+  "Ё",
+  "Ж",
+  "З",
+  "И",
+  "Й",
+  "К",
+  "Л",
+  "М",
+  "Н",
+  "О",
+  "П",
+  "Р",
+  "С",
+  "Т",
+  "У",
+  "Ф",
+  "Х",
+  "Ц",
+  "Ч",
+  "Ш",
+  "Щ",
+  "Ъ",
+  "Ы",
+  "Ь",
+  "Э",
+  "Ю",
+  "Я",
+];
 
 const containerElem = document.createElement("div");
 containerElem.classList.add("container");
@@ -84,6 +119,8 @@ function showQuiz() {
   incorrectScoreSpanElem.innerText = "Неверные попытки: ";
 
   const scoreElem = document.createElement("div");
+
+  //insert counter
   scoreElem.classList.add("score");
   scoreElem.classList.add("incorrect");
 
@@ -105,13 +142,13 @@ function showQuiz() {
   const keyboardElem = document.createElement("div");
   keyboardElem.classList.add("keyboard");
 
-  const letterElem = document.createElement("div");
+  for (let i = 0; i < alphabet.length; i++) {
+    const letterElem = document.createElement("div");
+    letterElem.classList.add("letter");
+    letterElem.innerText = alphabet[i];
 
-  //loop
-  letterElem.classList.add("letter");
-  letterElem.innerText = "";
-
-  keyboardElem.appendChild(letterElem);
+    keyboardElem.appendChild(letterElem);
+  }
 
   containerElem.appendChild(quizElem);
   quizElem.appendChild(secretWordElem);
