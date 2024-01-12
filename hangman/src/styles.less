@@ -118,4 +118,67 @@
       display: none;
     }
   }
+
+  .quiz {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+
+    .secret-word {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 30px;
+
+      .underscore {
+        border-bottom: 4px solid black;
+        width: 30px;
+      }
+    }
+
+    .question {
+      display: flex;
+      font-size: 26px;
+      font-weight: bold;
+      margin-bottom: 30px;
+
+      p {
+        margin: 0;
+      }
+    }
+
+    .incorrect-score {
+      display: flex;
+      font-size: 26px;
+      font-weight: bold;
+      margin-bottom: 30px;
+
+      .incorrect {
+        color: red;
+      }
+    }
+
+    .keyboard {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      max-width: 600px;
+
+      .letter {
+        width: 35px;
+        height: 35px;
+        padding: 3px;
+        color: white;
+        background-color: rgb(126, 126, 240);
+        border-radius: 5px;
+        font-size: 24px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
 }
