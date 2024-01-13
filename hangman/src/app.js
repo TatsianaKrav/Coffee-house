@@ -4,6 +4,7 @@ const bodyElem = document.body;
 let random = randomQuesion(questions.length) - 1;
 let { question, answer } = questions[random];
 let incorrectCounter = 0;
+let manBodyParts = [];
 
 const alphabet = [
   "А",
@@ -64,21 +65,27 @@ function showGallow() {
 
   const headElem = document.createElement("div");
   headElem.classList.add("head");
+  headElem.classList.add("man");
 
   const bodyManElem = document.createElement("div");
   bodyManElem.classList.add("body");
+  bodyManElem.classList.add("man");
 
   const leftArmElem = document.createElement("div");
   leftArmElem.classList.add("left-arm");
+  leftArmElem.classList.add("man");
 
   const rightArmElem = document.createElement("div");
   rightArmElem.classList.add("right-arm");
+  rightArmElem.classList.add("man");
 
   const leftLegElem = document.createElement("div");
   leftLegElem.classList.add("left-leg");
+  leftLegElem.classList.add("man");
 
   const rightLegElem = document.createElement("div");
   rightLegElem.classList.add("right-leg");
+  rightLegElem.classList.add("man");
 
   gallowElem.appendChild(rect1Elem);
   gallowElem.appendChild(rect2Elem);
@@ -87,9 +94,12 @@ function showGallow() {
   gallowElem.appendChild(headElem);
   gallowElem.appendChild(bodyManElem);
   gallowElem.appendChild(leftArmElem);
-  gallowElem.appendChild(leftLegElem);
   gallowElem.appendChild(rightArmElem);
+  gallowElem.appendChild(leftLegElem);
   gallowElem.appendChild(rightLegElem);
+
+  manBodyParts = Array.from(document.getElementsByClassName("man"));
+  console.log(manBodyParts);
 }
 
 function randomQuesion(max) {
@@ -166,6 +176,7 @@ function showQuiz() {
           }
         });
       } else {
+        manBodyParts[incorrectCounter].style.display = "block";
         incorrectCounter++;
         scoreElem.innerText = incorrectCounter;
       }
