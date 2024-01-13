@@ -155,6 +155,7 @@ function showQuiz() {
 
     letterElem.addEventListener("click", (e) => {
       const chosenLetter = e.target.innerText.toLowerCase();
+
       if (answer.includes(chosenLetter)) {
         const answArr = answer.split("");
         answArr.forEach((item, index) => {
