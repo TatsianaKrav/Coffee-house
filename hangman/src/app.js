@@ -1,8 +1,9 @@
 import { questions } from "../questions-list.js";
 
 const bodyElem = document.body;
-let random = randomQuesion(questions.length) - 1;
-let { question, answer } = questions[random];
+/* let random = randomQuesion(questions.length) - 1; */
+/* let { question, answer } = questions[random]; */
+let { question, answer } = {};
 let incorrectCounter = 0;
 let manBodyParts = [];
 
@@ -108,6 +109,11 @@ function randomQuesion(max) {
 }
 
 function showQuiz() {
+  let random = randomQuesion(questions.length) - 1;
+  const quizItem = questions[random];
+  question = quizItem.question;
+  answer = quizItem.answer;
+
   const quizElem = document.createElement("div");
   quizElem.classList.add("quiz");
 
@@ -230,6 +236,28 @@ function showQuiz() {
     //transition
     const modal = (document.getElementsByClassName("modal")[0].style.opacity =
       "1");
+
+    playAgain();
+  }
+
+  function playAgain() {
+    const button = document.querySelector(".button");
+    button.onclick = () => {
+      newGaim();
+    };
+  }
+
+  function newGaim() {
+    //transition
+    const modal = (document.getElementsByClassName("modal")[0].style.opacity =
+      "0");
+    incorrectCounter = 0;
+    manBodyParts.forEach((item) => {
+      item.style.display = "none";
+    });
+    containerElem.innerHTML = "";
+    showGallow();
+    showQuiz();
   }
 
   containerElem.appendChild(quizElem);
