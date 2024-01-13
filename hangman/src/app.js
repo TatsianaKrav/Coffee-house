@@ -4,6 +4,7 @@ const bodyElem = document.body;
 let random = randomQuesion(questions.length) - 1;
 let { question, answer } = questions[random];
 let incorrectCounter = 0;
+let countRightLetters = 0;
 let manBodyParts = [];
 
 const alphabet = [
@@ -175,14 +176,61 @@ function showQuiz() {
             upperElems[index].classList.add("right");
           }
         });
+
+        countRightLetters++;
       } else {
         manBodyParts[incorrectCounter].style.display = "block";
         incorrectCounter++;
         scoreElem.innerText = incorrectCounter;
       }
+
+      checkGame();
     });
 
     keyboardElem.appendChild(letterElem);
+  }
+
+  function checkGame() {
+    if (incorrectCounter === 6 || countRightLetters === answer.length) {
+      showPopup();
+    }
+  }
+
+  function showPopup() {
+    const modalElem = document.createElement("div");
+    modalElem.classList.add("modal");
+
+    const modalWindowElem = document.createElement("div");
+    modalWindowElem.classList.add("modal-window");
+
+    const messageElem = document.createElement("div");
+    messageElem.classList.add("message");
+    if (incorrectCounter === 6) {
+      messageElem.innerText = "You failed";
+      messageElem.classList.add("fail");
+    } else {
+      messageElem.innerText = "Congratilations!";
+      messageElem.classList.add("win");
+    }
+
+    const resultElem = document.createElement("div");
+    resultElem.classList.add("result");
+    resultElem.innerHTML = `Правильный ответ: <span>${answer}</span>`;
+
+    const buttonElem = document.createElement("button");
+    buttonElem.classList.add("button");
+    buttonElem.innerText = "Play again";
+
+    modalWindowElem.appendChild(messageElem);
+    modalWindowElem.appendChild(resultElem);
+    modalWindowElem.appendChild(buttonElem);
+
+    modalElem.appendChild(modalWindowElem);
+    containerElem.appendChild(modalElem);
+
+    //transition
+    const modal = (document.getElementsByClassName("modal")[0].style.opacity =
+      "1");
   }
 
   containerElem.appendChild(quizElem);
