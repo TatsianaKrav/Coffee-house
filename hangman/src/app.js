@@ -4,7 +4,6 @@ const bodyElem = document.body;
 let random = randomQuesion(questions.length) - 1;
 let { question, answer } = questions[random];
 let incorrectCounter = 0;
-let countRightLetters = 0;
 let manBodyParts = [];
 
 const alphabet = [
@@ -176,8 +175,6 @@ function showQuiz() {
             upperElems[index].classList.add("right");
           }
         });
-
-        countRightLetters++;
       } else {
         manBodyParts[incorrectCounter].style.display = "block";
         incorrectCounter++;
@@ -191,7 +188,9 @@ function showQuiz() {
   }
 
   function checkGame() {
-    if (incorrectCounter === 6 || countRightLetters === answer.length) {
+    const underscoreElems = document.querySelectorAll(".underscore.right");
+
+    if (incorrectCounter === 6 || underscoreElems.length === answer.length) {
       showPopup();
     }
   }
