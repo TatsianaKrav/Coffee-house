@@ -100,7 +100,6 @@ function showGallow() {
   gallowElem.appendChild(rightLegElem);
 
   manBodyParts = Array.from(document.getElementsByClassName("man"));
-  console.log(manBodyParts);
 }
 
 function randomQuesion(max) {
@@ -136,30 +135,8 @@ function showQuiz() {
 
   const incorrectScoreElem = document.createElement("div");
   incorrectScoreElem.classList.add("incorrect-score");
-
-  const incorrectScoreSpanElem = document.createElement("span");
-  incorrectScoreSpanElem.innerText = "Неверные попытки: ";
-
-  const scoreElem = document.createElement("div");
-
-  scoreElem.classList.add("score");
-  scoreElem.classList.add("incorrect");
-  scoreElem.innerText = incorrectCounter;
-
-  const delimElem = document.createElement("div");
-  delimElem.classList.add("delim");
-  delimElem.classList.add("incorrect");
-  delimElem.innerText = " / ";
-
-  const totalElem = document.createElement("div");
-  totalElem.classList.add("total");
-  totalElem.classList.add("incorrect");
-  totalElem.innerText = "6";
-
-  incorrectScoreElem.appendChild(incorrectScoreSpanElem);
-  incorrectScoreElem.appendChild(scoreElem);
-  incorrectScoreElem.appendChild(delimElem);
-  incorrectScoreElem.appendChild(totalElem);
+  incorrectScoreElem.innerHTML = `<span>Неверные попытки: &nbsp;</span> 
+  <div class="incorrect"> <span class="incorrect-counter">${incorrectCounter}</span> / 6</div>`;
 
   const keyboardElem = document.createElement("div");
   keyboardElem.classList.add("keyboard");
@@ -171,6 +148,10 @@ function showQuiz() {
 
     letterElem.addEventListener("click", (e) => {
       const chosenLetter = e.target.innerText.toLowerCase();
+
+      if (e.target.classList.contains("guessed")) {
+        e.target.preventDefault();
+      }
 
       if (answer.includes(chosenLetter)) {
         const answArr = answer.split("");
@@ -184,8 +165,12 @@ function showQuiz() {
       } else {
         manBodyParts[incorrectCounter].style.display = "block";
         incorrectCounter++;
-        scoreElem.innerText = incorrectCounter;
+        const incorrectCounterElem =
+          document.querySelector(".incorrect-counter");
+        incorrectCounterElem.innerText = incorrectCounter;
       }
+
+      e.target.classList.add("guessed");
 
       checkGame();
     });
@@ -233,9 +218,10 @@ function showQuiz() {
     modalElem.appendChild(modalWindowElem);
     containerElem.appendChild(modalElem);
 
-    //transition
-    const modal = (document.getElementsByClassName("modal")[0].style.opacity =
-      "1");
+    const modal = document.querySelector(".modal");
+    modal.style.visibility = "visible";
+    modal.style.opacity = "1";
+    bodyElem.style.overflowY = "hidden";
 
     playAgain();
   }
@@ -243,14 +229,16 @@ function showQuiz() {
   function playAgain() {
     const button = document.querySelector(".button");
     button.onclick = () => {
-      newGaim();
+      newGame();
     };
   }
 
-  function newGaim() {
-    //transition
-    const modal = (document.getElementsByClassName("modal")[0].style.opacity =
-      "0");
+  function newGame() {
+    bodyElem.style.overflowY = "auto";
+    const modal = document.querySelector(".modal");
+    modal.style.visibility = "visible";
+    modal.style.opacity = "0";
+
     incorrectCounter = 0;
     manBodyParts.forEach((item) => {
       item.style.display = "none";
