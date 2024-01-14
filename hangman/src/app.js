@@ -1,8 +1,6 @@
 import { questions } from "../questions-list.js";
 
 const bodyElem = document.body;
-/* let random = randomQuesion(questions.length) - 1; */
-/* let { question, answer } = questions[random]; */
 let { question, answer } = {};
 let incorrectCounter = 0;
 let manBodyParts = [];
@@ -87,17 +85,12 @@ function showGallow() {
   gallowElem.classList.add("gallow");
   containerElem.appendChild(gallowElem);
 
-  const rect1Elem = document.createElement("div");
-  rect1Elem.classList.add("rect1");
+  const imageElem = document.createElement("img");
+  imageElem.classList.add("gallow-img");
+  imageElem.setAttribute("src", "assets/hangman.png");
+  imageElem.setAttribute("alt", "gallow");
 
-  const rect2Elem = document.createElement("div");
-  rect2Elem.classList.add("rect2");
-
-  const rect3Elem = document.createElement("div");
-  rect3Elem.classList.add("rect3");
-
-  const rect4Elem = document.createElement("div");
-  rect4Elem.classList.add("rect4");
+  gallowElem.appendChild(imageElem);
 
   const manElem = document.createElement("div");
   manElem.classList.add("hangman");
@@ -125,11 +118,6 @@ function showGallow() {
   const rightLegElem = document.createElement("div");
   rightLegElem.classList.add("right-leg");
   rightLegElem.classList.add("man");
-
-  gallowElem.appendChild(rect1Elem);
-  gallowElem.appendChild(rect2Elem);
-  gallowElem.appendChild(rect3Elem);
-  gallowElem.appendChild(rect4Elem);
 
   manElem.appendChild(headElem);
   manElem.appendChild(bodyManElem);
@@ -213,6 +201,7 @@ function showQuiz() {
       }
 
       e.target.classList.add("guessed");
+      e.target.setAttribute("disabled", true);
 
       checkGame();
     });
