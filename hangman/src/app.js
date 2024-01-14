@@ -4,6 +4,7 @@ const bodyElem = document.body;
 let { question, answer } = {};
 let incorrectCounter = 0;
 let manBodyParts = [];
+let modal = {};
 
 const alphabet = [
   "А",
@@ -242,9 +243,9 @@ function keyboardInput() {
       letters.forEach((item) => {
         if (
           item.innerText.toLowerCase() === chosenLetter &&
-          item.classList.contains("guessed")
+          (item.classList.contains("guessed") || item.getAttribute("disabled"))
         ) {
-          e.target.preventDefault();
+          e.preventDefault();
         }
       });
 
@@ -268,6 +269,7 @@ function keyboardInput() {
       letters.forEach((item) => {
         if (item.innerText.toLowerCase() === chosenLetter) {
           item.classList.add("guessed");
+          item.setAttribute("disabled", true);
         }
       });
 
@@ -318,7 +320,7 @@ function showPopup() {
   modalElem.appendChild(modalWindowElem);
   containerElem.appendChild(modalElem);
 
-  const modal = document.querySelector(".modal");
+  modal = document.querySelector(".modal");
   modal.style.visibility = "visible";
   modal.style.opacity = "1";
   bodyElem.style.overflowY = "hidden";
@@ -335,7 +337,7 @@ function playAgain() {
 
 function newGame() {
   bodyElem.style.overflowY = "auto";
-  const modal = document.querySelector(".modal");
+  /*  const modal = document.querySelector(".modal"); */
   modal.style.visibility = "visible";
   modal.style.opacity = "0";
 
