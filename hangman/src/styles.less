@@ -1,0 +1,490 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+@black-color: #000000;
+@grey-color: #909090;
+@lavander-color: #7e7ef0;
+
+.rect {
+  width: 42px;
+  border-radius: 5px;
+  border: 3px solid #fffefe;
+  background: @black-color;
+
+  @media screen and (max-width: 767px) {
+    width: 35px;
+  }
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: @lavander-color;
+}
+
+.arm-leg {
+  width: 5px;
+  height: 80px;
+  background-color: @grey-color;
+
+  @media screen and (max-width: 767px) {
+    height: 70px;
+  }
+
+  @media screen and (max-width: 462px) {
+    height: 60px;
+  }
+}
+
+.container {
+  max-width: 1440px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(4, auto);
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  margin: 20px;
+
+  padding: 50px 50px;
+  border: 1px solid black;
+  border-radius: 20px;
+  position: relative;
+
+  @media (max-width: 923px) {
+    padding: 30px;
+  }
+
+  @media screen and (max-width: 767px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(5, auto);
+    gap: 10px;
+    justify-items: center;
+  }
+
+  .gallow {
+    position: relative;
+    grid-area: 1/1/5/2;
+
+    @media screen and (max-width: 767px) {
+      grid-area: 2/1/2/2;
+      justify-self: self-start;
+      left: 25%;
+    }
+
+    @media screen and (max-width: 445px) {
+      left: 20px;
+    }
+
+    .rect1 {
+      .rect();
+      height: 581px;
+
+      @media screen and (max-width: 767px) {
+        height: 450px;
+      }
+
+      @media screen and (max-width: 445px) {
+        height: 400px;
+      }
+    }
+
+    .rect2 {
+      .rect();
+      height: 353px;
+      transform: rotate(90deg);
+      position: absolute;
+      top: -120px;
+      left: 130px;
+
+      @media screen and (max-width: 767px) {
+        height: 300px;
+        top: -90px;
+        left: 95px;
+      }
+
+      @media screen and (max-width: 445px) {
+        height: 280px;
+      }
+    }
+
+    .rect3 {
+      .rect();
+      height: 202px;
+      transform: rotate(45deg);
+      position: absolute;
+      top: 25px;
+      left: 63px;
+      z-index: -1;
+
+      @media screen and (max-width: 462px) {
+        top: 30px;
+        height: 138px;
+        left: 54px;
+      }
+    }
+
+    .rect4 {
+      width: 10px;
+      height: 74px;
+      background: @black-color;
+      position: absolute;
+      top: 80px;
+      left: 275px;
+
+      @media screen and (max-width: 828px) {
+        left: 225px;
+      }
+
+      @media screen and (max-width: 767px) {
+        height: 59px;
+      }
+
+      @media screen and (max-width: 462px) {
+        top: 60px;
+        left: 205px;
+      }
+    }
+
+    .hangman {
+      position: absolute;
+      top: 150px;
+      left: 225px;
+
+      @media screen and (max-width: 828px) {
+        left: 175px;
+      }
+
+      @media screen and (max-width: 767px) {
+        left: 182px;
+        top: 135px;
+      }
+
+      @media screen and (max-width: 462px) {
+        left: 160px;
+        top: 118px;
+      }
+
+      .head {
+        width: 101px;
+        height: 101px;
+        border: 5px solid @grey-color;
+        border-radius: 50%;
+        position: absolute;
+        display: none;
+
+        @media screen and (max-width: 767px) {
+          width: 90px;
+          height: 90px;
+        }
+      }
+
+      .body {
+        width: 5px;
+        height: 131px;
+        background-color: @grey-color;
+        position: absolute;
+        top: 110px;
+        left: 55px;
+        display: none;
+
+        @media screen and (max-width: 767px) {
+          height: 120px;
+          top: 99px;
+          left: 50px;
+        }
+
+        @media screen and (max-width: 462px) {
+          height: 110px;
+        }
+      }
+
+      .left-arm,
+      .left-leg {
+        .arm-leg();
+        transform: rotate(45deg);
+      }
+
+      .left-arm {
+        position: absolute;
+        top: 120px;
+        left: 25px;
+        display: none;
+
+        @media screen and (max-width: 462px) {
+          left: 27px;
+        }
+      }
+
+      .left-leg {
+        position: absolute;
+        top: 228px;
+        left: 25px;
+        display: none;
+
+        @media screen and (max-width: 767px) {
+          top: 208px;
+        }
+
+        @media screen and (max-width: 462px) {
+          left: 27px;
+          top: 200px;
+        }
+      }
+
+      .right-arm,
+      .right-leg {
+        .arm-leg();
+        transform: rotate(-45deg);
+      }
+
+      .right-arm {
+        position: absolute;
+        display: none;
+        top: 120px;
+        left: 85px;
+
+        @media screen and (max-width: 767px) {
+          left: 77px;
+        }
+
+        @media screen and (max-width: 462px) {
+          left: 73px;
+        }
+      }
+
+      .right-leg {
+        position: absolute;
+        top: 228px;
+        left: 85px;
+        display: none;
+
+        @media screen and (max-width: 767px) {
+          top: 208px;
+          left: 77px;
+        }
+
+        @media screen and (max-width: 462px) {
+          left: 73px;
+          top: 200px;
+        }
+      }
+    }
+  }
+
+  .secret-word {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    grid-area: 1/2/2/3;
+
+    @media screen and (max-width: 767px) {
+      grid-area: 1/1/2/2;
+    }
+
+    @media screen and (max-width: 462px) {
+    }
+
+    .underscore {
+      border-bottom: 4px solid black;
+      width: 5%;
+      height: 30px;
+      box-sizing: border-box;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &.right {
+        border-bottom: 0;
+        font-size: 30px;
+        height: 26px;
+        align-self: flex-end;
+      }
+
+      @media screen and (max-width: 462px) {
+        font-size: 25px;
+        height: 21px;
+      }
+    }
+  }
+
+  .question {
+    display: flex;
+    font-size: 40px;
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
+    grid-area: 2/2/3/3;
+    justify-self: center;
+
+    @media screen and (max-width: 767px) {
+      grid-area: 3/1/4/2;
+    }
+
+    p {
+      margin: 0;
+
+      @media screen and (max-width: 923px) {
+        font-size: 35px;
+      }
+
+      @media screen and (max-width: 462px) {
+        font-size: 30px;
+      }
+    }
+  }
+
+  .incorrect-score {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 35px;
+    font-weight: bold;
+    grid-area: 3/2/4/3;
+    justify-self: center;
+
+    .incorrect {
+      color: red;
+    }
+
+    @media screen and (max-width: 923px) {
+      font-size: 30px;
+    }
+
+    @media screen and (max-width: 767px) {
+      grid-area: 4/1/5/2;
+    }
+
+    @media screen and (max-width: 462px) {
+      font-size: 25px;
+    }
+  }
+
+  .keyboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    max-width: 600px;
+    grid-area: 4/2/5/3;
+
+    @media screen and (max-width: 767px) {
+      grid-area: 6/1/7/2;
+    }
+
+    .letter {
+      outline: none;
+      border: 0;
+      width: 45px;
+      height: 45px;
+      padding: 5px;
+      color: white;
+      background-color: @lavander-color;
+      border-radius: 5px;
+      font-size: 34px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+
+      &.guessed {
+        background-color: rgb(211, 211, 238);
+        cursor: default;
+      }
+
+      @media screen and (max-width: 923px) {
+        width: 40px;
+        height: 40px;
+        font-size: 30px;
+      }
+
+      @media screen and (max-width: 462px) {
+        width: 35px;
+        height: 35px;
+        font-size: 25px;
+      }
+    }
+  }
+
+  .modal {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 20px;
+    display: flex;
+    z-index: 10;
+    border: 2px solid black;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 3s linear;
+
+    .modal-window {
+      max-width: 800px;
+      padding: 100px;
+      border-radius: 15px;
+      background: rgb(243, 236, 236);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      box-sizing: border-box;
+      cursor: pointer;
+      font-size: 35px;
+
+      @media screen and (max-width: 530px) {
+        padding: 20px 30px;
+        font-size: 30px;
+      }
+
+      .message {
+        &.win {
+          color: green;
+        }
+
+        &.fail {
+          color: red;
+        }
+      }
+
+      .result {
+        text-align: center;
+
+        span {
+          font-weight: bold;
+        }
+      }
+
+      .button {
+        font-size: 30px;
+        padding: 20px 35px;
+        color: white;
+        background-color: @lavander-color;
+        border: none;
+        outline: none;
+        border-radius: 15px;
+        cursor: pointer;
+        display: block;
+        margin: 0 auto;
+
+        @media screen and (max-width: 530px) {
+          font-size: 25px;
+          padding: 20px 30px;
+        }
+      }
+    }
+  }
+}
