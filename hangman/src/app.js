@@ -242,9 +242,9 @@ function keyboardInput() {
       letters.forEach((item) => {
         if (
           item.innerText.toLowerCase() === chosenLetter &&
-          item.classList.contains("guessed")
+          (item.classList.contains("guessed") || item.getAttribute("disabled"))
         ) {
-          e.target.preventDefault();
+          e.preventDefault();
         }
       });
 
@@ -268,6 +268,7 @@ function keyboardInput() {
       letters.forEach((item) => {
         if (item.innerText.toLowerCase() === chosenLetter) {
           item.classList.add("guessed");
+          item.setAttribute("disabled", true);
         }
       });
 
