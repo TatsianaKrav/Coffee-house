@@ -64,6 +64,9 @@ function showGallow() {
   const rect4Elem = document.createElement("div");
   rect4Elem.classList.add("rect4");
 
+  const manElem = document.createElement("div");
+  manElem.classList.add("hangman");
+
   const headElem = document.createElement("div");
   headElem.classList.add("head");
   headElem.classList.add("man");
@@ -92,12 +95,20 @@ function showGallow() {
   gallowElem.appendChild(rect2Elem);
   gallowElem.appendChild(rect3Elem);
   gallowElem.appendChild(rect4Elem);
-  gallowElem.appendChild(headElem);
+  /*   gallowElem.appendChild(headElem);
   gallowElem.appendChild(bodyManElem);
   gallowElem.appendChild(leftArmElem);
   gallowElem.appendChild(rightArmElem);
   gallowElem.appendChild(leftLegElem);
-  gallowElem.appendChild(rightLegElem);
+  gallowElem.appendChild(rightLegElem); */
+  manElem.appendChild(headElem);
+  manElem.appendChild(bodyManElem);
+  manElem.appendChild(leftArmElem);
+  manElem.appendChild(rightArmElem);
+  manElem.appendChild(leftLegElem);
+  manElem.appendChild(rightLegElem);
+
+  gallowElem.appendChild(manElem);
 
   manBodyParts = Array.from(document.getElementsByClassName("man"));
 }
@@ -182,7 +193,9 @@ function showQuiz() {
     const underscoreElems = document.querySelectorAll(".underscore.right");
 
     if (incorrectCounter === 6 || underscoreElems.length === answer.length) {
-      showPopup();
+      setTimeout(() => {
+        showPopup();
+      }, 1000);
     }
   }
 
@@ -196,10 +209,10 @@ function showQuiz() {
     const messageElem = document.createElement("div");
     messageElem.classList.add("message");
     if (incorrectCounter === 6) {
-      messageElem.innerText = "You failed";
+      messageElem.innerText = "Вы проиграли";
       messageElem.classList.add("fail");
     } else {
-      messageElem.innerText = "Congratilations!";
+      messageElem.innerText = "Вы победили!";
       messageElem.classList.add("win");
     }
 
@@ -209,7 +222,7 @@ function showQuiz() {
 
     const buttonElem = document.createElement("button");
     buttonElem.classList.add("button");
-    buttonElem.innerText = "Play again";
+    buttonElem.innerText = "Начать заново";
 
     modalWindowElem.appendChild(messageElem);
     modalWindowElem.appendChild(resultElem);
@@ -248,11 +261,15 @@ function showQuiz() {
     showQuiz();
   }
 
-  containerElem.appendChild(quizElem);
-  quizElem.appendChild(secretWordElem);
+ /*  containerElem.appendChild(quizElem); */
+  /* quizElem.appendChild(secretWordElem);
   quizElem.appendChild(questionElem);
   quizElem.appendChild(incorrectScoreElem);
-  quizElem.appendChild(keyboardElem);
+  quizElem.appendChild(keyboardElem); */
+  containerElem.appendChild(secretWordElem);
+  containerElem.appendChild(questionElem);
+  containerElem.appendChild(incorrectScoreElem);
+  containerElem.appendChild(keyboardElem);
 }
 
 showGallow();
