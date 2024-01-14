@@ -43,6 +43,41 @@ const alphabet = [
   "Я",
 ];
 
+const enKeyboard = [
+  "Q",
+  "W",
+  "E",
+  "R",
+  "T",
+  "Y",
+  "U",
+  "I",
+  "O",
+  "P",
+  "[",
+  "]",
+  "A",
+  "S",
+  "D",
+  "F",
+  "G",
+  "H",
+  "J",
+  "K",
+  "L",
+  ";",
+  "'",
+  "Z",
+  "X",
+  "C",
+  "V",
+  "B",
+  "N",
+  "M",
+  ",",
+  ".",
+];
+
 const containerElem = document.createElement("div");
 containerElem.classList.add("container");
 bodyElem.appendChild(containerElem);
@@ -95,12 +130,7 @@ function showGallow() {
   gallowElem.appendChild(rect2Elem);
   gallowElem.appendChild(rect3Elem);
   gallowElem.appendChild(rect4Elem);
-  /*   gallowElem.appendChild(headElem);
-  gallowElem.appendChild(bodyManElem);
-  gallowElem.appendChild(leftArmElem);
-  gallowElem.appendChild(rightArmElem);
-  gallowElem.appendChild(leftLegElem);
-  gallowElem.appendChild(rightLegElem); */
+
   manElem.appendChild(headElem);
   manElem.appendChild(bodyManElem);
   manElem.appendChild(leftArmElem);
@@ -123,6 +153,7 @@ function showQuiz() {
   const quizItem = questions[random];
   question = quizItem.question;
   answer = quizItem.answer;
+  console.log(answer);
 
   const quizElem = document.createElement("div");
   quizElem.classList.add("quiz");
@@ -188,89 +219,146 @@ function showQuiz() {
 
     keyboardElem.appendChild(letterElem);
   }
-
-  function checkGame() {
-    const underscoreElems = document.querySelectorAll(".underscore.right");
-
-    if (incorrectCounter === 6 || underscoreElems.length === answer.length) {
-      setTimeout(() => {
-        showPopup();
-      }, 1000);
-    }
-  }
-
-  function showPopup() {
-    const modalElem = document.createElement("div");
-    modalElem.classList.add("modal");
-
-    const modalWindowElem = document.createElement("div");
-    modalWindowElem.classList.add("modal-window");
-
-    const messageElem = document.createElement("div");
-    messageElem.classList.add("message");
-    if (incorrectCounter === 6) {
-      messageElem.innerText = "Вы проиграли";
-      messageElem.classList.add("fail");
-    } else {
-      messageElem.innerText = "Вы победили!";
-      messageElem.classList.add("win");
-    }
-
-    const resultElem = document.createElement("div");
-    resultElem.classList.add("result");
-    resultElem.innerHTML = `Правильный ответ: <span>${answer}</span>`;
-
-    const buttonElem = document.createElement("button");
-    buttonElem.classList.add("button");
-    buttonElem.innerText = "Начать заново";
-
-    modalWindowElem.appendChild(messageElem);
-    modalWindowElem.appendChild(resultElem);
-    modalWindowElem.appendChild(buttonElem);
-
-    modalElem.appendChild(modalWindowElem);
-    containerElem.appendChild(modalElem);
-
-    const modal = document.querySelector(".modal");
-    modal.style.visibility = "visible";
-    modal.style.opacity = "1";
-    bodyElem.style.overflowY = "hidden";
-
-    playAgain();
-  }
-
-  function playAgain() {
-    const button = document.querySelector(".button");
-    button.onclick = () => {
-      newGame();
-    };
-  }
-
-  function newGame() {
-    bodyElem.style.overflowY = "auto";
-    const modal = document.querySelector(".modal");
-    modal.style.visibility = "visible";
-    modal.style.opacity = "0";
-
-    incorrectCounter = 0;
-    manBodyParts.forEach((item) => {
-      item.style.display = "none";
-    });
-    containerElem.innerHTML = "";
-    showGallow();
-    showQuiz();
-  }
-
- /*  containerElem.appendChild(quizElem); */
-  /* quizElem.appendChild(secretWordElem);
-  quizElem.appendChild(questionElem);
-  quizElem.appendChild(incorrectScoreElem);
-  quizElem.appendChild(keyboardElem); */
   containerElem.appendChild(secretWordElem);
   containerElem.appendChild(questionElem);
   containerElem.appendChild(incorrectScoreElem);
   containerElem.appendChild(keyboardElem);
 }
 
+function keyboardInput() {
+  document.addEventListener("keydown", function (e) {
+    {
+      const chosenLetter = e.key.toLowerCase();
+
+      const charOnRightLang = alphabet.find(
+        (char) => char.toLocaleLowerCase() === chosenLetter
+      );
+      const charOnIncorrLang = enKeyboard.find(
+        (char) => char.toLowerCase() === chosenLetter
+      );
+
+      if (!charOnRightLang && charOnIncorrLang) {
+        //popup
+        alert("Поменяйте язковую раскладку");
+        return false;
+      }
+
+      if (!charOnRightLang && !charOnIncorrLang) {
+        //popup
+        return false;
+      }
+
+      const letters = document.querySelectorAll(".letter");
+
+      letters.forEach((item) => {
+        if (
+          item.innerText.toLowerCase() === chosenLetter &&
+          item.classList.contains("guessed")
+        ) {
+          e.target.preventDefault();
+        }
+      });
+
+      if (answer.includes(chosenLetter)) {
+        const answArr = answer.split("");
+        answArr.forEach((item, index) => {
+          if (item === chosenLetter) {
+            const upperElems = document.getElementsByClassName("underscore");
+            upperElems[index].innerText = chosenLetter.toUpperCase();
+            upperElems[index].classList.add("right");
+          }
+        });
+      } else {
+        manBodyParts[incorrectCounter].style.display = "block";
+        incorrectCounter++;
+        const incorrectCounterElem =
+          document.querySelector(".incorrect-counter");
+        incorrectCounterElem.innerText = incorrectCounter;
+      }
+
+      letters.forEach((item) => {
+        if (item.innerText.toLowerCase() === chosenLetter) {
+          item.classList.add("guessed");
+        }
+      });
+
+      checkGame();
+    }
+  });
+}
+
+function checkGame() {
+  const underscoreElems = document.querySelectorAll(".underscore.right");
+
+  if (incorrectCounter === 6 || underscoreElems.length === answer.length) {
+    setTimeout(() => {
+      showPopup();
+    }, 1000);
+  }
+}
+
+function showPopup() {
+  const modalElem = document.createElement("div");
+  modalElem.classList.add("modal");
+
+  const modalWindowElem = document.createElement("div");
+  modalWindowElem.classList.add("modal-window");
+
+  const messageElem = document.createElement("div");
+  messageElem.classList.add("message");
+  if (incorrectCounter === 6) {
+    messageElem.innerText = "Вы проиграли";
+    messageElem.classList.add("fail");
+  } else {
+    messageElem.innerText = "Вы победили!";
+    messageElem.classList.add("win");
+  }
+
+  const resultElem = document.createElement("div");
+  resultElem.classList.add("result");
+  resultElem.innerHTML = `Правильный ответ: <span>${answer}</span>`;
+
+  const buttonElem = document.createElement("button");
+  buttonElem.classList.add("button");
+  buttonElem.innerText = "Начать заново";
+
+  modalWindowElem.appendChild(messageElem);
+  modalWindowElem.appendChild(resultElem);
+  modalWindowElem.appendChild(buttonElem);
+
+  modalElem.appendChild(modalWindowElem);
+  containerElem.appendChild(modalElem);
+
+  const modal = document.querySelector(".modal");
+  modal.style.visibility = "visible";
+  modal.style.opacity = "1";
+  bodyElem.style.overflowY = "hidden";
+
+  playAgain();
+}
+
+function playAgain() {
+  const button = document.querySelector(".button");
+  button.onclick = () => {
+    newGame();
+  };
+}
+
+function newGame() {
+  bodyElem.style.overflowY = "auto";
+  const modal = document.querySelector(".modal");
+  modal.style.visibility = "visible";
+  modal.style.opacity = "0";
+
+  incorrectCounter = 0;
+  manBodyParts.forEach((item) => {
+    item.style.display = "none";
+  });
+  containerElem.innerHTML = "";
+  showGallow();
+  showQuiz();
+}
+
 showGallow();
 showQuiz();
+keyboardInput();

@@ -1,5 +1,12 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 @black-color: #000000;
 @grey-color: #909090;
+@lavander-color: #7e7ef0;
+
 .rect {
   width: 42px;
   border-radius: 5px;
@@ -9,6 +16,14 @@
   @media screen and (max-width: 767px) {
     width: 35px;
   }
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: @lavander-color;
 }
 
 .arm-leg {
@@ -27,15 +42,17 @@
 
 .container {
   max-width: 1440px;
-  margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: repeat(4, auto);
   justify-content: center;
   align-items: center;
+  background-color: white;
+  margin: 20px;
 
   padding: 50px 50px;
   border: 1px solid black;
+  border-radius: 20px;
   position: relative;
 
   @media (max-width: 923px) {
@@ -303,23 +320,25 @@
     display: flex;
     font-size: 40px;
     font-weight: bold;
+    font-style: italic;
     text-align: center;
     grid-area: 2/2/3/3;
+    justify-self: center;
 
     @media screen and (max-width: 767px) {
       grid-area: 3/1/4/2;
     }
 
-    @media sreen and (max-width: 923px) {
-      font-size: 35px;
-    }
-
-    @media screen and (max-width: 462px) {
-      font-size: 30px;
-    }
-
     p {
       margin: 0;
+
+      @media screen and (max-width: 923px) {
+        font-size: 35px;
+      }
+
+      @media screen and (max-width: 462px) {
+        font-size: 30px;
+      }
     }
   }
 
@@ -369,7 +388,7 @@
       height: 45px;
       padding: 5px;
       color: white;
-      background-color: rgb(126, 126, 240);
+      background-color: @lavander-color;
       border-radius: 5px;
       font-size: 34px;
       font-weight: bold;
@@ -453,7 +472,7 @@
         font-size: 30px;
         padding: 20px 35px;
         color: white;
-        background-color: rgb(126, 126, 240);
+        background-color: @lavander-color;
         border: none;
         outline: none;
         border-radius: 15px;
