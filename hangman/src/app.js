@@ -239,15 +239,25 @@ function keyboardInput() {
       }
 
       const letters = document.querySelectorAll(".letter");
+      const result = Array.from(letters).find(
+        (item) =>
+          item.innerText.toLowerCase() === chosenLetter &&
+          item.classList.contains("guessed")
+      );
 
-      letters.forEach((item) => {
+      if (result) return false;
+
+      /* 
+      Array.from(letters).forEach((item) => {
         if (
           item.innerText.toLowerCase() === chosenLetter &&
           (item.classList.contains("guessed") || item.getAttribute("disabled"))
         ) {
+          console.log(e);
+          e.stopPropagation();
           e.preventDefault();
         }
-      });
+      }); */
 
       if (answer.includes(chosenLetter)) {
         const answArr = answer.split("");
