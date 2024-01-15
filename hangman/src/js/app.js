@@ -1,81 +1,13 @@
-import { questions } from "../questions-list.js";
+import { questions } from "./questions-list.js";
+import { alphabet } from "./constants.js";
+import { enKeyboard } from "./constants.js";
+import { checkGame, playAgain, chooseQuestion } from "./utils.js";
 
 const bodyElem = document.body;
 let { question, answer } = {};
 let incorrectCounter = 0;
 let manBodyParts = [];
 let modal = {};
-
-const alphabet = [
-  "А",
-  "Б",
-  "В",
-  "Г",
-  "Д",
-  "Е",
-  "Ё",
-  "Ж",
-  "З",
-  "И",
-  "Й",
-  "К",
-  "Л",
-  "М",
-  "Н",
-  "О",
-  "П",
-  "Р",
-  "С",
-  "Т",
-  "У",
-  "Ф",
-  "Х",
-  "Ц",
-  "Ч",
-  "Ш",
-  "Щ",
-  "Ъ",
-  "Ы",
-  "Ь",
-  "Э",
-  "Ю",
-  "Я",
-];
-
-const enKeyboard = [
-  "Q",
-  "W",
-  "E",
-  "R",
-  "T",
-  "Y",
-  "U",
-  "I",
-  "O",
-  "P",
-  "[",
-  "]",
-  "A",
-  "S",
-  "D",
-  "F",
-  "G",
-  "H",
-  "J",
-  "K",
-  "L",
-  ";",
-  "'",
-  "Z",
-  "X",
-  "C",
-  "V",
-  "B",
-  "N",
-  "M",
-  ",",
-  ".",
-];
 
 const containerElem = document.createElement("div");
 containerElem.classList.add("container");
@@ -132,17 +64,15 @@ function showGallow() {
   manBodyParts = Array.from(document.getElementsByClassName("man"));
 }
 
-function randomQuesion(max) {
-  // случайное число от 1 до (max+1)
-  return Math.floor(1 + Math.random() * max);
-}
-
 function showQuiz() {
-  let random = randomQuesion(questions.length) - 1;
-  const quizItem = questions[random];
-  question = quizItem.question;
-  answer = quizItem.answer;
-  console.log(answer);
+  const prevQuestion = localStorage.getItem("question");
+  [answer, question] = chooseQuestion(questions);
+
+  if (prevQuestion && prevQuestion === question) {
+    console.log(1);
+    chooseQuestion(questions);
+    [answer, question] = chooseQuestion(questions);
+  }
 
   const quizElem = document.createElement("div");
   quizElem.classList.add("quiz");
@@ -204,7 +134,7 @@ function showQuiz() {
       e.target.classList.add("guessed");
       e.target.setAttribute("disabled", true);
 
-      checkGame();
+      checkGame(incorrectCounter, answer, showPopup);
     });
 
     keyboardElem.appendChild(letterElem);
@@ -228,13 +158,11 @@ function keyboardInput() {
       );
 
       if (!charOnRightLang && charOnIncorrLang) {
-        //popup
         alert("Поменяйте язковую раскладку");
         return false;
       }
 
       if (!charOnRightLang && !charOnIncorrLang) {
-        //popup
         return false;
       }
 
@@ -246,18 +174,6 @@ function keyboardInput() {
       );
 
       if (result) return false;
-
-      /* 
-      Array.from(letters).forEach((item) => {
-        if (
-          item.innerText.toLowerCase() === chosenLetter &&
-          (item.classList.contains("guessed") || item.getAttribute("disabled"))
-        ) {
-          console.log(e);
-          e.stopPropagation();
-          e.preventDefault();
-        }
-      }); */
 
       if (answer.includes(chosenLetter)) {
         const answArr = answer.split("");
@@ -283,19 +199,9 @@ function keyboardInput() {
         }
       });
 
-      checkGame();
+      checkGame(incorrectCounter, answer, showPopup);
     }
   });
-}
-
-function checkGame() {
-  const underscoreElems = document.querySelectorAll(".underscore.right");
-
-  if (incorrectCounter === 6 || underscoreElems.length === answer.length) {
-    setTimeout(() => {
-      showPopup();
-    }, 1000);
-  }
 }
 
 function showPopup() {
@@ -335,19 +241,11 @@ function showPopup() {
   modal.style.opacity = "1";
   bodyElem.style.overflowY = "hidden";
 
-  playAgain();
-}
-
-function playAgain() {
-  const button = document.querySelector(".button");
-  button.onclick = () => {
-    newGame();
-  };
+  playAgain(newGame);
 }
 
 function newGame() {
   bodyElem.style.overflowY = "auto";
-  /*  const modal = document.querySelector(".modal"); */
   modal.style.visibility = "visible";
   modal.style.opacity = "0";
 
