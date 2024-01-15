@@ -1,9 +1,9 @@
 export function randomQuesion(min, max) {
-  return Math.floor(min + Math.random() * (max + 1 - min));
+  return Math.floor(Math.random() * (max - min) + min);
 }
 
 export function chooseQuestion(questions) {
-  let random = randomQuesion(0, questions.length - 1);
+  let random = randomQuesion(0, questions.length);
   const quizItem = questions[random];
   const question = quizItem.question;
   localStorage.setItem("question", `${question}`);
