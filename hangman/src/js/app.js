@@ -148,6 +148,9 @@ function showQuiz() {
 function keyboardInput() {
   document.addEventListener("keydown", function (e) {
     {
+      const modal = document.querySelector(".modal-window");
+      if (modal) return false;
+
       const chosenLetter = e.key.toLowerCase();
 
       const charOnRightLang = alphabet.find(
