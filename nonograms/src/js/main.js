@@ -73,3 +73,41 @@ function showField(nonograms) {
 }
 
 showField(getLevel());
+
+function fillCell() {
+  const cells = document.querySelectorAll("td:not(.left-cell):not(.top-cell)");
+  cells.forEach((item) => {
+    if (item.classList.contains("left") || item.classList.contains("top")) {
+      return false;
+    }
+
+    item.onclick = () => {
+      if (item.getAttribute("not") === "x") {
+        return false;
+      }
+      if (!item.getAttribute("filled")) {
+        item.style.backgroundColor = "black"; // или добавить класс
+        item.setAttribute("filled", "true");
+      } else if (item.getAttribute("filled")) {
+        item.style.backgroundColor = "transparent"; // или добавить класс
+        item.removeAttribute("filled");
+      }
+    };
+
+    item.addEventListener("contextmenu", (e) => {
+      e.preventDefault();
+
+      if (item.getAttribute("filled")) return false;
+
+      if (item.getAttribute("not") === "x") {
+        item.classList.remove("not");
+        item.setAttribute("not", "null");
+      } else {
+        item.classList.add("not");
+        item.setAttribute("not", "x");
+      }
+    });
+  });
+}
+
+fillCell();
