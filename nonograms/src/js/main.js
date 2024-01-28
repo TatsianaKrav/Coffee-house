@@ -1,7 +1,14 @@
 import { easy, medium, hard } from "./data.js";
+import { checkGameEnd, createModal, closeModal } from "./utils.js";
 
 const bodyElem = document.body;
+const containerElem = document.createElement("div");
+containerElem.classList.add("container");
+
+bodyElem.appendChild(containerElem);
+
 let nonograms = [];
+let nonogram = {};
 
 //получить из select/radio
 let level = "Легкий";
@@ -24,10 +31,12 @@ function getLevel() {
   return nonograms;
 }
 
+nonograms = getLevel();
+
 function showField(nonograms) {
   const tableElem = document.createElement("table");
   const tableId = Math.floor(1 + Math.random() * 5);
-  const nonogram = nonograms.find((item) => item.id === tableId);
+  nonogram = nonograms.find((item) => item.id === tableId);
   const topClues = nonogram.topClues;
   const leftClues = nonogram.leftClues;
 
@@ -69,7 +78,7 @@ function showField(nonograms) {
     tableElem.appendChild(row);
   }
 
-  bodyElem.appendChild(tableElem);
+  containerElem.appendChild(tableElem);
 }
 
 showField(getLevel());
@@ -92,6 +101,8 @@ function fillCell() {
         item.style.backgroundColor = "transparent"; // или добавить класс
         item.removeAttribute("filled");
       }
+
+      checkGameEnd(nonogram);
     };
 
     item.addEventListener("contextmenu", (e) => {
@@ -111,3 +122,9 @@ function fillCell() {
 }
 
 fillCell();
+
+createModal(containerElem);
+closeModal(() => {
+  containerElem.innerHTML = "";
+  showField(nonograms);
+});
