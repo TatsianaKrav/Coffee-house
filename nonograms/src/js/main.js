@@ -5,6 +5,14 @@ const bodyElem = document.body;
 const containerElem = document.createElement("div");
 containerElem.classList.add("container");
 
+const gameElem = document.createElement("div");
+gameElem.classList.add("game");
+
+const gameName = document.createElement("div");
+gameName.classList.add("game-name");
+
+gameElem.appendChild(gameName);
+containerElem.appendChild(gameElem);
 bodyElem.appendChild(containerElem);
 
 let nonograms = [];
@@ -37,6 +45,7 @@ function showField(nonograms) {
   const tableElem = document.createElement("table");
   const tableId = Math.floor(1 + Math.random() * 5);
   nonogram = nonograms.find((item) => item.id === tableId);
+  gameName.innerText = nonogram.name;
   const topClues = nonogram.topClues;
   const leftClues = nonogram.leftClues;
 
@@ -78,7 +87,7 @@ function showField(nonograms) {
     tableElem.appendChild(row);
   }
 
-  containerElem.appendChild(tableElem);
+  gameElem.appendChild(tableElem);
 }
 
 showField(getLevel());

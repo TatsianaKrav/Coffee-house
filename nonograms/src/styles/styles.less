@@ -1,142 +1,150 @@
 @black: black;
+.container {
+  .game {
+    .game-name {
+      margin-bottom: 15px;
+      font-weight: bold;
+      font-size: 20px;
+    }
+    table {
+      border-collapse: collapse;
+      margin-bottom: 20px;
 
-table {
-  border-collapse: collapse;
-  margin-bottom: 20px;
+      tr {
+        &:first-child {
+          border-bottom: 3px solid @black;
+        }
 
-  tr {
-    &:first-child {
-      border-bottom: 3px solid @black;
+        &:nth-child(5n + 1) {
+          border-bottom: 3px solid @black;
+        }
+
+        td {
+          width: 25px;
+          height: 25px;
+          box-sizing: border-box;
+          cursor: pointer;
+          border: 1px solid @black;
+          position: relative;
+
+          &.empty {
+            width: 60px;
+            border-right: 3px solid @black;
+          }
+
+          &.left-cell {
+            text-align: right;
+            padding: 2px;
+            border-right: 3px solid @black;
+          }
+
+          .top {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            align-self: flex-end;
+            padding-top: 3px;
+          }
+
+          &.not:before {
+            content: "";
+            position: absolute;
+            top: -4px;
+            left: 11px;
+            width: 1px;
+            height: 30px;
+            background-color: @black;
+            transform: rotate(45deg);
+          }
+
+          &.not:after {
+            content: "";
+            position: absolute;
+            top: -4px;
+            left: 11px;
+            width: 1px;
+            height: 30px;
+            background-color: @black;
+            transform: rotate(-45deg);
+          }
+
+          &:nth-child(5n + 1) {
+            border-right: 3px solid @black;
+          }
+        }
+      }
+    }
+  }
+
+  .modal {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 20px;
+    display: flex;
+    z-index: 10;
+    border: 2px solid black;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.5s linear;
+    overflow-y: hidden;
+
+    &.show {
+      visibility: visible;
+      opacity: 1;
+      transition: all 0.5s linear;
+      overflow-y: auto;
     }
 
-    &:nth-child(5n + 1) {
-      border-bottom: 3px solid @black;
-    }
-
-    td {
-      width: 25px;
-      height: 25px;
+    .modal-window {
+      max-width: 800px;
+      padding: 100px;
+      border-radius: 15px;
+      background: rgb(243, 236, 236);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
       box-sizing: border-box;
       cursor: pointer;
-      border: 1px solid @black;
+      font-size: 35px;
       position: relative;
 
-      &.empty {
-        width: 60px;
-        border-right: 3px solid @black;
-      }
+      /*   .message {
+          } */
 
-      &.left-cell {
-        text-align: right;
-        padding: 2px;
-        border-right: 3px solid @black;
-      }
-
-      .top {
-        display: flex;
-        align-items: flex-end;
-        justify-content: center;
-        align-self: flex-end;
-        padding-top: 3px;
-      }
-
-      &.not:before {
-        content: "";
+      .close {
+        width: 25px;
+        height: 25px;
         position: absolute;
-        top: -4px;
-        left: 11px;
-        width: 1px;
-        height: 30px;
-        background-color: @black;
-        transform: rotate(45deg);
-      }
+        top: 20px;
+        right: 20px;
 
-      &.not:after {
-        content: "";
-        position: absolute;
-        top: -4px;
-        left: 11px;
-        width: 1px;
-        height: 30px;
-        background-color: @black;
-        transform: rotate(-45deg);
-      }
+        &:before {
+          content: "";
+          position: absolute;
+          top: -4px;
+          left: 11px;
+          width: 1px;
+          height: 30px;
+          background-color: @black;
+          transform: rotate(45deg);
+        }
 
-      &:nth-child(5n + 1) {
-        border-right: 3px solid @black;
-      }
-    }
-  }
-}
-
-.modal {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  padding: 20px;
-  display: flex;
-  z-index: 10;
-  border: 2px solid black;
-  visibility: hidden;
-  opacity: 0;
-  transition: all 0.5s linear;
-  overflow-y: hidden;
-
-  &.show {
-    visibility: visible;
-    opacity: 1;
-    transition: all 0.5s linear;
-    overflow-y: auto;
-  }
-
-  .modal-window {
-    max-width: 800px;
-    padding: 100px;
-    border-radius: 15px;
-    background: rgb(243, 236, 236);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    box-sizing: border-box;
-    cursor: pointer;
-    font-size: 35px;
-    position: relative;
-
-    /*   .message {
-    } */
-
-    .close {
-      width: 25px;
-      height: 25px;
-      position: absolute;
-      top: 20px;
-      right: 20px;
-
-      &:before {
-        content: "";
-        position: absolute;
-        top: -4px;
-        left: 11px;
-        width: 1px;
-        height: 30px;
-        background-color: @black;
-        transform: rotate(45deg);
-      }
-
-      &:after {
-        content: "";
-        position: absolute;
-        top: -4px;
-        left: 11px;
-        width: 1px;
-        height: 30px;
-        background-color: @black;
-        transform: rotate(-45deg);
+        &:after {
+          content: "";
+          position: absolute;
+          top: -4px;
+          left: 11px;
+          width: 1px;
+          height: 30px;
+          background-color: @black;
+          transform: rotate(-45deg);
+        }
       }
     }
   }
