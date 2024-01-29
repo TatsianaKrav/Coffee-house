@@ -15,11 +15,37 @@ export function checkGameEnd(nonogram) {
     .filter((item) => item === 1).length;
 
   if (currentGameFilledCells === nonogramFilledCells) {
-    //функция проверки правильности заполнения
+    const result = checkResult(nonogram);
+    console.log(result);
 
-    const modal = document.querySelector(".modal");
-    modal.classList.add("show");
+    if (result) {
+      const modal = document.querySelector(".modal");
+      modal.classList.add("show");
+    }
   }
+}
+
+function checkResult(nonogram) {
+  const currentGameCells = document.querySelectorAll(
+    "td:not(.left-cell):not(.top-cell):not(.empty)"
+  );
+
+  const gameAnswers = String(nonogram.image.flat()).split(",").join("");
+
+  let stringResult = "";
+
+  Array.from(currentGameCells).forEach((item) => {
+    if (item.getAttribute("filled")) {
+      stringResult += "1";
+    } else {
+      stringResult += "0";
+    }
+  });
+
+  console.log(gameAnswers);
+  console.log(stringResult);
+
+  return gameAnswers === stringResult;
 }
 
 export function createModal(containerElem) {
@@ -51,4 +77,9 @@ export function closeModal(cb) {
       cb();
     };
   }
+}
+
+function showModal() {
+  const modal = document.querySelector(".modal");
+  modal.classList.add("show");
 }
