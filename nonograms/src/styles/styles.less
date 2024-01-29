@@ -19,31 +19,86 @@
           border-bottom: 3px solid @black;
         }
 
+        &:last-child {
+          border-bottom: 1px solid @black;
+
+          td:first-child {
+            border-bottom: none;
+          }
+        }
+
         td {
+          padding: 0;
           width: 25px;
           height: 25px;
           box-sizing: border-box;
           cursor: pointer;
           border: 1px solid @black;
+          box-sizing: border-box;
           position: relative;
 
           &.empty {
-            width: 60px;
+            /*   width: 60px; */
             border-right: 3px solid @black;
           }
 
           &.left-cell {
             text-align: right;
-            padding: 2px;
-            border-right: 3px solid @black;
+            border-right: 2px solid @black;
+            width: auto;
+            display: flex;
+            justify-content: flex-end;
+            text-align: center;
+            border: none;
+            border-bottom: 1px solid @black;
+
+            /*  &:first-child {
+              border-bottom: none;
+            } */
+
+            .left {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              width: 25px;
+              height: 25px;
+              border-left: 1px solid @black;
+
+              &:nth-last-child(5n) {
+                border-left: 3px solid @black;
+              }
+
+              &:last-child {
+                border-left: 1px solid @black;
+              }
+            }
           }
 
-          .top {
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            align-self: flex-end;
+          &.top-cell {
+            height: auto;
+            vertical-align: bottom;
+            text-align: center;
             padding-top: 3px;
+            /*  display: flex;
+            flex-direction: column; */
+
+            .top {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+
+              width: 25px;
+              height: 25px;
+              border-top: 1px solid @black;
+
+              &:first-child {
+                border-top: none;
+              }
+
+              &:nth-last-child(5n) {
+                border-top: 3px solid @black;
+              }
+            }
           }
 
           &.not:before {
@@ -70,6 +125,14 @@
 
           &:nth-child(5n + 1) {
             border-right: 3px solid @black;
+
+            &.left-cell {
+              border-right: 2px solid @black;
+            }
+          }
+
+          &:last-child {
+            border-right: 2px solid @black;
           }
         }
       }

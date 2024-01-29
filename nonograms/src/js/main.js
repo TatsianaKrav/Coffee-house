@@ -1,5 +1,10 @@
 import { easy, medium, hard } from "./data.js";
-import { checkGameEnd, createModal, closeModal } from "./utils.js";
+import {
+  checkGameEnd,
+  createModal,
+  closeModal,
+  calculateClues,
+} from "./utils.js";
 
 const bodyElem = document.body;
 const containerElem = document.createElement("div");
@@ -43,11 +48,15 @@ nonograms = getLevel();
 
 function showField(nonograms) {
   const tableElem = document.createElement("table");
+
+  //сменить на select/radio по выбору игрока
   const tableId = Math.floor(1 + Math.random() * 5);
   nonogram = nonograms.find((item) => item.id === tableId);
   gameName.innerText = nonogram.name;
   const topClues = nonogram.topClues;
   const leftClues = nonogram.leftClues;
+
+  const [topCluesMaxCount, leftCluesMaxCount] = calculateClues(nonogram);
 
   //localStorage проверка на пройденный кроссворд
 
@@ -62,21 +71,46 @@ function showField(nonograms) {
       } else if ((i === 0) & (j !== 0)) {
         col.classList.add("top-cell");
 
-        for (let k = 0; k < topClues[j - 1].length; k++) {
-          const spanElem = document.createElement("span");
-          spanElem.classList.add("top");
-          spanElem.innerText = topClues[j - 1][k];
-          col.appendChild(spanElem);
+        for (let l = 0; l < topCluesMaxCount; l++) {
+          const divElem = document.createElement("div");
+          divElem.classList.add("top");
+          col.insertBefore(divElem, col.firstChild);
+
+          /*   if (topCluesMaxCount > 5) { */
+          if (topClues[j - 1][l]) {
+            divElem.innerText = topClues[j - 1][l];
+          }
+          /*   } else {
+            for (let k = 0; k < topClues[j - 1].length; k++) {
+              divElem.innerText = topClues[j - 1][k];
+            }
+          } */
         }
       } else if (i !== 0 && j === 0) {
         col.classList.add("left-cell");
 
-        for (let k = 0; k < leftClues[i - 1].length; k++) {
+        for (let l = 0; l < leftCluesMaxCount; l++) {
+          const divElem = document.createElement("div");
+          divElem.classList.add("left");
+          col.insertBefore(divElem, col.firstChild);
+
+          /*    if (leftCluesMaxCount > 5) { */
+          if (leftClues[i - 1][l]) {
+            divElem.innerText = leftClues[i - 1][l];
+          }
+          /*  } else {
+            for (let k = 0; k < leftClues[i - 1].length; k++) {
+              divElem.innerText = leftClues[i - 1][k];
+            }
+          } */
+        }
+
+        /* for (let k = 0; k < leftClues[i - 1].length; k++) {
           const spanElem = document.createElement("span");
           spanElem.classList.add("left");
           spanElem.innerText = leftClues[i - 1][k];
           col.appendChild(spanElem);
-        }
+        } */
       } else {
         col.classList.add("cell");
       }
