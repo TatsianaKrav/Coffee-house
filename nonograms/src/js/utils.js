@@ -16,7 +16,6 @@ export function checkGameEnd(nonogram) {
 
   if (currentGameFilledCells === nonogramFilledCells) {
     const result = checkResult(nonogram);
-    console.log(result);
 
     if (result) {
       const modal = document.querySelector(".modal");
@@ -41,10 +40,6 @@ function checkResult(nonogram) {
       stringResult += "0";
     }
   });
-
-  console.log(gameAnswers);
-  console.log(stringResult);
-
   return gameAnswers === stringResult;
 }
 

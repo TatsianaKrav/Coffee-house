@@ -16,10 +16,6 @@ gameElem.classList.add("game");
 const gameName = document.createElement("div");
 gameName.classList.add("game-name");
 
-gameElem.appendChild(gameName);
-containerElem.appendChild(gameElem);
-bodyElem.appendChild(containerElem);
-
 let nonograms = [];
 let nonogram = {};
 
@@ -119,12 +115,39 @@ function showField(nonograms) {
     }
 
     tableElem.appendChild(row);
+    containerElem.appendChild(gameElem);
+    bodyElem.appendChild(containerElem);
   }
 
+  gameElem.appendChild(gameName);
   gameElem.appendChild(tableElem);
+
+  resetGame();
 }
 
 showField(getLevel());
+
+function resetGame() {
+  const resetBtn = document.createElement("button");
+  resetBtn.classList.add("reset");
+  resetBtn.innerText = "Reset game";
+
+  const gameElem = document.querySelector(".game");
+  gameElem.appendChild(resetBtn);
+
+  resetBtn.onclick = () => {
+    const cells = document.querySelectorAll(
+      "td:not(.left-cell):not(.top-cell)"
+    );
+
+    Array.from(cells).forEach((cell) => {
+      cell.style.backgroundColor = "transparent";
+      cell.removeAttribute("filled");
+      cell.classList.remove("not");
+      cell.setAttribute("not", "null");
+    });
+  };
+}
 
 function fillCell() {
   const cells = document.querySelectorAll("td:not(.left-cell):not(.top-cell)");
@@ -168,6 +191,9 @@ fillCell();
 
 createModal(containerElem);
 closeModal(() => {
-  containerElem.innerHTML = "";
+  gameElem.innerHTML = "";
+  const modal = document.querySelector(".modal");
+  modal.classList.remove("show");
   showField(nonograms);
+  fillCell();
 });
