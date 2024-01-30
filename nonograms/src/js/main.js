@@ -4,6 +4,8 @@ import {
   createModal,
   closeModal,
   calculateClues,
+  showTimer,
+  initTimer,
 } from "./utils.js";
 
 const bodyElem = document.body;
@@ -18,6 +20,9 @@ gameName.classList.add("game-name");
 
 let nonograms = [];
 let nonogram = {};
+let timerOn = false;
+let interval = {};
+let time = {};
 
 //получить из select/radio
 let level = "Легкий";
@@ -120,6 +125,7 @@ function showField(nonograms) {
   }
 
   gameElem.appendChild(gameName);
+  showTimer(gameElem);
   gameElem.appendChild(tableElem);
 
   resetGame();
@@ -150,13 +156,20 @@ function resetGame() {
 }
 
 function fillCell() {
-  const cells = document.querySelectorAll("td:not(.left-cell):not(.top-cell)");
+  const cells = document.querySelectorAll(
+    "td:not(.left-cell):not(.top-cell):not(.empty)"
+  );
   cells.forEach((item) => {
     if (item.classList.contains("left") || item.classList.contains("top")) {
       return false;
     }
 
     item.onclick = () => {
+      if (!timerOn) {
+        interval = initTimer();
+        timerOn = true;
+      }
+
       if (item.getAttribute("not") === "x") {
         return false;
       }
@@ -168,7 +181,7 @@ function fillCell() {
         item.removeAttribute("filled");
       }
 
-      checkGameEnd(nonogram);
+      checkGameEnd(nonogram, newGame);
     };
 
     item.addEventListener("contextmenu", (e) => {
@@ -189,11 +202,23 @@ function fillCell() {
 
 fillCell();
 
-createModal(containerElem);
-closeModal(() => {
+/* createModal(containerElem); */
+/* closeModal(() => {
   gameElem.innerHTML = "";
   const modal = document.querySelector(".modal");
   modal.classList.remove("show");
+  clearInterval(interval);
+  timerOn = false;
   showField(nonograms);
   fillCell();
-});
+}); */
+
+function newGame() {
+  gameElem.innerHTML = "";
+  const modal = document.querySelector(".modal");
+  modal.classList.remove("show");
+  clearInterval(interval);
+  timerOn = false;
+  showField(nonograms);
+  fillCell();
+}

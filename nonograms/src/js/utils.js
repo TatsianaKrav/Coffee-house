@@ -1,4 +1,9 @@
-export function checkGameEnd(nonogram) {
+let sec = 0;
+let min = 0;
+let isPaused = false;
+/* let closeModalElem = {}; */
+
+export function checkGameEnd(nonogram, cb) {
   let currentGameFilledCells = 0;
   const currentGameCells = document.querySelectorAll(
     "td:not(.left-cell):not(.top-cell)"
@@ -18,6 +23,8 @@ export function checkGameEnd(nonogram) {
     const result = checkResult(nonogram);
 
     if (result) {
+      const containerElem = document.querySelector(".container");
+      createModal(containerElem, cb);
       const modal = document.querySelector(".modal");
       modal.classList.add("show");
     }
@@ -43,7 +50,10 @@ function checkResult(nonogram) {
   return gameAnswers === stringResult;
 }
 
-export function createModal(containerElem) {
+export function createModal(containerElem, cb) {
+  const timer = document.getElementById("timer");
+  console.log(timer);
+
   const modalElem = document.createElement("div");
   modalElem.classList.add("modal");
 
@@ -52,20 +62,24 @@ export function createModal(containerElem) {
 
   const messageElem = document.createElement("div");
   messageElem.classList.add("message");
-  messageElem.innerText = "Great! You have solved the nonogram!";
-
+  messageElem.innerText =
+    "Great! You have solved the nonogram!" + timer.innerText;
   const closeElem = document.createElement("div");
   closeElem.classList.add("close");
+  /*   closeModalElem = document.querySelector(".close"); */
 
   modalWindowElem.appendChild(messageElem);
   modalWindowElem.appendChild(closeElem);
 
   modalElem.appendChild(modalWindowElem);
   containerElem.appendChild(modalElem);
+
+  closeModal(cb);
 }
 
 export function closeModal(cb) {
   const closeModalElem = document.querySelector(".close");
+  console.log(closeModalElem);
 
   if (closeModalElem) {
     closeModalElem.onclick = () => {
@@ -87,4 +101,55 @@ export function calculateClues(nonogram) {
   });
 
   return [maxTop, maxLeft];
+}
+
+export function initTimer() {
+  //часы?
+  sec = 0;
+  min = 0;
+
+  const timer = setInterval(tick, 1000);
+  return timer;
+}
+
+function tick() {
+  const modal = document.querySelector(".modal.show");
+
+  isPaused = modal ? true : false;
+
+  if (isPaused) return false;
+
+  const timer = document.getElementById("timer");
+  sec++;
+
+  if (sec >= 60) {
+    min++;
+    sec = 0;
+  }
+
+  if (sec < 10) {
+    if (min < 10) {
+      //05:05
+      //div timer -> span.min, span.sec
+      timer.innerText = `0${min}:0${sec}`;
+    } else {
+      //10:05
+      timer.innerText = `${min}:0${sec}`;
+    }
+  } else {
+    if (min < 10) {
+      //05:15
+      timer.innerText = `0${min}:${sec}`;
+    } else {
+      //15:15
+      timer.innerText = `${min}:${sec}`;
+    }
+  }
+}
+
+export function showTimer(gameElem) {
+  const timerElem = document.createElement("div");
+  timerElem.setAttribute("id", "timer");
+  timerElem.innerText = "00:00";
+  gameElem.appendChild(timerElem);
 }
