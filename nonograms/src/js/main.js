@@ -18,6 +18,49 @@ gameElem.classList.add("game");
 const gameName = document.createElement("div");
 gameName.classList.add("game-name");
 
+function showActions() {
+  //создание блока справа
+  //menu
+  //btn save game
+  //btn continue game
+  //theme
+  //table
+  //btn random game
+  //btn solution
+
+  const actionsElem = document.createElement("div");
+  gameElem.classList.add("actions");
+  containerElem.appendChild(actionsElem);
+
+  const menuElem = document.createElement("div");
+  menuElem.classList.add("menu");
+  actionsElem.appendChild(menuElem);
+
+  const levelElem = document.createElement("select");
+  levelElem.classList.add("level");
+  menuElem.appendChild(levelElem);
+
+  for (let i = 0; i < 3; i++) {
+    const gameChoiceElem = document.createElement("option");
+
+    switch (i) {
+      case 0:
+        gameChoiceElem.innerText = "Easy";
+        break;
+      case 1:
+        gameChoiceElem.innerText = "Medium";
+        break;
+      case 2:
+        gameChoiceElem.innerText = "Hard";
+        break;
+      default:
+        "Игр нет";
+    }
+
+    levelElem.appendChild(gameChoiceElem);
+  }
+}
+
 let nonograms = [];
 let nonogram = {};
 let timerOn = false;
@@ -132,6 +175,8 @@ function showField(nonograms) {
 }
 
 showField(getLevel());
+
+showActions();
 
 function resetGame() {
   const resetBtn = document.createElement("button");
