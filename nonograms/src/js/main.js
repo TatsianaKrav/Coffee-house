@@ -11,12 +11,22 @@ import {
 const bodyElem = document.body;
 const containerElem = document.createElement("div");
 containerElem.classList.add("container");
+bodyElem.appendChild(containerElem);
 
 const gameElem = document.createElement("div");
 gameElem.classList.add("game");
 
 const gameName = document.createElement("div");
 gameName.classList.add("game-name");
+
+let nonograms = easy;
+let nonogram = {};
+let timerOn = false;
+let interval = {};
+let level = "easy";
+/* const tableId = Math.floor(1 + Math.random() * 5); */
+/* let firstNonogram = nonograms.find((item) => item.id === tableId); */
+let firstNonogram = nonograms[0];
 
 function showActions() {
   //создание блока справа
@@ -29,8 +39,7 @@ function showActions() {
   //btn solution
 
   const actionsElem = document.createElement("div");
-  gameElem.classList.add("actions");
-  containerElem.appendChild(actionsElem);
+  actionsElem.classList.add("actions");
 
   const menuElem = document.createElement("div");
   menuElem.classList.add("menu");
@@ -41,44 +50,81 @@ function showActions() {
   menuElem.appendChild(levelElem);
 
   for (let i = 0; i < 3; i++) {
-    const gameChoiceElem = document.createElement("option");
+    const levelChoiceElem = document.createElement("option");
 
     switch (i) {
       case 0:
-        gameChoiceElem.innerText = "Easy";
+        levelChoiceElem.innerText = "Easy";
+        levelChoiceElem.setAttribute("value", "easy");
+        levelChoiceElem.setAttribute("checked", "true");
         break;
       case 1:
-        gameChoiceElem.innerText = "Medium";
+        levelChoiceElem.innerText = "Medium";
+        levelChoiceElem.setAttribute("value", "medium");
         break;
       case 2:
-        gameChoiceElem.innerText = "Hard";
+        levelChoiceElem.innerText = "Hard";
+        levelChoiceElem.setAttribute("value", "hard");
         break;
       default:
         "Игр нет";
     }
 
-    levelElem.appendChild(gameChoiceElem);
+    levelElem.appendChild(levelChoiceElem);
+    containerElem.appendChild(actionsElem);
+  }
+
+  const gameMenuElem = document.createElement("select");
+  gameMenuElem.classList.add("game-choice");
+  menuElem.appendChild(gameMenuElem);
+
+  showGameChoice(gameMenuElem);
+  chooseLevel(gameMenuElem);
+  chooseGame(nonograms);
+}
+
+function showGameChoice(gameMenuElem) {
+  const options = document.querySelectorAll(".game-choice-option");
+  if (options.length > 0) {
+    const parent = options[0].parentNode;
+
+    options.forEach((item) => {
+      parent.removeChild(item);
+    });
+  }
+
+  for (let i = 0; i < nonograms.length; i++) {
+    const gameMenuOption = document.createElement("option");
+    gameMenuOption.innerText = nonograms[i].name;
+    gameMenuOption.classList.add("game-choice-option");
+    gameMenuOption.setAttribute("value", nonograms[i].name);
+    gameMenuElem.appendChild(gameMenuOption);
   }
 }
 
-let nonograms = [];
-let nonogram = {};
-let timerOn = false;
-let interval = {};
-let time = {};
+showActions();
+showField(firstNonogram);
 
-//получить из select/radio
-let level = "Легкий";
+function chooseGame(nonograms) {
+  const chosenGameSelector = document.querySelector(".game-choice");
+
+  chosenGameSelector.onchange = (e) => {
+    const chosenGame = e.target.value;
+
+    nonogram = nonograms.find((item) => item.name === chosenGame);
+    showField(nonogram);
+  };
+}
 
 function getLevel() {
   switch (level) {
-    case "Легкий":
+    case "easy":
       nonograms = easy;
       break;
-    case "Средний":
+    case "medium":
       nonograms = medium;
       break;
-    case "Сложный":
+    case "hard":
       nonograms = hard;
       break;
     default:
@@ -87,15 +133,29 @@ function getLevel() {
 
   return nonograms;
 }
+function chooseLevel(gameMenuElem) {
+  const levelElem = document.querySelector(".level");
 
-nonograms = getLevel();
+  levelElem.onchange = (e) => {
+    level = e.target.value;
 
-function showField(nonograms) {
+    nonograms = getLevel();
+    showGameChoice(gameMenuElem);
+
+    const defaultGame =
+      document.querySelector(".game-choice").childNodes[0].value;
+    const defaultNonogram = nonograms.find((item) => item.name === defaultGame);
+
+    showField(defaultNonogram);
+
+    chooseGame(nonograms);
+  };
+}
+
+function showField(nonogram) {
+  gameElem.innerHTML = "";
   const tableElem = document.createElement("table");
 
-  //сменить на select/radio по выбору игрока
-  const tableId = Math.floor(1 + Math.random() * 5);
-  nonogram = nonograms.find((item) => item.id === tableId);
   gameName.innerText = nonogram.name;
   const topClues = nonogram.topClues;
   const leftClues = nonogram.leftClues;
@@ -104,10 +164,10 @@ function showField(nonograms) {
 
   //localStorage проверка на пройденный кроссворд
 
-  for (let i = 0; i <= nonograms.length; i++) {
+  for (let i = 0; i <= nonogram.image.length; i++) {
     const row = document.createElement("tr");
 
-    for (let j = 0; j <= nonograms.length; j++) {
+    for (let j = 0; j <= nonogram.image.length; j++) {
       const col = document.createElement("td");
 
       if (i === 0 && j === 0) {
@@ -120,15 +180,9 @@ function showField(nonograms) {
           divElem.classList.add("top");
           col.insertBefore(divElem, col.firstChild);
 
-          /*   if (topCluesMaxCount > 5) { */
           if (topClues[j - 1][l]) {
             divElem.innerText = topClues[j - 1][l];
           }
-          /*   } else {
-            for (let k = 0; k < topClues[j - 1].length; k++) {
-              divElem.innerText = topClues[j - 1][k];
-            }
-          } */
         }
       } else if (i !== 0 && j === 0) {
         col.classList.add("left-cell");
@@ -138,23 +192,10 @@ function showField(nonograms) {
           divElem.classList.add("left");
           col.insertBefore(divElem, col.firstChild);
 
-          /*    if (leftCluesMaxCount > 5) { */
           if (leftClues[i - 1][l]) {
             divElem.innerText = leftClues[i - 1][l];
           }
-          /*  } else {
-            for (let k = 0; k < leftClues[i - 1].length; k++) {
-              divElem.innerText = leftClues[i - 1][k];
-            }
-          } */
         }
-
-        /* for (let k = 0; k < leftClues[i - 1].length; k++) {
-          const spanElem = document.createElement("span");
-          spanElem.classList.add("left");
-          spanElem.innerText = leftClues[i - 1][k];
-          col.appendChild(spanElem);
-        } */
       } else {
         col.classList.add("cell");
       }
@@ -164,7 +205,7 @@ function showField(nonograms) {
 
     tableElem.appendChild(row);
     containerElem.appendChild(gameElem);
-    bodyElem.appendChild(containerElem);
+    /* bodyElem.appendChild(containerElem); */
   }
 
   gameElem.appendChild(gameName);
@@ -173,10 +214,6 @@ function showField(nonograms) {
 
   resetGame();
 }
-
-showField(getLevel());
-
-showActions();
 
 function resetGame() {
   const resetBtn = document.createElement("button");
@@ -264,6 +301,6 @@ function newGame() {
   modal.classList.remove("show");
   clearInterval(interval);
   timerOn = false;
-  showField(nonograms);
+  showField(firstNonogram);
   fillCell();
 }

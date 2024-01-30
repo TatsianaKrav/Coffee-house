@@ -1,7 +1,7 @@
 export const easy = [
   {
     id: 1,
-    name: "Вентилятор",
+    name: "Ventilator",
     lavel: "Легкий",
     image: [
       [0, 1, 0, 0, 0],
@@ -15,7 +15,7 @@ export const easy = [
   },
   {
     id: 2,
-    name: "Сердечко",
+    name: "Heart",
     lavel: "Легкий",
     image: [
       [0, 1, 0, 1, 0],
@@ -29,7 +29,7 @@ export const easy = [
   },
   {
     id: 3,
-    name: "Часы",
+    name: "Clock",
     lavel: "Легкий",
     image: [
       [0, 1, 1, 1, 0],
@@ -43,7 +43,7 @@ export const easy = [
   },
   {
     id: 4,
-    name: "Бомбочка",
+    name: "Bomb",
     lavel: "Легкий",
     image: [
       [0, 0, 1, 1, 0],
@@ -57,7 +57,7 @@ export const easy = [
   },
   {
     id: 5,
-    name: "Коляска",
+    name: "Baby carriage",
     lavel: "Легкий",
     image: [
       [0, 1, 1, 0, 0],
@@ -74,7 +74,7 @@ export const easy = [
 export const medium = [
   {
     id: 1,
-    name: "Кот",
+    name: "Cat",
     lavel: "Средний",
     image: [
       [0, 0, 0, 0, 0, 0, 1, 1, 1, 0],
