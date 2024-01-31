@@ -28,9 +28,10 @@ let level = "easy";
 /* let firstNonogram = nonograms.find((item) => item.id === tableId); */
 let firstNonogram = nonograms[0];
 
+showActions();
+showField(firstNonogram);
+
 function showActions() {
-  //создание блока справа
-  //menu
   //btn save game
   //btn continue game
   //theme
@@ -81,6 +82,7 @@ function showActions() {
   showGameChoice(gameMenuElem);
   chooseLevel(gameMenuElem);
   chooseGame(nonograms);
+  randomGame(actionsElem);
 }
 
 function showGameChoice(gameMenuElem) {
@@ -102,9 +104,6 @@ function showGameChoice(gameMenuElem) {
   }
 }
 
-showActions();
-showField(firstNonogram);
-
 function chooseGame(nonograms) {
   const chosenGameSelector = document.querySelector(".game-choice");
 
@@ -113,6 +112,47 @@ function chooseGame(nonograms) {
 
     nonogram = nonograms.find((item) => item.name === chosenGame);
     showField(nonogram);
+  };
+}
+
+function chooseLevel(gameMenuElem) {
+  const levelElem = document.querySelector(".level");
+
+  levelElem.onchange = (e) => {
+    level = e.target.value;
+
+    nonograms = getLevel();
+    showGameChoice(gameMenuElem);
+
+    const defaultGame =
+      document.querySelector(".game-choice").childNodes[0].value;
+    const defaultNonogram = nonograms.find((item) => item.name === defaultGame);
+
+    showField(defaultNonogram);
+
+    chooseGame(nonograms);
+  };
+}
+
+function randomGame(actionsElem) {
+  const randomBtn = document.createElement("button");
+  randomBtn.classList.add("random");
+  randomBtn.classList.add("btn");
+  randomBtn.innerText = "Random game";
+
+  actionsElem.appendChild(randomBtn);
+
+  const allGames = easy.concat(medium).concat(hard);
+
+  randomBtn.onclick = () => {
+    let random = Math.floor(Math.random() * allGames.length);
+    let randomGame = allGames[random];
+
+    gameElem.innerHTML = "";
+    clearInterval(interval);
+    timerOn = false;
+    showField(randomGame);
+    fillCell();
   };
 }
 
@@ -132,24 +172,6 @@ function getLevel() {
   }
 
   return nonograms;
-}
-function chooseLevel(gameMenuElem) {
-  const levelElem = document.querySelector(".level");
-
-  levelElem.onchange = (e) => {
-    level = e.target.value;
-
-    nonograms = getLevel();
-    showGameChoice(gameMenuElem);
-
-    const defaultGame =
-      document.querySelector(".game-choice").childNodes[0].value;
-    const defaultNonogram = nonograms.find((item) => item.name === defaultGame);
-
-    showField(defaultNonogram);
-
-    chooseGame(nonograms);
-  };
 }
 
 function showField(nonogram) {
