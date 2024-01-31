@@ -25,7 +25,9 @@ export function checkGameEnd(nonogram, cb) {
       const containerElem = document.querySelector(".container");
       createModal(containerElem, cb);
       const modal = document.querySelector(".modal");
-      modal.classList.add("show");
+      setTimeout(() => {
+        modal.classList.add("show");
+      }, 1500);
     }
   }
 }

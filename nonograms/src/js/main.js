@@ -155,8 +155,9 @@ function chooseLevel(gameMenuElem) {
     const defaultGame =
       document.querySelector(".game-choice").childNodes[0].value;
     const defaultNonogram = nonograms.find((item) => item.name === defaultGame);
+    nonogram = defaultNonogram;
 
-    showField(defaultNonogram);
+    showField(nonogram);
 
     chooseGame(nonograms);
   };
