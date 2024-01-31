@@ -6,6 +6,7 @@ import {
   calculateClues,
   showTimer,
   initTimer,
+  showSolution,
 } from "./utils.js";
 
 const bodyElem = document.body;
@@ -20,23 +21,22 @@ const gameName = document.createElement("div");
 gameName.classList.add("game-name");
 
 let nonograms = easy;
-let nonogram = {};
+let nonogram = nonograms[0];
 let timerOn = false;
 let interval = {};
 let level = "easy";
 /* const tableId = Math.floor(1 + Math.random() * 5); */
 /* let firstNonogram = nonograms.find((item) => item.id === tableId); */
-let firstNonogram = nonograms[0];
+/* let firstNonogram = nonograms[0]; */
 
 showActions();
-showField(firstNonogram);
+showField(nonogram);
 
 function showActions() {
   //btn save game
   //btn continue game
   //theme
   //table
-  //btn random game
   //btn solution
 
   const actionsElem = document.createElement("div");
@@ -78,6 +78,12 @@ function showActions() {
   const gameMenuElem = document.createElement("select");
   gameMenuElem.classList.add("game-choice");
   menuElem.appendChild(gameMenuElem);
+
+  const solutionBtn = document.createElement("button");
+  solutionBtn.classList.add("solution");
+  solutionBtn.classList.add("btn");
+  solutionBtn.innerText = "Solution";
+  actionsElem.appendChild(solutionBtn);
 
   showGameChoice(gameMenuElem);
   chooseLevel(gameMenuElem);
@@ -226,7 +232,6 @@ function showField(nonogram) {
 
     tableElem.appendChild(row);
     containerElem.appendChild(gameElem);
-    /* bodyElem.appendChild(containerElem); */
   }
 
   gameElem.appendChild(gameName);
@@ -235,6 +240,7 @@ function showField(nonogram) {
 
   fillCell();
   resetGame();
+  showSolution(nonogram);
 }
 
 function resetGame() {
@@ -326,5 +332,5 @@ function newGame() {
   modal.classList.remove("show");
   clearInterval(interval);
   timerOn = false;
-  showField(firstNonogram);
+  showField(nonogram);
 }

@@ -157,3 +157,30 @@ export function showTimer(gameElem) {
   timerElem.innerText = "00:00";
   gameElem.appendChild(timerElem);
 }
+
+export function showSolution(nonogram) {
+  const solutionBtn = document.querySelector(".solution");
+
+  /*  const solution = nonogram.image; */
+  const gameAnswers = String(nonogram.image.flat()).split(",").join("");
+
+  solutionBtn.onclick = () => {
+    const cells = document.querySelectorAll(
+      "td:not(.left-cell):not(.top-cell):not(.empty)"
+    );
+
+    for (let i = 0; i < cells.length; i++) {
+      if (gameAnswers[i] === "0" && cells[i].getAttribute("filled")) {
+        cells[i].style.backgroundColor = "transparent";
+        cells[i].removeAttribute("filled");
+        console.log(1);
+      }
+
+      if (gameAnswers[i] === "1" && cells[i].getAttribute("filled") === null) {
+        cells[i].style.backgroundColor = "black";
+        cells[i].setAttribute("filled", "true");
+        console.log(2);
+      }
+    }
+  };
+}
