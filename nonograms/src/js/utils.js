@@ -51,8 +51,13 @@ function checkResult(nonogram) {
 }
 
 export function createModal(containerElem, cb) {
+  const winSound = document.createElement("audio");
+  winSound.setAttribute("src", "assets/sounds/win.mp3");
+  containerElem.appendChild(winSound);
+
+  winSound.play();
+
   const timer = document.getElementById("timer");
-  console.log(timer);
 
   const modalElem = document.createElement("div");
   modalElem.classList.add("modal");
@@ -79,7 +84,6 @@ export function createModal(containerElem, cb) {
 
 export function closeModal(cb) {
   const closeModalElem = document.querySelector(".close");
-  console.log(closeModalElem);
 
   if (closeModalElem) {
     closeModalElem.onclick = () => {

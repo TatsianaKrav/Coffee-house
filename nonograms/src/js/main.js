@@ -152,7 +152,6 @@ function randomGame(actionsElem) {
     clearInterval(interval);
     timerOn = false;
     showField(randomGame);
-    fillCell();
   };
 }
 
@@ -234,6 +233,7 @@ function showField(nonogram) {
   showTimer(gameElem);
   gameElem.appendChild(tableElem);
 
+  fillCell();
   resetGame();
 }
 
@@ -260,6 +260,18 @@ function resetGame() {
 }
 
 function fillCell() {
+  const fillSound = document.createElement("audio");
+  fillSound.setAttribute("src", "assets/sounds/fill.mp3");
+  containerElem.appendChild(fillSound);
+
+  const removeSound = document.createElement("audio");
+  removeSound.setAttribute("src", "assets/sounds/remove.mp3");
+  containerElem.appendChild(removeSound);
+
+  const crossSound = document.createElement("audio");
+  crossSound.setAttribute("src", "assets/sounds/cross.mp3");
+  containerElem.appendChild(crossSound);
+
   const cells = document.querySelectorAll(
     "td:not(.left-cell):not(.top-cell):not(.empty)"
   );
@@ -280,9 +292,11 @@ function fillCell() {
       if (!item.getAttribute("filled")) {
         item.style.backgroundColor = "black"; // или добавить класс
         item.setAttribute("filled", "true");
+        fillSound.play();
       } else if (item.getAttribute("filled")) {
         item.style.backgroundColor = "transparent"; // или добавить класс
         item.removeAttribute("filled");
+        removeSound.play();
       }
 
       checkGameEnd(nonogram, newGame);
@@ -296,26 +310,15 @@ function fillCell() {
       if (item.getAttribute("not") === "x") {
         item.classList.remove("not");
         item.setAttribute("not", "null");
+        removeSound.play();
       } else {
         item.classList.add("not");
         item.setAttribute("not", "x");
+        crossSound.play();
       }
     });
   });
 }
-
-fillCell();
-
-/* createModal(containerElem); */
-/* closeModal(() => {
-  gameElem.innerHTML = "";
-  const modal = document.querySelector(".modal");
-  modal.classList.remove("show");
-  clearInterval(interval);
-  timerOn = false;
-  showField(nonograms);
-  fillCell();
-}); */
 
 function newGame() {
   gameElem.innerHTML = "";
@@ -324,5 +327,4 @@ function newGame() {
   clearInterval(interval);
   timerOn = false;
   showField(firstNonogram);
-  fillCell();
 }
