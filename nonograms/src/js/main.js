@@ -7,6 +7,8 @@ import {
   showTimer,
   initTimer,
   showSolution,
+  saveGame,
+  continueGame,
 } from "./utils.js";
 
 const bodyElem = document.body;
@@ -37,7 +39,6 @@ function showActions() {
   //btn continue game
   //theme
   //table
-  //btn solution
 
   const actionsElem = document.createElement("div");
   actionsElem.classList.add("actions");
@@ -79,16 +80,37 @@ function showActions() {
   gameMenuElem.classList.add("game-choice");
   menuElem.appendChild(gameMenuElem);
 
+  randomGame(actionsElem);
+
   const solutionBtn = document.createElement("button");
   solutionBtn.classList.add("solution");
   solutionBtn.classList.add("btn");
   solutionBtn.innerText = "Solution";
   actionsElem.appendChild(solutionBtn);
 
+  const saveGameBtn = document.createElement("button");
+  saveGameBtn.classList.add("save");
+  saveGameBtn.classList.add("btn");
+  saveGameBtn.innerText = "Save game";
+  actionsElem.appendChild(saveGameBtn);
+
+  saveGameBtn.onclick = () => {
+    saveGame(nonogram);
+  };
+
+  const continueGameBtn = document.createElement("button");
+  continueGameBtn.classList.add("continue");
+  continueGameBtn.classList.add("btn");
+  continueGameBtn.innerText = "Continue last game";
+  actionsElem.appendChild(continueGameBtn);
+
+  continueGameBtn.onclick = () => {
+    continueGame(showField);
+  };
+
   showGameChoice(gameMenuElem);
   chooseLevel(gameMenuElem);
   chooseGame(nonograms);
-  randomGame(actionsElem);
 }
 
 function showGameChoice(gameMenuElem) {
@@ -288,7 +310,7 @@ function fillCell() {
 
     item.onclick = () => {
       if (!timerOn) {
-        interval = initTimer();
+        interval = initTimer(0, 0);
         timerOn = true;
       }
 

@@ -1,7 +1,6 @@
 let sec = 0;
 let min = 0;
 let isPaused = false;
-/* let closeModalElem = {}; */
 
 export function checkGameEnd(nonogram, cb) {
   let currentGameFilledCells = 0;
@@ -107,7 +106,7 @@ export function calculateClues(nonogram) {
   return [maxTop, maxLeft];
 }
 
-export function initTimer() {
+export function initTimer(min, sec) {
   //часы?
   sec = 0;
   min = 0;
@@ -119,7 +118,9 @@ export function initTimer() {
 function tick() {
   const modal = document.querySelector(".modal.show");
 
-  isPaused = modal ? true : false;
+  if (!isPaused) {
+    isPaused = modal ? true : false;
+  }
 
   if (isPaused) return false;
 
@@ -134,7 +135,6 @@ function tick() {
   if (sec < 10) {
     if (min < 10) {
       //05:05
-      //div timer -> span.min, span.sec
       timer.innerText = `0${min}:0${sec}`;
     } else {
       //10:05
@@ -161,7 +161,6 @@ export function showTimer(gameElem) {
 export function showSolution(nonogram) {
   const solutionBtn = document.querySelector(".solution");
 
-  /*  const solution = nonogram.image; */
   const gameAnswers = String(nonogram.image.flat()).split(",").join("");
 
   solutionBtn.onclick = () => {
@@ -173,14 +172,72 @@ export function showSolution(nonogram) {
       if (gameAnswers[i] === "0" && cells[i].getAttribute("filled")) {
         cells[i].style.backgroundColor = "transparent";
         cells[i].removeAttribute("filled");
-        console.log(1);
       }
 
       if (gameAnswers[i] === "1" && cells[i].getAttribute("filled") === null) {
         cells[i].style.backgroundColor = "black";
         cells[i].setAttribute("filled", "true");
-        console.log(2);
       }
     }
   };
+}
+
+export function saveGame(nonogram) {
+  const cells = document.querySelectorAll(
+    "td:not(.left-cell):not(.top-cell):not(.empty)"
+  );
+  const savedGame = [];
+
+  cells.forEach((item, index) => {
+    if (item.getAttribute("filled")) {
+      savedGame[index] = "1";
+    } else if (item.getAttribute("not") === "x") {
+      savedGame[index] = "x";
+    } else {
+      savedGame[index] = "0";
+    }
+  });
+
+  const time = document.getElementById("timer").innerText;
+
+  const toSave = {
+    currentGame: nonogram,
+    savedGame: savedGame,
+    timer: time,
+  };
+
+  localStorage.setItem("savedGame", JSON.stringify(toSave));
+  isPaused = true;
+}
+
+export function continueGame(cb) {
+  //timer
+  const currentGame = JSON.parse(localStorage.getItem("savedGame")).currentGame;
+  const savedGame = JSON.parse(localStorage.getItem("savedGame")).savedGame;
+  const timer = JSON.parse(localStorage.getItem("savedGame")).timer;
+
+  cb(currentGame);
+  document.getElementById("timer").innerText = timer;
+  min = timer.slice(0, 2);
+  sec = timer.slice(3, 5);
+  if (min[0] === "0") {
+    min = min.slice(1);
+  }
+  if (sec[0] === "0") {
+    sec = sec.slice(1);
+  }
+
+  const cells = document.querySelectorAll(
+    "td:not(.left-cell):not(.top-cell):not(.empty)"
+  );
+
+  savedGame.forEach((item, index) => {
+    if (item === "1") {
+      cells[index].style.backgroundColor = "black";
+      cells[index].setAttribute("filled", "true");
+    } else if (item === "x") {
+      cells[index].classList.add("not");
+      cells[index].setAttribute("not", "x");
+    }
+  });
 }
