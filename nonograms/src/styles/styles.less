@@ -1,31 +1,115 @@
-@black: gray;
+@main: gray;
+.btns {
+  width: 150px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid @main;
+  font-family: EdgeDisplay-Regular, sans-serif;
+  font-size: 18px;
+  background-color: #fbe4b7;
+  outline: none;
+  cursor: pointer;
+}
+
+@font-face {
+  font-family: "EdgeDisplay-Regular";
+  src: url(../../assets/fonts/EdgeDisplay-Regular.otf);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: EdgeDisplay-Regular, sans-serif;
+  font-size: 18px;
+  background-color: rgb(253, 238, 208);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 .container {
   display: flex;
   justify-content: center;
-  align-items: baseline;
+  align-items: start;
+  padding: 25px;
+  max-width: 1440px;
   gap: 50px;
+  margin: 0 auto;
+  height: 610px;
+  border: 2px solid @main;
+  border-radius: 5px;
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    max-width: 310px;
+
+    .menu {
+      display: flex;
+      gap: 10px;
+
+      select {
+        width: 150px;
+        font-family: EdgeDisplay-Regular, sans-serif;
+        font-size: 18px;
+        padding: 5px;
+        border-radius: 5px;
+        background-color: #fbe4b7;
+        outline: none;
+
+        option {
+          padding: 5px !important;
+        }
+      }
+    }
+
+    .btn {
+      .btns();
+    }
+  }
 
   .game {
+    width: 535px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     .game-name {
       margin-bottom: 15px;
       font-weight: bold;
-      font-size: 20px;
+      font-size: 24px;
     }
+
+    #timer {
+      margin-bottom: 10px;
+    }
+
     table {
       border-collapse: collapse;
       margin-bottom: 20px;
 
       tr {
         &:first-child {
-          border-bottom: 3px solid @black;
+          border-bottom: 3px solid @main;
         }
 
-        &:nth-child(5n + 1) {
-          border-bottom: 3px solid @black;
+        &:not(:last-child):nth-child(5n + 1) {
+          border-bottom: 3px solid @main;
+
+          .left-cell {
+            border-bottom: none;
+          }
         }
 
         &:last-child {
-          border-bottom: 1px solid @black;
+          border-bottom: 1px solid @main;
 
           td:first-child {
             border-bottom: none;
@@ -38,24 +122,24 @@
           height: 25px;
           box-sizing: border-box;
           cursor: pointer;
-          border: 1px solid @black;
+          border: 1px solid @main;
           box-sizing: border-box;
           position: relative;
 
           &.empty {
-            /*   width: 60px; */
-            border-right: 3px solid @black;
+            border-right: 3px solid @main;
+            cursor: none;
           }
 
           &.left-cell {
             text-align: right;
-            border-right: 2px solid @black;
+            border-right: 2px solid @main;
             width: auto;
             display: flex;
             justify-content: flex-end;
             text-align: center;
             border: none;
-            border-bottom: 1px solid @black;
+            border-bottom: 1px solid @main;
 
             /*  &:first-child {
               border-bottom: none;
@@ -67,14 +151,14 @@
               justify-content: center;
               width: 25px;
               height: 25px;
-              border-left: 1px solid @black;
+              border-left: 1px solid @main;
 
               &:nth-last-child(5n) {
-                border-left: 3px solid @black;
+                border-left: 3px solid @main;
               }
 
-              &:last-child {
-                border-left: 1px solid @black;
+              &:first-child {
+                border-left: 1px solid @main;
               }
             }
           }
@@ -83,9 +167,6 @@
             height: auto;
             vertical-align: bottom;
             text-align: center;
-            padding-top: 3px;
-            /*  display: flex;
-            flex-direction: column; */
 
             .top {
               display: flex;
@@ -94,14 +175,14 @@
 
               width: 25px;
               height: 25px;
-              border-top: 1px solid @black;
+              border-top: 1px solid @main;
+
+              &:nth-last-child(5n) {
+                border-top: 3px solid @main;
+              }
 
               &:first-child {
                 border-top: none;
-              }
-
-              &:nth-last-child(5n) {
-                border-top: 3px solid @black;
               }
             }
           }
@@ -113,7 +194,7 @@
             left: 11px;
             width: 1px;
             height: 30px;
-            background-color: @black;
+            background-color: @main;
             transform: rotate(45deg);
           }
 
@@ -124,29 +205,30 @@
             left: 11px;
             width: 1px;
             height: 30px;
-            background-color: @black;
+            background-color: @main;
             transform: rotate(-45deg);
           }
 
           &:nth-child(5n + 1) {
-            border-right: 3px solid @black;
+            border-right: 3px solid @main;
 
             &.left-cell {
-              border-right: 2px solid @black;
+              border-right: 2px solid @main;
             }
           }
 
           &:last-child {
-            border-right: 2px solid @black;
+            border-right: 2px solid @main;
           }
         }
       }
     }
-  }
 
- /*  .actions {
-    border: 3px solid red;
-  } */
+    .reset {
+      .btns();
+      text-align: center;
+    }
+  }
 
   .modal {
     position: fixed;
@@ -161,29 +243,29 @@
     border: 2px solid black;
     visibility: hidden;
     opacity: 0;
-    transition: all 0.5s linear;
+    transition: all 0.3s linear;
     overflow-y: hidden;
 
     &.show {
       visibility: visible;
       opacity: 1;
-      transition: all 0.5s linear;
+      transition: all 0.3s linear;
       overflow-y: auto;
     }
 
     .modal-window {
-      max-width: 800px;
+      max-width: 500px;
       padding: 100px;
       border-radius: 15px;
-      background: rgb(243, 236, 236);
+      background-color: #fbe4b7;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       gap: 20px;
+      font-size: 24px;
       box-sizing: border-box;
       cursor: pointer;
-      font-size: 35px;
       position: relative;
 
       /*   .message {
@@ -203,7 +285,7 @@
           left: 11px;
           width: 1px;
           height: 30px;
-          background-color: @black;
+          background-color: @main;
           transform: rotate(45deg);
         }
 
@@ -214,7 +296,7 @@
           left: 11px;
           width: 1px;
           height: 30px;
-          background-color: @black;
+          background-color: @main;
           transform: rotate(-45deg);
         }
       }

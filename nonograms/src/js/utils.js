@@ -68,8 +68,7 @@ export function createModal(containerElem, cb) {
 
   const messageElem = document.createElement("div");
   messageElem.classList.add("message");
-  messageElem.innerText =
-    "Great! You have solved the nonogram!" + timer.innerText;
+  messageElem.innerText = `Great! You have solved the nonogram in ${timer.innerText} seconds!`;
   const closeElem = document.createElement("div");
   closeElem.classList.add("close");
   /*   closeModalElem = document.querySelector(".close"); */
