@@ -28,7 +28,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-/*   height: 100vh; */
+  /* height: 100vh; */
 }
 
 .container {
@@ -39,7 +39,7 @@ body {
   max-width: 1440px;
   gap: 50px;
   margin: 0 auto;
-  height: 610px;
+  max-height: 640px;
   border: 2px solid @main;
   border-radius: 5px;
 
@@ -141,10 +141,6 @@ body {
             border: none;
             border-bottom: 1px solid @main;
 
-            /*  &:first-child {
-              border-bottom: none;
-            } */
-
             .left {
               display: flex;
               align-items: center;
@@ -164,19 +160,15 @@ body {
               &.not:before {
                 content: "";
                 position: absolute;
-              /*   top: -4px;
-                left: 11px; */
                 width: 1px;
                 height: 30px;
                 background-color: @main;
                 transform: rotate(45deg);
               }
-    
+
               &.not:after {
                 content: "";
                 position: absolute;
-              /*   top: -4px;
-                left: 11px; */
                 width: 1px;
                 height: 30px;
                 background-color: @main;
@@ -210,25 +202,20 @@ body {
               &.not:before {
                 content: "";
                 position: absolute;
-              /*   top: -4px;
-                left: 11px; */
                 width: 1px;
                 height: 30px;
                 background-color: @main;
                 transform: rotate(45deg);
               }
-    
+
               &.not:after {
                 content: "";
                 position: absolute;
-              /*   top: -4px;
-                left: 11px; */
                 width: 1px;
                 height: 30px;
                 background-color: @main;
                 transform: rotate(-45deg);
               }
-    
             }
           }
 
@@ -312,9 +299,6 @@ body {
       box-sizing: border-box;
       cursor: pointer;
       position: relative;
-
-      /*   .message {
-          } */
 
       .close {
         width: 25px;

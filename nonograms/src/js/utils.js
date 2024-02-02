@@ -1,6 +1,36 @@
+import { easy, medium, hard } from "./data.js";
+
 let sec = 0;
 let min = 0;
 let isPaused = false;
+let timer = {};
+
+export function createElement(node, name) {
+  const elem = document.createElement(node);
+  elem.classList.add(name);
+
+  return elem;
+}
+
+export function getLevel(level) {
+  let nonograms = [];
+
+  switch (level) {
+    case "easy":
+      nonograms = easy;
+      break;
+    case "medium":
+      nonograms = medium;
+      break;
+    case "hard":
+      nonograms = hard;
+      break;
+    default:
+      [];
+  }
+
+  return nonograms;
+}
 
 export function checkGameEnd(nonogram, cb) {
   let currentGameFilledCells = 0;
@@ -22,12 +52,11 @@ export function checkGameEnd(nonogram, cb) {
     const result = checkResult(nonogram);
 
     if (result) {
-      const containerElem = document.querySelector(".container");
-      createModal(containerElem, cb);
+      createModal(cb);
       const modal = document.querySelector(".modal");
       setTimeout(() => {
         modal.classList.add("show");
-      }, 1500);
+      }, 700);
     }
   }
 }
@@ -51,7 +80,8 @@ function checkResult(nonogram) {
   return gameAnswers === stringResult;
 }
 
-export function createModal(containerElem, cb) {
+export function createModal(cb) {
+  const containerElem = document.querySelector(".container");
   const winSound = document.createElement("audio");
   winSound.setAttribute("src", "assets/sounds/win.mp3");
   containerElem.appendChild(winSound);
@@ -61,17 +91,13 @@ export function createModal(containerElem, cb) {
   const timer = document.getElementById("timer");
   let timerInSec = calculateTimer(timer.innerText);
 
-  const modalElem = document.createElement("div");
-  modalElem.classList.add("modal");
+  const modalElem = createElement("div", "modal");
 
-  const modalWindowElem = document.createElement("div");
-  modalWindowElem.classList.add("modal-window");
+  const modalWindowElem = createElement("div", "modal-window");
 
-  const messageElem = document.createElement("div");
-  messageElem.classList.add("message");
+  const messageElem = createElement("div", "message");
   messageElem.innerText = `Great! You have solved the nonogram in ${timerInSec} seconds!`;
-  const closeElem = document.createElement("div");
-  closeElem.classList.add("close");
+  const closeElem = createElement("div", "close");
 
   modalWindowElem.appendChild(messageElem);
   modalWindowElem.appendChild(closeElem);
@@ -83,7 +109,6 @@ export function createModal(containerElem, cb) {
 }
 
 function calculateTimer(time) {
-  let timeInSec = 0;
   let minStr = time.slice(0, 2);
   let secStr = time.slice(3, 5);
 
@@ -91,10 +116,7 @@ function calculateTimer(time) {
   let sec = Number(secStr);
 
   min = min > 0 ? min * 60 : min;
-
-  timeInSec = min + sec;
-
-  return timeInSec;
+  return min + sec;
 }
 
 export function closeModal(cb) {
@@ -122,16 +144,16 @@ export function calculateClues(nonogram) {
   return [maxTop, maxLeft];
 }
 
-export function initTimer(min, sec) {
+export function initTimer(first, second) {
   isPaused = false;
-  sec = 0;
-  min = 0;
+  sec = second;
+  min = first;
 
-  const timer = setInterval(tick, 1000);
+  timer = setInterval(tick, 1000);
   return timer;
 }
 
-function tick() {
+export function tick() {
   const modal = document.querySelector(".modal.show");
 
   if (!isPaused) {
@@ -163,7 +185,8 @@ function tick() {
   }
 }
 
-export function showTimer(gameElem) {
+export function showTimer() {
+  const gameElem = document.querySelector(".game");
   const timerElem = document.createElement("div");
   timerElem.setAttribute("id", "timer");
   timerElem.innerText = "00:00";
@@ -172,7 +195,6 @@ export function showTimer(gameElem) {
 
 export function showSolution(nonogram) {
   const solutionBtn = document.querySelector(".solution");
-
   const gameAnswers = String(nonogram.image.flat()).split(",").join("");
 
   solutionBtn.onclick = () => {
@@ -257,18 +279,6 @@ export function continueGame(cb) {
       cells[index].setAttribute("not", "x");
     }
   });
-}
-
-export function calculateCluesCells(elem) {
-  let cellCount = 0;
-
-  if (elem <= 5) {
-    cellCount = 5;
-  } else if (elem > 5 && elem <= 10) {
-    cellCount = 10;
-  }
-
-  return cellCount;
 }
 
 export function crossClues(clues, soundOn, soundOff) {
