@@ -10,6 +10,7 @@ import {
   saveGame,
   continueGame,
   calculateCluesCells,
+  crossClues,
 } from "./utils.js";
 
 const bodyElem = document.body;
@@ -140,8 +141,9 @@ function chooseGame(nonograms) {
     const chosenGame = e.target.value;
 
     nonogram = nonograms.find((item) => item.name === chosenGame);
-    showField(nonogram);
-    clearInterval(interval);
+    /*   showField(nonogram);
+    clearInterval(interval); */
+    newGame(nonogram);
   };
 }
 
@@ -159,8 +161,10 @@ function chooseLevel(gameMenuElem) {
     const defaultNonogram = nonograms.find((item) => item.name === defaultGame);
     nonogram = defaultNonogram;
 
-    showField(nonogram);
-    clearInterval(interval);
+    newGame(nonogram);
+
+    /*  showField(nonogram);
+    clearInterval(interval); */
 
     chooseGame(nonograms);
   };
@@ -179,11 +183,13 @@ function randomGame(actionsElem) {
   randomBtn.onclick = () => {
     let random = Math.floor(Math.random() * allGames.length);
     let randomGame = allGames[random];
+    nonogram = randomGame;
 
-    gameElem.innerHTML = "";
+    newGame(nonogram);
+    /* gameElem.innerHTML = "";
     clearInterval(interval);
     timerOn = false;
-    showField(randomGame);
+    showField(randomGame); */
   };
 }
 
@@ -283,11 +289,10 @@ function resetGame() {
   gameElem.appendChild(resetBtn);
 
   resetBtn.onclick = () => {
-    const cells = document.querySelectorAll(
-      "td:not(.left-cell):not(.top-cell)"
-    );
+    const cells = document.querySelectorAll("td, .top, .left");
 
     Array.from(cells).forEach((cell) => {
+      console.log(cell);
       cell.style.backgroundColor = "transparent";
       cell.removeAttribute("filled");
       cell.classList.remove("not");
@@ -312,6 +317,7 @@ function fillCell() {
   const cells = document.querySelectorAll(
     "td:not(.left-cell):not(.top-cell):not(.empty)"
   );
+
   cells.forEach((item) => {
     if (item.classList.contains("left") || item.classList.contains("top")) {
       return false;
@@ -360,12 +366,20 @@ function fillCell() {
       }
     });
   });
+
+  const topCellsClues = document.querySelectorAll(".top");
+  const leftCellsClues = document.querySelectorAll(".left");
+
+  crossClues(topCellsClues, removeSound, crossSound);
+  crossClues(leftCellsClues, removeSound, crossSound);
 }
 
 function newGame() {
   gameElem.innerHTML = "";
   const modal = document.querySelector(".modal");
-  modal.classList.remove("show");
+  if (modal) {
+    modal.classList.remove("show");
+  }
   clearInterval(interval);
   timerOn = false;
   showField(nonogram);

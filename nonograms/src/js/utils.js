@@ -268,3 +268,21 @@ export function calculateCluesCells(elem) {
 
   return cellCount;
 }
+
+export function crossClues(clues, soundOn, soundOff) {
+  clues.forEach((item) => {
+    item.addEventListener("contextmenu", (e) => {
+      e.preventDefault();
+
+      if (item.getAttribute("not") === "x") {
+        item.classList.remove("not");
+        item.setAttribute("not", "null");
+        soundOff.play();
+      } else {
+        item.classList.add("not");
+        item.setAttribute("not", "x");
+        soundOn.play();
+      }
+    });
+  });
+}

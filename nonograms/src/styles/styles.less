@@ -160,6 +160,28 @@ body {
               &:first-child {
                 border-left: 1px solid @main;
               }
+
+              &.not:before {
+                content: "";
+                position: absolute;
+              /*   top: -4px;
+                left: 11px; */
+                width: 1px;
+                height: 30px;
+                background-color: @main;
+                transform: rotate(45deg);
+              }
+    
+              &.not:after {
+                content: "";
+                position: absolute;
+              /*   top: -4px;
+                left: 11px; */
+                width: 1px;
+                height: 30px;
+                background-color: @main;
+                transform: rotate(-45deg);
+              }
             }
           }
 
@@ -184,6 +206,29 @@ body {
               &:first-child {
                 border-top: none;
               }
+
+              &.not:before {
+                content: "";
+                position: absolute;
+              /*   top: -4px;
+                left: 11px; */
+                width: 1px;
+                height: 30px;
+                background-color: @main;
+                transform: rotate(45deg);
+              }
+    
+              &.not:after {
+                content: "";
+                position: absolute;
+              /*   top: -4px;
+                left: 11px; */
+                width: 1px;
+                height: 30px;
+                background-color: @main;
+                transform: rotate(-45deg);
+              }
+    
             }
           }
 
