@@ -321,9 +321,6 @@ function fillCell() {
       if (!timerOn) {
         interval = initTimer(0, 0);
         timerOn = true;
-
-        console.log(1);
-        console.log(timerOn);
       }
 
       if (item.getAttribute("not") === "x") {

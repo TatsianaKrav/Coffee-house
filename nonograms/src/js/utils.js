@@ -190,6 +190,10 @@ export function showSolution(nonogram) {
         cells[i].style.backgroundColor = "black";
         cells[i].setAttribute("filled", "true");
       }
+
+      if (cells[i].getAttribute("not") === "x") {
+        cells[i].classList.remove("not");
+      }
     }
   };
 }
