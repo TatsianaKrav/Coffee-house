@@ -59,6 +59,7 @@ export function createModal(containerElem, cb) {
   winSound.play();
 
   const timer = document.getElementById("timer");
+  let timerInSec = calculateTimer(timer.innerText);
 
   const modalElem = document.createElement("div");
   modalElem.classList.add("modal");
@@ -68,10 +69,9 @@ export function createModal(containerElem, cb) {
 
   const messageElem = document.createElement("div");
   messageElem.classList.add("message");
-  messageElem.innerText = `Great! You have solved the nonogram in ${timer.innerText} seconds!`;
+  messageElem.innerText = `Great! You have solved the nonogram in ${timerInSec} seconds!`;
   const closeElem = document.createElement("div");
   closeElem.classList.add("close");
-  /*   closeModalElem = document.querySelector(".close"); */
 
   modalWindowElem.appendChild(messageElem);
   modalWindowElem.appendChild(closeElem);
@@ -80,6 +80,21 @@ export function createModal(containerElem, cb) {
   containerElem.appendChild(modalElem);
 
   closeModal(cb);
+}
+
+function calculateTimer(time) {
+  let timeInSec = 0;
+  let minStr = time.slice(0, 2);
+  let secStr = time.slice(3, 5);
+
+  let min = Number(minStr);
+  let sec = Number(secStr);
+
+  min = min > 0 ? min * 60 : min;
+
+  timeInSec = min + sec;
+
+  return timeInSec;
 }
 
 export function closeModal(cb) {
@@ -135,18 +150,14 @@ function tick() {
 
   if (sec < 10) {
     if (min < 10) {
-      //05:05
       timer.innerText = `0${min}:0${sec}`;
     } else {
-      //10:05
       timer.innerText = `${min}:0${sec}`;
     }
   } else {
     if (min < 10) {
-      //05:15
       timer.innerText = `0${min}:${sec}`;
     } else {
-      //15:15
       timer.innerText = `${min}:${sec}`;
     }
   }
@@ -212,7 +223,6 @@ export function saveGame(nonogram) {
 }
 
 export function continueGame(cb) {
-  //timer
   const currentGame = JSON.parse(localStorage.getItem("savedGame")).currentGame;
   const savedGame = JSON.parse(localStorage.getItem("savedGame")).savedGame;
   const timer = JSON.parse(localStorage.getItem("savedGame")).timer;
@@ -241,4 +251,16 @@ export function continueGame(cb) {
       cells[index].setAttribute("not", "x");
     }
   });
+}
+
+export function calculateCluesCells(elem) {
+  let cellCount = 0;
+
+  if (elem <= 5) {
+    cellCount = 5;
+  } else if (elem > 5 && elem <= 10) {
+    cellCount = 10;
+  }
+
+  return cellCount;
 }

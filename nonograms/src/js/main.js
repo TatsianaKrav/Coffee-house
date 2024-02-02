@@ -9,6 +9,7 @@ import {
   showSolution,
   saveGame,
   continueGame,
+  calculateCluesCells,
 } from "./utils.js";
 
 const bodyElem = document.body;
@@ -140,6 +141,7 @@ function chooseGame(nonograms) {
 
     nonogram = nonograms.find((item) => item.name === chosenGame);
     showField(nonogram);
+    clearInterval(interval);
   };
 }
 
@@ -158,6 +160,7 @@ function chooseLevel(gameMenuElem) {
     nonogram = defaultNonogram;
 
     showField(nonogram);
+    clearInterval(interval);
 
     chooseGame(nonograms);
   };
@@ -203,6 +206,7 @@ function getLevel() {
 }
 
 function showField(nonogram) {
+  timerOn = false;
   gameElem.innerHTML = "";
   const tableElem = document.createElement("table");
 
@@ -225,6 +229,8 @@ function showField(nonogram) {
       } else if ((i === 0) & (j !== 0)) {
         col.classList.add("top-cell");
 
+        /*   let topCellCount = calculateCluesCells(topCluesMaxCount); */
+
         for (let l = 0; l < topCluesMaxCount; l++) {
           const divElem = document.createElement("div");
           divElem.classList.add("top");
@@ -236,6 +242,8 @@ function showField(nonogram) {
         }
       } else if (i !== 0 && j === 0) {
         col.classList.add("left-cell");
+
+        /*   let leftCellCount = calculateCluesCells(leftCluesMaxCount); */
 
         for (let l = 0; l < leftCluesMaxCount; l++) {
           const divElem = document.createElement("div");
@@ -313,6 +321,9 @@ function fillCell() {
       if (!timerOn) {
         interval = initTimer(0, 0);
         timerOn = true;
+
+        console.log(1);
+        console.log(timerOn);
       }
 
       if (item.getAttribute("not") === "x") {
@@ -333,7 +344,7 @@ function fillCell() {
 
     item.addEventListener("contextmenu", (e) => {
       e.preventDefault();
-      
+
       if (!timerOn) {
         interval = initTimer(0, 0);
         timerOn = true;
