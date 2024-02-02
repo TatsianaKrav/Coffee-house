@@ -198,7 +198,7 @@ export function showSolution(nonogram) {
   };
 }
 
-export function saveGame(nonogram) {
+export function saveGame(nonogram, cb, newNonogram) {
   const cells = document.querySelectorAll(
     "td:not(.left-cell):not(.top-cell):not(.empty)"
   );
@@ -224,6 +224,8 @@ export function saveGame(nonogram) {
 
   localStorage.setItem("savedGame", JSON.stringify(toSave));
   isPaused = true;
+
+  cb(newNonogram);
 }
 
 export function continueGame(cb) {

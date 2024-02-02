@@ -96,8 +96,10 @@ function showActions() {
   saveGameBtn.innerText = "Save game";
   actionsElem.appendChild(saveGameBtn);
 
+  let random = Math.floor(1 + Math.random() * 5);
+
   saveGameBtn.onclick = () => {
-    saveGame(nonogram);
+    saveGame(nonogram, showField, nonograms[random]);
   };
 
   const continueGameBtn = document.createElement("button");
@@ -327,7 +329,7 @@ function fillCell() {
       if (!timerOn) {
         interval = initTimer(0, 0);
         timerOn = true;
-      } 
+      }
 
       if (item.getAttribute("not") === "x") {
         return false;
@@ -341,7 +343,6 @@ function fillCell() {
         item.removeAttribute("filled");
         removeSound.play();
       }
-
       checkGameEnd(nonogram, newGame);
     };
 
@@ -383,5 +384,6 @@ function newGame() {
   clearInterval(interval);
   interval = {};
   timerOn = false;
-  showField(nonogram);
+  let random = Math.floor(1 + Math.random() * 5);
+  showField(nonograms[random]);
 }
