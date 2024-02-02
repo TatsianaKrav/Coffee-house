@@ -123,7 +123,7 @@ export function calculateClues(nonogram) {
 }
 
 export function initTimer(min, sec) {
-  //часы?
+  isPaused = false;
   sec = 0;
   min = 0;
 

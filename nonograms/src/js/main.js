@@ -327,7 +327,7 @@ function fillCell() {
       if (!timerOn) {
         interval = initTimer(0, 0);
         timerOn = true;
-      }
+      } 
 
       if (item.getAttribute("not") === "x") {
         return false;
@@ -381,6 +381,7 @@ function newGame() {
     modal.classList.remove("show");
   }
   clearInterval(interval);
+  interval = {};
   timerOn = false;
   showField(nonogram);
 }
