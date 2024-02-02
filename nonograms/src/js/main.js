@@ -333,6 +333,11 @@ function fillCell() {
 
     item.addEventListener("contextmenu", (e) => {
       e.preventDefault();
+      
+      if (!timerOn) {
+        interval = initTimer(0, 0);
+        timerOn = true;
+      }
 
       if (item.getAttribute("filled")) return false;
 
