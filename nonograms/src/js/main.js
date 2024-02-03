@@ -102,7 +102,7 @@ function showActions() {
   let random = Math.floor(Math.random() * 5);
 
   saveGameBtn.onclick = () => {
-    saveGame(nonogram, showField, nonograms[random]);
+    saveGame(nonogram, newGame, nonograms[random]);
   };
 
   const continueGameBtn = createElement("button", "btn");
