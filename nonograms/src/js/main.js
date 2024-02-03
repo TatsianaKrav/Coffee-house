@@ -112,10 +112,24 @@ function showGameChoice() {
     });
   }
 
+  /*   const gameNameElem = document.querySelector(".game-name");
+  let gameName = "";
+
+  if (gameNameElem) {
+    gameName === gameNameElem.innerText;
+  } */
+
   for (let i = 0; i < nonograms.length; i++) {
     const gameMenuOption = createElement("option", "game-choice-option");
     gameMenuOption.innerText = nonograms[i].name;
     gameMenuOption.setAttribute("value", nonograms[i].name);
+    /*  console.log(gameMenuOption.innerText);
+    console.log(gameName);
+    if (gameName && gameMenuOption.innerText === gameName) {
+      console.log(gameMenuOption.innerText);
+      console.log(gameName);
+      gameMenuOption.setAttribute("selected", "selected");
+    } */
     gameMenuElem.appendChild(gameMenuOption);
   }
 }
@@ -171,8 +185,6 @@ function randomGame() {
 }
 
 function showField(nonogram) {
-  /*   timerOn = false;
-  gameElem.innerHTML = ""; */
   const tableElem = document.createElement("table");
 
   gameName.innerText = nonogram.name;
@@ -225,6 +237,15 @@ function showField(nonogram) {
   gameElem.appendChild(gameName);
   showTimer();
   gameElem.appendChild(tableElem);
+
+  const gameChoiceOptions = document.querySelectorAll(".game-choice-option");
+
+  gameChoiceOptions.forEach((option) => {
+    option.removeAttribute("selected");
+    if (option.innerText === gameName.innerText) {
+      option.setAttribute("selected", "selected");
+    }
+  });
 
   fillCell();
   resetGame();
@@ -319,7 +340,7 @@ function fillCell() {
   crossClues(cellsClues, removeSound, crossSound);
 }
 
-function newGame() {
+function newGame(nonogram) {
   gameElem.innerHTML = "";
   const modal = document.querySelector(".modal");
   if (modal) {
@@ -328,7 +349,5 @@ function newGame() {
   clearInterval(interval);
   interval = {};
   timerOn = false;
-  /*   let random = Math.floor(Math.random() * 5); */
-  /*   showField(nonograms[random]); */
   showField(nonogram);
 }

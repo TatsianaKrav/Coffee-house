@@ -52,7 +52,7 @@ export function checkGameEnd(nonogram, cb) {
     const result = checkResult(nonogram);
 
     if (result) {
-      createModal(cb);
+      createModal(nonogram, cb);
       const modal = document.querySelector(".modal");
       setTimeout(() => {
         modal.classList.add("show");
@@ -80,7 +80,7 @@ function checkResult(nonogram) {
   return gameAnswers === stringResult;
 }
 
-export function createModal(cb) {
+export function createModal(nonogram, cb) {
   const containerElem = document.querySelector(".container");
   const winSound = document.createElement("audio");
   winSound.setAttribute("src", "assets/sounds/win.mp3");
@@ -105,7 +105,7 @@ export function createModal(cb) {
   modalElem.appendChild(modalWindowElem);
   containerElem.appendChild(modalElem);
 
-  closeModal(cb);
+  closeModal(nonogram, cb);
 }
 
 function calculateTimer(time) {
@@ -119,14 +119,39 @@ function calculateTimer(time) {
   return min + sec;
 }
 
-export function closeModal(cb) {
+function closeModal(nonogram, cb) {
   const closeModalElem = document.querySelector(".close");
+  let nonograms = [];
+
+  switch (nonogram.level) {
+    case 'easy':
+      nonograms = easy;
+      break;
+    case 'medium':
+      nonograms = medium;
+      break;
+    case 'hard':
+      nonograms = hard;
+      break;
+    default:
+      [];
+  }
+
+  let currentGameId = nonogram.id;
+
+  let random = Math.floor(Math.random() * 5);
+  while (currentGameId === random + 1) {
+    random = Math.floor(Math.random() * 5);
+  }
+
+ 
 
   if (closeModalElem) {
     closeModalElem.onclick = () => {
-      cb();
+      cb(nonograms[random]);
     };
   }
+
 }
 
 export function calculateClues(nonogram) {
