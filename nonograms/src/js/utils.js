@@ -77,6 +77,7 @@ function checkResult(nonogram) {
       stringResult += "0";
     }
   });
+
   return gameAnswers === stringResult;
 }
 
@@ -166,10 +167,29 @@ export function calculateClues(nonogram) {
   return [maxTop, maxLeft];
 }
 
-export function initTimer(first, second) {
+export function initTimer(first, second, game) {
   isPaused = false;
   sec = second;
   min = first;
+
+  const savedGame = JSON.parse(localStorage.getItem("savedGame")).currentGame;
+  const time = JSON.parse(localStorage.getItem("savedGame")).timer;
+  let savedMin = 0;
+  let savedSec = 0;
+
+  savedMin = time.slice(0, 2);
+  savedSec = time.slice(3, 5);
+  if (savedMin[0] === "0") {
+    savedMin = savedMin.slice(1);
+  }
+  if (savedSec[0] === "0") {
+    savedSec = savedSec.slice(1);
+  }
+
+  if (savedGame.name === game.name) {
+    min = min + Number(savedMin);
+    sec = sec + Number(savedSec);
+  }
 
   timer = setInterval(tick, 1000);
   return timer;

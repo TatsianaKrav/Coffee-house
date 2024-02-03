@@ -37,7 +37,7 @@ let level = "easy";
 function init() {
   showActions();
   showField(nonogram);
- /*  burgerHandler(); */
+  /*  burgerHandler(); */
 }
 
 init();
@@ -60,7 +60,7 @@ function showActions() {
   menuElem.appendChild(levelElem);
 
   for (let i = 0; i < 3; i++) {
-    const levelChoiceElem = document.createElement("option");
+    const levelChoiceElem = createElement("option", "level-option");
 
     switch (i) {
       case 0:
@@ -111,7 +111,7 @@ function showActions() {
   actionsElem.appendChild(continueGameBtn);
 
   continueGameBtn.onclick = () => {
-    continueGame(showField);
+    continueGame(newGame);
   };
 
   showGameChoice();
@@ -131,24 +131,10 @@ function showGameChoice() {
     });
   }
 
-  /*   const gameNameElem = document.querySelector(".game-name");
-  let gameName = "";
-
-  if (gameNameElem) {
-    gameName === gameNameElem.innerText;
-  } */
-
   for (let i = 0; i < nonograms.length; i++) {
     const gameMenuOption = createElement("option", "game-choice-option");
     gameMenuOption.innerText = nonograms[i].name;
     gameMenuOption.setAttribute("value", nonograms[i].name);
-    /*  console.log(gameMenuOption.innerText);
-    console.log(gameName);
-    if (gameName && gameMenuOption.innerText === gameName) {
-      console.log(gameMenuOption.innerText);
-      console.log(gameName);
-      gameMenuOption.setAttribute("selected", "selected");
-    } */
     gameMenuElem.appendChild(gameMenuOption);
   }
 }
@@ -257,6 +243,22 @@ function showField(nonogram) {
   showTimer();
   gameElem.appendChild(tableElem);
 
+  const levelOptions = document.querySelectorAll(".level-option");
+  const allGames = easy.concat(medium).concat(hard);
+  let currentGame = allGames.find((item) => item.name === gameName.innerText);
+  let currentLevel = currentGame.level;
+
+  nonograms = getLevel(currentLevel);
+
+  showGameChoice();
+
+  levelOptions.forEach((option) => {
+    option.removeAttribute("selected");
+    if (option.innerText.toLowerCase() === currentLevel.toLowerCase()) {
+      option.setAttribute("selected", "selected");
+    }
+  });
+
   const gameChoiceOptions = document.querySelectorAll(".game-choice-option");
 
   gameChoiceOptions.forEach((option) => {
@@ -266,7 +268,7 @@ function showField(nonogram) {
     }
   });
 
-  fillCell();
+  fillCell(nonogram);
   resetGame();
   showSolution(nonogram);
 }
@@ -290,7 +292,7 @@ function resetGame() {
   };
 }
 
-function fillCell() {
+function fillCell(nonogram) {
   const fillSound = document.createElement("audio");
   fillSound.setAttribute("src", "assets/sounds/fill.mp3");
   containerElem.appendChild(fillSound);
@@ -314,7 +316,7 @@ function fillCell() {
 
     item.onclick = () => {
       if (!timerOn) {
-        interval = initTimer(0, 0);
+        interval = initTimer(0, 0, nonogram);
         timerOn = true;
       }
 
@@ -337,7 +339,7 @@ function fillCell() {
       e.preventDefault();
 
       if (!timerOn) {
-        interval = initTimer(0, 0);
+        interval = initTimer(0, 0, nonogram);
         timerOn = true;
       }
 
