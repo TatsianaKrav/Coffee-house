@@ -10,11 +10,20 @@ import {
   crossClues,
   createElement,
   getLevel,
+  burgerHandler,
 } from "./utils.js";
 
 const bodyElem = document.body;
 const containerElem = createElement("div", "container");
 bodyElem.appendChild(containerElem);
+
+const burgerElem = createElement("div", "burger");
+containerElem.appendChild(burgerElem);
+
+const burgerLineTop = createElement("dive", "line");
+const burgerLineBottom = createElement("dive", "line");
+burgerElem.appendChild(burgerLineTop);
+burgerElem.appendChild(burgerLineBottom);
 
 const gameElem = createElement("div", "game");
 const gameName = createElement("div", "game-name");
@@ -28,12 +37,21 @@ let level = "easy";
 function init() {
   showActions();
   showField(nonogram);
+ /*  burgerHandler(); */
 }
 
 init();
 
 function showActions() {
   const actionsElem = createElement("div", "actions");
+  actionsElem.setAttribute("id", "actions");
+
+  const closeBurger = createElement("div", "burger-close");
+  const closeBurgerLineOne = createElement("div", "burger-close-line");
+  const closeBurgerLineTwo = createElement("div", "burger-close-line");
+  closeBurger.appendChild(closeBurgerLineOne);
+  closeBurger.appendChild(closeBurgerLineTwo);
+  actionsElem.appendChild(closeBurger);
 
   const menuElem = createElement("div", "menu");
   actionsElem.appendChild(menuElem);
@@ -99,6 +117,7 @@ function showActions() {
   showGameChoice();
   chooseLevel();
   chooseGame(nonograms);
+  burgerHandler();
 }
 
 function showGameChoice() {

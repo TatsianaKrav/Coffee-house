@@ -124,13 +124,13 @@ function closeModal(nonogram, cb) {
   let nonograms = [];
 
   switch (nonogram.level) {
-    case 'easy':
+    case "easy":
       nonograms = easy;
       break;
-    case 'medium':
+    case "medium":
       nonograms = medium;
       break;
-    case 'hard':
+    case "hard":
       nonograms = hard;
       break;
     default:
@@ -144,14 +144,11 @@ function closeModal(nonogram, cb) {
     random = Math.floor(Math.random() * 5);
   }
 
- 
-
   if (closeModalElem) {
     closeModalElem.onclick = () => {
       cb(nonograms[random]);
     };
   }
-
 }
 
 export function calculateClues(nonogram) {
@@ -321,5 +318,34 @@ export function crossClues(clues, soundOn, soundOff) {
         soundOn.play();
       }
     });
+  });
+}
+
+export function burgerHandler() {
+  const burger = document.querySelector(".burger");
+
+  if (burger) {
+    burger.onclick = () => {
+      const actionsElem = document.querySelector(".actions");
+      actionsElem.classList.add("open");
+      closeMenu();
+    };
+  }
+}
+
+function closeMenu() {
+  const actionsElems = document.querySelectorAll(
+    "#actions .btn, .burger-close"
+  );
+  Array.from(actionsElems).forEach((item) => {
+    item.addEventListener("click", () => {
+      document.getElementById("actions").classList.remove("open");
+    });
+  });
+
+  const gameMenuElem = document.querySelector(".game-choice");
+  console.log(gameMenuElem);
+  gameMenuElem.addEventListener("change", () => {
+    document.getElementById("actions").classList.remove("open");
   });
 }
