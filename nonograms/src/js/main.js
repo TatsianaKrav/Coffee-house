@@ -11,6 +11,7 @@ import {
   createElement,
   getLevel,
   burgerHandler,
+  showThemeBtn,
 } from "./utils.js";
 
 const bodyElem = document.body;
@@ -113,6 +114,8 @@ function showActions() {
   continueGameBtn.onclick = () => {
     continueGame(newGame);
   };
+
+  showThemeBtn();
 
   showGameChoice();
   chooseLevel();

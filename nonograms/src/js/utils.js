@@ -369,3 +369,31 @@ function closeMenu() {
     document.getElementById("actions").classList.remove("open");
   });
 }
+
+export function showThemeBtn() {
+  const actionsElem = document.querySelector(".actions");
+
+  const themeElem = createElement("div", "theme");
+  const themeChoice = createElement("div", "theme-choice");
+  const spanLight = createElement("span", "light");
+  spanLight.innerText = "Light theme";
+  const spanDark = createElement("span", "dark");
+  spanDark.innerText = "Dark theme";
+  themeChoice.appendChild(spanLight);
+  themeChoice.appendChild(spanDark);
+  const checkboxWrap = createElement('div', 'wrapper');
+  const themeLabel = createElement("label", "label");
+  themeLabel.setAttribute("for", "checkbox");
+  themeElem.appendChild(themeChoice);
+  checkboxWrap.appendChild(themeLabel);
+  themeElem.appendChild(checkboxWrap);
+  const checkbox = document.createElement("input");
+  checkbox.setAttribute("type", "checkbox");
+  checkbox.setAttribute("id", "checkbox");
+  themeLabel.appendChild(checkbox);
+
+  const spanInner = createElement("span", "span-inner");
+  themeLabel.appendChild(spanInner);
+
+  actionsElem.appendChild(themeElem);
+}
