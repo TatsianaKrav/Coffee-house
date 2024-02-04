@@ -12,6 +12,7 @@ import {
   getLevel,
   burgerHandler,
   showThemeBtn,
+  chooseTheme,
 } from "./utils.js";
 
 const bodyElem = document.body;
@@ -193,7 +194,7 @@ function randomGame() {
 }
 
 function showField(nonogram) {
-  const tableElem = document.createElement("table");
+  const tableElem = createElement("table", "table");
 
   gameName.innerText = nonogram.name;
   const topClues = nonogram.topClues;
@@ -274,10 +275,12 @@ function showField(nonogram) {
   fillCell(nonogram);
   resetGame();
   showSolution(nonogram);
+  chooseTheme();
 }
 
 function resetGame() {
   const resetBtn = createElement("button", "reset");
+  resetBtn.classList.add("btn");
   resetBtn.innerText = "Reset game";
 
   const gameElem = document.querySelector(".game");
@@ -327,14 +330,17 @@ function fillCell(nonogram) {
         return false;
       }
       if (!item.getAttribute("filled")) {
-        item.style.backgroundColor = "black";
+        /*   item.style.backgroundColor = "black"; */
+        item.classList.add("filled");
         item.setAttribute("filled", "true");
         fillSound.play();
       } else if (item.getAttribute("filled")) {
-        item.style.backgroundColor = "transparent";
+        /* item.style.backgroundColor = "transparent"; */
+        item.classList.remove("filled");
         item.removeAttribute("filled");
         removeSound.play();
       }
+
       checkGameEnd(nonogram, newGame);
     };
 

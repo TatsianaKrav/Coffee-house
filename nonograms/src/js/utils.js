@@ -54,6 +54,7 @@ export function checkGameEnd(nonogram, cb) {
     if (result) {
       createModal(nonogram, cb);
       const modal = document.querySelector(".modal");
+
       setTimeout(() => {
         modal.classList.add("show");
       }, 700);
@@ -105,6 +106,14 @@ export function createModal(nonogram, cb) {
 
   modalElem.appendChild(modalWindowElem);
   containerElem.appendChild(modalElem);
+
+  const checkbox = document.getElementById("checkbox");
+
+      if (checkbox.checked) {
+        modalWindowElem.classList.add("dark");
+      } else {
+        modalWindowElem.classList.remove("dark");
+      }
 
   closeModal(nonogram, cb);
 }
@@ -246,12 +255,14 @@ export function showSolution(nonogram) {
 
     for (let i = 0; i < cells.length; i++) {
       if (gameAnswers[i] === "0" && cells[i].getAttribute("filled")) {
-        cells[i].style.backgroundColor = "transparent";
+        /* cells[i].style.backgroundColor = "transparent"; */
+        cells[i].classList.remove("filled");
         cells[i].removeAttribute("filled");
       }
 
       if (gameAnswers[i] === "1" && cells[i].getAttribute("filled") === null) {
-        cells[i].style.backgroundColor = "black";
+        /*    cells[i].style.backgroundColor = "black"; */
+        cells[i].classList.add("filled");
         cells[i].setAttribute("filled", "true");
       }
 
@@ -314,7 +325,8 @@ export function continueGame(cb) {
 
   savedGame.forEach((item, index) => {
     if (item === "1") {
-      cells[index].style.backgroundColor = "black";
+      /*  cells[index].style.backgroundColor = "black"; */
+      cells[index].classList.add("filled");
       cells[index].setAttribute("filled", "true");
     } else if (item === "x") {
       cells[index].classList.add("not");
@@ -381,7 +393,7 @@ export function showThemeBtn() {
   spanDark.innerText = "Dark theme";
   themeChoice.appendChild(spanLight);
   themeChoice.appendChild(spanDark);
-  const checkboxWrap = createElement('div', 'wrapper');
+  const checkboxWrap = createElement("div", "wrapper");
   const themeLabel = createElement("label", "label");
   themeLabel.setAttribute("for", "checkbox");
   themeElem.appendChild(themeChoice);
@@ -396,4 +408,27 @@ export function showThemeBtn() {
   themeLabel.appendChild(spanInner);
 
   actionsElem.appendChild(themeElem);
+}
+
+export function chooseTheme() {
+  const themeCheckbox = document.getElementById("checkbox");
+  const elemsToChangeColor = document.querySelectorAll(
+    "body, .table, td, select, .btn"
+  );
+
+  function checkTheme() {
+    if (themeCheckbox.checked) {
+      elemsToChangeColor.forEach((elem) => {
+        elem.classList.add("dark");
+      });
+    } else {
+      elemsToChangeColor.forEach((elem) => {
+        elem.classList.remove("dark");
+      });
+    }
+  }
+
+  checkTheme();
+
+  themeCheckbox.addEventListener("change", checkTheme);
 }

@@ -1,5 +1,6 @@
 @main: gray;
-@light: rgb(253, 238, 208);
+@light: #fdeed0;
+@dark: #524d44;
 
 .btns {
   width: 150px;
@@ -11,6 +12,11 @@
   background-color: #fbe4b7;
   outline: none;
   cursor: pointer;
+
+  &.dark {
+    background-color: @dark;
+    color: @light;
+  }
 }
 
 @font-face {
@@ -31,6 +37,11 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+
+  &.dark {
+    background-color: #6e685d;
+    color: @light;
+  }
 
   @media screen and (max-width: 840px) {
     height: auto;
@@ -172,6 +183,11 @@ body {
         background-color: #fbe4b7;
         outline: none;
 
+        &.dark {
+          background-color: @dark;
+          color: @light;
+        }
+
         @media screen and (max-width: 905px) {
           width: 100px;
         }
@@ -195,6 +211,16 @@ body {
         justify-content: space-between;
         align-items: center;
         gap: 10px;
+
+        .light {
+          color: @main;
+        }
+
+        .dark {
+          &.dark {
+            color: black;
+          }
+        }
       }
 
       .wrapper {
@@ -274,6 +300,10 @@ body {
       border-collapse: collapse;
       margin-bottom: 20px;
       background-color: white;
+
+      &.dark {
+        background-color: rgba(49, 48, 48, 0.8);
+      }
 
       tr {
         &:first-child {
@@ -438,6 +468,14 @@ body {
           &:last-child {
             border-right: 2px solid @main;
           }
+
+          &.filled {
+            background-color: black;
+
+            &.dark {
+                background-color: @light;
+            }
+          }
         }
       }
     }
@@ -485,6 +523,10 @@ body {
       box-sizing: border-box;
       cursor: pointer;
       position: relative;
+
+      &.dark {
+        background-color: @dark;
+      }
 
       .close {
         width: 25px;
