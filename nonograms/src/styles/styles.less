@@ -204,6 +204,7 @@ body {
 
     .theme {
       max-width: 310px;
+      height: 67px;
 
       .theme-choice {
         padding: 5px 10px;
@@ -275,6 +276,36 @@ body {
             left: 3px;
             transition: all 0.3s linear;
           }
+        }
+      }
+    }
+
+    .high-score-table {
+      .table-name {
+        margin-bottom: 10px;
+      }
+
+      .score-table {
+        .headers {
+          display: flex;
+          border-bottom: 2px solid @main;
+
+          .head {
+            border-right: 2px solid @main;
+            padding: 5px;
+            padding-top: 0;
+
+            &:last-child {
+              border-right: none;
+            }
+          }
+        }
+        .row {
+            display: flex;
+
+            .col {
+                width: 50px;
+            }
         }
       }
     }
@@ -473,7 +504,7 @@ body {
             background-color: black;
 
             &.dark {
-                background-color: @light;
+              background-color: @light;
             }
           }
         }

@@ -13,6 +13,7 @@ import {
   burgerHandler,
   showThemeBtn,
   chooseTheme,
+  createScoreTable,
 } from "./utils.js";
 
 const bodyElem = document.body;
@@ -121,6 +122,7 @@ function showActions() {
   showGameChoice();
   chooseLevel();
   chooseGame(nonograms);
+  createScoreTable();
   burgerHandler();
 }
 
@@ -290,7 +292,8 @@ function resetGame() {
     const cells = document.querySelectorAll("td, .top, .left");
 
     Array.from(cells).forEach((cell) => {
-      cell.style.backgroundColor = "transparent";
+      /*    cell.style.backgroundColor = "transparent"; */
+      cell.classList.remove("filled");
       cell.removeAttribute("filled");
       cell.classList.remove("not");
       cell.setAttribute("not", "null");

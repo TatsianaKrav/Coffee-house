@@ -4,6 +4,7 @@ let sec = 0;
 let min = 0;
 let isPaused = false;
 let timer = {};
+let scores = [];
 
 export function createElement(node, name) {
   const elem = document.createElement(node);
@@ -55,9 +56,22 @@ export function checkGameEnd(nonogram, cb) {
       createModal(nonogram, cb);
       const modal = document.querySelector(".modal");
 
+      const timer = document.getElementById("timer");
+      let timerInSec = calculateTimer(timer.innerText);
+      const messageElem = document.querySelector(".message");
+      messageElem.innerText =
+        "Great! You have solved the nonogram in " + timerInSec + " seconds!";
+
       setTimeout(() => {
         modal.classList.add("show");
       }, 700);
+
+      const gameTimeResult = {
+        game: nonogram,
+        time: document.querySelector("#timer").innerText,
+      };
+
+      checkScoreTable(gameTimeResult);
     }
   }
 }
@@ -98,7 +112,7 @@ export function createModal(nonogram, cb) {
   const modalWindowElem = createElement("div", "modal-window");
 
   const messageElem = createElement("div", "message");
-  messageElem.innerText = `Great! You have solved the nonogram in ${timerInSec} seconds!`;
+
   const closeElem = createElement("div", "close");
 
   modalWindowElem.appendChild(messageElem);
@@ -109,11 +123,11 @@ export function createModal(nonogram, cb) {
 
   const checkbox = document.getElementById("checkbox");
 
-      if (checkbox.checked) {
-        modalWindowElem.classList.add("dark");
-      } else {
-        modalWindowElem.classList.remove("dark");
-      }
+  if (checkbox.checked) {
+    modalWindowElem.classList.add("dark");
+  } else {
+    modalWindowElem.classList.remove("dark");
+  }
 
   closeModal(nonogram, cb);
 }
@@ -181,23 +195,26 @@ export function initTimer(first, second, game) {
   sec = second;
   min = first;
 
-  const savedGame = JSON.parse(localStorage.getItem("savedGame")).currentGame;
-  const time = JSON.parse(localStorage.getItem("savedGame")).timer;
-  let savedMin = 0;
-  let savedSec = 0;
+  if (localStorage.getItem("savedGame")) {
+    const savedGame = JSON.parse(localStorage.getItem("savedGame")).currentGame;
+    const time = JSON.parse(localStorage.getItem("savedGame")).timer;
 
-  savedMin = time.slice(0, 2);
-  savedSec = time.slice(3, 5);
-  if (savedMin[0] === "0") {
-    savedMin = savedMin.slice(1);
-  }
-  if (savedSec[0] === "0") {
-    savedSec = savedSec.slice(1);
-  }
+    let savedMin = 0;
+    let savedSec = 0;
 
-  if (savedGame.name === game.name) {
-    min = min + Number(savedMin);
-    sec = sec + Number(savedSec);
+    savedMin = time.slice(0, 2);
+    savedSec = time.slice(3, 5);
+    if (savedMin[0] === "0") {
+      savedMin = savedMin.slice(1);
+    }
+    if (savedSec[0] === "0") {
+      savedSec = savedSec.slice(1);
+    }
+
+    if (savedGame.name === game.name) {
+      min = min + Number(savedMin);
+      sec = sec + Number(savedSec);
+    }
   }
 
   timer = setInterval(tick, 1000);
@@ -255,13 +272,11 @@ export function showSolution(nonogram) {
 
     for (let i = 0; i < cells.length; i++) {
       if (gameAnswers[i] === "0" && cells[i].getAttribute("filled")) {
-        /* cells[i].style.backgroundColor = "transparent"; */
         cells[i].classList.remove("filled");
         cells[i].removeAttribute("filled");
       }
 
       if (gameAnswers[i] === "1" && cells[i].getAttribute("filled") === null) {
-        /*    cells[i].style.backgroundColor = "black"; */
         cells[i].classList.add("filled");
         cells[i].setAttribute("filled", "true");
       }
@@ -325,7 +340,6 @@ export function continueGame(cb) {
 
   savedGame.forEach((item, index) => {
     if (item === "1") {
-      /*  cells[index].style.backgroundColor = "black"; */
       cells[index].classList.add("filled");
       cells[index].setAttribute("filled", "true");
     } else if (item === "x") {
@@ -376,7 +390,6 @@ function closeMenu() {
   });
 
   const gameMenuElem = document.querySelector(".game-choice");
-  console.log(gameMenuElem);
   gameMenuElem.addEventListener("change", () => {
     document.getElementById("actions").classList.remove("open");
   });
@@ -431,4 +444,200 @@ export function chooseTheme() {
   checkTheme();
 
   themeCheckbox.addEventListener("change", checkTheme);
+}
+
+export function createScoreTable() {
+  const actionsElem = document.getElementById("actions");
+  const highScoreTable = createElement("div", "high-score-table");
+  const tableName = createElement("div", "table-name");
+  tableName.innerText = "High score table";
+
+  const scoreTableElem = createElement("div", "score-table");
+  const headers = createElement("div", "headers");
+
+  for (let i = 0; i < 4; i++) {
+    const tdElem = createElement("div", "head");
+
+    switch (i) {
+      case 1:
+        tdElem.innerText = "Game";
+        break;
+      case 2:
+        tdElem.innerText = "Level";
+        break;
+      case 3:
+        tdElem.innerText = "Time";
+        break;
+      default:
+        "";
+    }
+
+    headers.appendChild(tdElem);
+  }
+
+  scoreTableElem.appendChild(headers);
+  highScoreTable.appendChild(tableName);
+  highScoreTable.appendChild(scoreTableElem);
+  actionsElem.appendChild(highScoreTable);
+}
+
+/* export function createScoreTable() {
+  const actionsElem = document.getElementById("actions");
+  const tableName = createElement("div", "table-name");
+  tableName.innerText = "High score table";
+
+  const scoreTableElem = createElement("table", "score-table");
+  const theadElem = document.createElement("thead");
+  const tbodyElem = document.createElement("tbody");
+
+  const headers = document.createElement("tr");
+
+  for (let i = 0; i < 4; i++) {
+    const tdElem = document.createElement("td");
+
+    switch (i) {
+      case 1:
+        tdElem.innerText = "Game";
+        break;
+      case 2:
+        tdElem.innerText = "Level";
+        break;
+      case 3:
+        tdElem.innerText = "Time";
+        break;
+      default:
+        "";
+    }
+
+    headers.appendChild(tdElem);
+  }
+
+  theadElem.appendChild(headers); */
+
+/*  for (let i = 0; i < 5; i++) {
+    const trElem = document.createElement("tr");
+
+    for (let j = 0; j < 4; j++) {
+      const tdElem = document.createElement("td");
+
+      if (j === 0) {
+        tdElem.innerText = i + 1;
+      } else if (j === 1) {
+        tdElem.innerText = game.game;
+      } else if (j === 2) {
+        tdElem.innerText = game.game.level;
+      } else if (j === 3) {
+        tdElem.innerText = game.time;
+      }
+      trElem.appendChild(tdElem);
+    }
+
+    tbodyElem.appendChild(trElem);
+  } */
+
+/*  scoreTableElem.appendChild(theadElem);
+  scoreTableElem.appendChild(tbodyElem);
+  actionsElem.appendChild(tableName);
+  actionsElem.appendChild(scoreTableElem);
+} */
+
+export function checkScoreTable(game) {
+  const scoreTableElem = document.querySelector(".score-table");
+
+  const rows = document.querySelectorAll(".row");
+  const cols = document.querySelectorAll(".col");
+
+  if (cols.length > 0) {
+    let sameGame = Array.from(cols).find(
+      (item) => item.innerText === game.game.name
+    );
+
+    if (sameGame) {
+      sameGame.nextElementSibling.nextElementSibling.innerText = game.time;
+      filterScore(scores);
+      return false;
+    }
+  }
+
+  if (scores.length < 5) {
+    scores.push(game);
+    const row = createElement("div", "row");
+    let index = scores.indexOf(game);
+    let item = scores[index];
+
+    for (let i = 0; i < 4; i++) {
+      const col = createElement("div", "col");
+      if (i === 0) {
+        col.innerText = index + 1;
+      } else if (i === 1) {
+        col.innerText = item.game.name;
+      } else if (i === 2) {
+        col.innerText = item.game.level;
+      } else if (i === 3) {
+        col.innerText = item.time;
+      }
+
+      row.appendChild(col);
+    }
+    scoreTableElem.appendChild(row);
+  } else {
+    checkScore(scores, game);
+  }
+
+  filterScore(scores);
+}
+
+function checkScore(arr, game) {
+  let longestTime = 0;
+  let longestGame = {};
+
+  arr.forEach((item) => {
+    let itemTime = calculateTimer(item.time);
+    if (itemTime > longestTime) {
+      longestTime = itemTime;
+      longestGame = item;
+    }
+  });
+
+  let gameTime = calculateTimer(game.time);
+
+  if (longestTime > gameTime) {
+    let index = arr.indexOf(longestGame);
+    arr[index] = game;
+
+    const rows = document.querySelectorAll(".row");
+    const rowsChildren = rows[index].children;
+    Array.from(rowsChildren).forEach((item, index) => {
+      if (index === 1) {
+        item.innerText = game.game.name;
+      } else if (index === 2) {
+        item.innerText = game.game.level;
+      } else if (index === 3) {
+        item.innerText = game.time;
+      }
+    });
+    filterScore(scores);
+  }
+}
+
+function filterScore(arr) {
+  let copyArr = Array.from(arr);
+  copyArr = copyArr.sort((a, b) => {
+    return calculateTimer(a.time) - calculateTimer(b.time);
+  });
+
+  const rows = document.querySelectorAll(".row");
+
+  rows.forEach((item, indexRow) => {
+    const arrChildren = Array.from(item.children);
+    arrChildren.forEach((child, indexCol) => {
+      if (indexCol === 1) {
+        child.innerText = copyArr[indexRow].game.name;
+      } else if (indexCol === 2) {
+        child.innerText = copyArr[indexRow].game.level;
+      } else if (indexCol === 3) {
+        child.innerText = copyArr[indexRow].time;
+      }
+    });
+  });
 }
