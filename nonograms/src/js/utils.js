@@ -486,7 +486,7 @@ export function createScoreTable() {
 export function checkScoreTable(game) {
   const scoreTableElem = document.querySelector(".score-table");
 
-  const cols = document.querySelectorAll(".col");
+  /*  const cols = document.querySelectorAll(".col");
 
   if (cols.length > 0) {
     let sameGame = Array.from(cols).find(
@@ -508,7 +508,7 @@ export function checkScoreTable(game) {
       filterScore(scores);
       return false;
     }
-  }
+  } */
 
   if (scores.length < 5) {
     scores.push(game);
@@ -532,13 +532,29 @@ export function checkScoreTable(game) {
     }
     scoreTableElem.appendChild(row);
   } else {
-    checkScore(scores, game);
+    updateScoreTable(game);
   }
 
   filterScore(scores);
 }
 
-function checkScore(arr, game) {
+function updateScoreTable(game) {
+  const firstGame = scores[0];
+  scores.unshift();
+  console.log(scores);
+  console.log(firstGame);
+  scores.push(game);
+
+  const cols = document.querySelectorAll(".col");
+  const prevGame = Array.from(cols).find(
+    (col) => col.innerText === firstGame.game.name
+  );
+  prevGame.innerText = firstGame.game.name;
+  prevGame.nextElementSibling.innerText = firstGame.game.level;
+  prevGame.nextElementSibling.nextElementSibling.innerText = firstGame.time;
+}
+
+/* function checkScore(arr, game) {
   let longestTime = 0;
   let longestGame = {};
 
@@ -569,7 +585,7 @@ function checkScore(arr, game) {
     });
     filterScore(scores);
   }
-}
+} */
 
 function filterScore(arr) {
   let copyArr = Array.from(arr);
