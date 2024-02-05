@@ -332,6 +332,10 @@ body {
     flex-direction: column;
     align-items: center;
 
+    @media screen and (max-width:585px) {
+      max-width: 500px;
+    }
+
     .game-name {
       margin-bottom: 15px;
       font-weight: bold;
@@ -346,6 +350,10 @@ body {
       border-collapse: collapse;
       margin-bottom: 20px;
       background-color: white;
+
+      @media screen and (max-width:585px) {
+        max-width: 500px;
+      }
 
       &.dark {
         background-color: rgba(49, 48, 48, 0.8);
@@ -405,9 +413,12 @@ body {
               justify-content: center;
               width: 25px;
               height: 25px;
-              /* width: 5%;
-              height: 5%; */
               border-left: 1px solid @main;
+
+              @media screen and (max-width:585px) {
+                width: 20px;
+                height: 20px;
+              }
 
               &:nth-last-child(5n) {
                 border-left: 3px solid @main;
@@ -449,8 +460,6 @@ body {
 
               width: 25px;
               height: 25px;
-              /* width: 5%;
-              height: 5%; */
               border-top: 1px solid @main;
 
               &:nth-last-child(5n) {
@@ -477,6 +486,11 @@ body {
                 height: 30px;
                 background-color: @main;
                 transform: rotate(-45deg);
+              }
+
+              @media screen and (max-width:585px) {
+                width: 20px;
+                height: 20px;
               }
             }
           }
