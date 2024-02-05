@@ -281,8 +281,19 @@ body {
     }
 
     .high-score-table {
+      background-color: #fbe4b7;
+      padding: 5px;
+      border-radius: 5px;
+      border: 1px solid @main;
+
+      &.dark {
+        background-color: @dark;
+        color: @light;
+      }
+
       .table-name {
         margin-bottom: 10px;
+        text-align: center;
       }
 
       .score-table {
@@ -292,8 +303,7 @@ body {
 
           .head {
             border-right: 2px solid @main;
-            padding: 5px;
-            padding-top: 0;
+            padding: 0 10px 5px 10px;
 
             &:last-child {
               border-right: none;
@@ -301,11 +311,16 @@ body {
           }
         }
         .row {
-            display: flex;
+          display: flex;
+          gap: 5px;
 
-            .col {
-                /* width: 50px; */
+          .col {
+            &:first-child {
+              padding: 5px;
+              padding-top: 0;
             }
+            /* width: 50px; */
+          }
         }
       }
     }

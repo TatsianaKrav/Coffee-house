@@ -125,8 +125,10 @@ export function createModal(nonogram, cb) {
 
   if (checkbox.checked) {
     modalWindowElem.classList.add("dark");
+    modalElem.classList.add("dark");
   } else {
     modalWindowElem.classList.remove("dark");
+    modalElem.classList.remove("dark");
   }
 
   closeModal(nonogram, cb);
@@ -426,7 +428,7 @@ export function showThemeBtn() {
 export function chooseTheme() {
   const themeCheckbox = document.getElementById("checkbox");
   const elemsToChangeColor = document.querySelectorAll(
-    "body, .table, td, select, .btn"
+    "body, .table, td, select, .btn, .high-score-table"
   );
 
   function checkTheme() {
@@ -480,66 +482,6 @@ export function createScoreTable() {
   highScoreTable.appendChild(scoreTableElem);
   actionsElem.appendChild(highScoreTable);
 }
-
-/* export function createScoreTable() {
-  const actionsElem = document.getElementById("actions");
-  const tableName = createElement("div", "table-name");
-  tableName.innerText = "High score table";
-
-  const scoreTableElem = createElement("table", "score-table");
-  const theadElem = document.createElement("thead");
-  const tbodyElem = document.createElement("tbody");
-
-  const headers = document.createElement("tr");
-
-  for (let i = 0; i < 4; i++) {
-    const tdElem = document.createElement("td");
-
-    switch (i) {
-      case 1:
-        tdElem.innerText = "Game";
-        break;
-      case 2:
-        tdElem.innerText = "Level";
-        break;
-      case 3:
-        tdElem.innerText = "Time";
-        break;
-      default:
-        "";
-    }
-
-    headers.appendChild(tdElem);
-  }
-
-  theadElem.appendChild(headers); */
-
-/*  for (let i = 0; i < 5; i++) {
-    const trElem = document.createElement("tr");
-
-    for (let j = 0; j < 4; j++) {
-      const tdElem = document.createElement("td");
-
-      if (j === 0) {
-        tdElem.innerText = i + 1;
-      } else if (j === 1) {
-        tdElem.innerText = game.game;
-      } else if (j === 2) {
-        tdElem.innerText = game.game.level;
-      } else if (j === 3) {
-        tdElem.innerText = game.time;
-      }
-      trElem.appendChild(tdElem);
-    }
-
-    tbodyElem.appendChild(trElem);
-  } */
-
-/*  scoreTableElem.appendChild(theadElem);
-  scoreTableElem.appendChild(tbodyElem);
-  actionsElem.appendChild(tableName);
-  actionsElem.appendChild(scoreTableElem);
-} */
 
 export function checkScoreTable(game) {
   const scoreTableElem = document.querySelector(".score-table");

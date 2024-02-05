@@ -40,7 +40,6 @@ let level = "easy";
 function init() {
   showActions();
   showField(nonogram);
-  /*  burgerHandler(); */
 }
 
 init();
@@ -292,7 +291,6 @@ function resetGame() {
     const cells = document.querySelectorAll("td, .top, .left");
 
     Array.from(cells).forEach((cell) => {
-      /*    cell.style.backgroundColor = "transparent"; */
       cell.classList.remove("filled");
       cell.removeAttribute("filled");
       cell.classList.remove("not");
@@ -333,12 +331,10 @@ function fillCell(nonogram) {
         return false;
       }
       if (!item.getAttribute("filled")) {
-        /*   item.style.backgroundColor = "black"; */
         item.classList.add("filled");
         item.setAttribute("filled", "true");
         fillSound.play();
       } else if (item.getAttribute("filled")) {
-        /* item.style.backgroundColor = "transparent"; */
         item.classList.remove("filled");
         item.removeAttribute("filled");
         removeSound.play();
