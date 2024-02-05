@@ -544,7 +544,6 @@ export function createScoreTable() {
 export function checkScoreTable(game) {
   const scoreTableElem = document.querySelector(".score-table");
 
-  const rows = document.querySelectorAll(".row");
   const cols = document.querySelectorAll(".col");
 
   if (cols.length > 0) {
@@ -553,7 +552,17 @@ export function checkScoreTable(game) {
     );
 
     if (sameGame) {
-      sameGame.nextElementSibling.nextElementSibling.innerText = game.time;
+      const prevTime = sameGame.nextElementSibling.nextElementSibling.innerText;
+
+      if (calculateTimer(prevTime) > calculateTimer(game.time)) {
+        sameGame.nextElementSibling.nextElementSibling.innerText = game.time;
+
+        const gameInScores = scores.find(
+          (item) => item.game.name === game.game.name
+        );
+        gameInScores.time = game.time;
+      }
+
       filterScore(scores);
       return false;
     }
