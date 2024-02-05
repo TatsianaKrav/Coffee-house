@@ -287,6 +287,8 @@ export function showSolution(nonogram) {
         cells[i].classList.remove("not");
       }
     }
+
+    clearInterval(timer);
   };
 }
 
