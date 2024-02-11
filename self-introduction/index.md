@@ -1,7 +1,5 @@
-<code> [Video][1]
-
+<code> [Self-introduction video][1]
 [1]: https://youtu.be/TjXFivrRRfQ "Self-introduction"
-
 </code>
 
 My name is Tatiana, I’m a french interpreter (with English as a second language), I graduated from Minsk Linguistic University and the majority of my professional experience I’ve worked within my speciality. I even became a head of the French support department at my previous job. But all this time I was thinking about changing my job because I’d like to find myself in a career. I wish to be pAssionate about my job, to develop my knowledge in my profession.
