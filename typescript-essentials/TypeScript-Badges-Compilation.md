@@ -21,3 +21,6 @@ This module introduces us to a new functionality - function types. This feature 
 
 TS is a perfect tool to implement OOP paradigms. It has special features to operate with classes. TS allows us to use access modifiers (private, protected, readonly). Besides, we can use interfaces to ensure class shape. Typing class fields protects us from creating a wrong instance. 
 
+- **Generics in TypeScript:** [Badge](https://learn.microsoft.com/api/achievements/share/en-us/43772041/UF5BSB43?sharingId=6A0FA167937C07F0)
+
+Another paradigm of OOP - polymorphism - is implemented well with help of Generics. We can use generic functions, classes and interfaces when we work with a variety of data types (call functions with different types) so we reduce our code because it’s reusable. For example, we don’t need to write several functions that do the same thing but operate with different types and can give us different results (such as usage of binary + that works with numbers as summary operators and contacts strings when we operate with string type).
