@@ -1,7 +1,9 @@
 import AppLoader from './appLoader';
+import { CallbackSources } from '../../types/CallbackSources';
+import { CallbackNews } from '../../types/CallbackNews';
 
 class AppController extends AppLoader {
-     getSources(callback) {
+    public getSources(callback: CallbackSources) {
         super.getResp(
             {
                 endpoint: 'sources',
@@ -10,15 +12,20 @@ class AppController extends AppLoader {
         );
     }
 
-     getNews(e, callback) {
-        let target = e.target;
-        const newsContainer = e.currentTarget;
+    public getNews(e: MouseEvent, callback: CallbackNews) {
+        let target = e.target as HTMLElement;
+        const newsContainer = e.currentTarget as HTMLElement;
+
+        if (!target) return;
 
         while (target !== newsContainer) {
             if (target.classList.contains('source__item')) {
-                const sourceId = target.getAttribute('data-source-id');
+                const sourceId: string | null = target.getAttribute('data-source-id');
                 if (newsContainer.getAttribute('data-source') !== sourceId) {
-                    newsContainer.setAttribute('data-source', sourceId);
+                    if (sourceId) {
+                        newsContainer.setAttribute('data-source', sourceId);
+                    }
+
                     super.getResp(
                         {
                             endpoint: 'everything',
@@ -31,7 +38,7 @@ class AppController extends AppLoader {
                 }
                 return;
             }
-            target = target.parentNode;
+            target = target.parentNode as HTMLElement;
         }
     }
 }
