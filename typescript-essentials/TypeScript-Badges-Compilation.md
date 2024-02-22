@@ -12,3 +12,7 @@ This module explains how to declare variables with TS. The most important differ
 - **Implement Interfaces in TypeScript:** [Badge](https://learn.microsoft.com/api/achievements/share/en-us/43772041/N79J6N8F?sharingId=6A0FA167937C07F0)
 
 In this module we knew about a new thing that doesn’t exist in JS - interfaces. It's a very useful tool for typing variables, firstly because we can describe a type (with interface) once and use it many times for different variables with the same type, secondly - because it makes us strictly use all the fields and methods of interface (if they are not optional). 
+
+- **Develop Typed Functions in TypeScript:** [Badge](https://learn.microsoft.com/api/achievements/share/en-us/43772041/3XL49EFH?sharingId=6A0FA167937C07F0)
+
+This module introduces us to a new functionality - function types. This feature makes our work with function more clear, because typing a function in such a way allows us to see what this function accepts as arguments and return. It works with function expression, function declaration and arrow function and like in JS, we can use default parameters. The usage of optional parameters makes our work more flexible. Besides, we can use interfaces to type functions so we don’t need to type every parameter. 
