@@ -28,3 +28,7 @@ Another paradigm of OOP - polymorphism - is implemented well with help of Generi
 - **Work with External Libraries in TypeScript:** [Badge](https://learn.microsoft.com/api/achievements/share/en-us/43772041/8R6S2TRW?sharingId=6A0FA167937C07F0)
 
 This module tells us about how to organize our code - with the usage of modules and namespace. It describes mostly how to work with modules. Actually, it’s realized in such a way as we do it in JS - using import and export. This module also explains how to use external libraries with TS. Modules are useful to make the architecture and logic of our project more clear, help to avoid the pollution of global scope and allow us to reuse our code .
+
+- **Organize Code with Namespaces in TypeScript:** [Badge](https://learn.microsoft.com/api/achievements/share/en-us/43772041/EJ7XXE5P?sharingId=6A0FA167937C07F0)
+
+Whereas, this module describes the usage of namescapes. This functionality helps to avoid naming conflicts in the global scope because the code inside a namespace is taken from the global scope and put into the scope of the namespace. Namespaces are very simple constructions to use because they represent a named JavaScript object. Unlike modules, they can span multiple files, and can be concatenated using outFile. 
