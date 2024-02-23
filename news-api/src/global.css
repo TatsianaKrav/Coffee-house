@@ -16,20 +16,34 @@ header h1 {
 footer {
     height: 100px;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 }
-footer .copyright {
+
+footer .footer {
     font-size: 14px;
     color: #333;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
 }
-footer .copyright a {
+footer .footer a {
     color: #444;
+    text-decoration: none;
 }
-footer .copyright a:hover {
+footer .footer a:hover {
     color: #555;
 }
-footer .copyright:before {
-    content: '©';
+
+footer .personal-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+footer .school-link {
+    display: inline-block;
+    margin-top: 5px;
 }
