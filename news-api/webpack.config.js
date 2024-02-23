@@ -21,7 +21,7 @@ const baseConfig = {
         ],
     },
     resolve: {
-        extensions: ['.js', '.ts'],
+        extensions: ['.ts', '.js'],
     },
     output: {
         filename: 'index.js',
@@ -34,6 +34,7 @@ const baseConfig = {
             filename: 'index.html',
         }),
         new CleanWebpackPlugin(),
+        new EslingPlugin({ extensions: 'ts' }),
     ],
 };
 
@@ -43,3 +44,5 @@ module.exports = ({ mode }) => {
 
     return merge(baseConfig, envConfig);
 };
+
+const EslingPlugin = require('eslint-webpack-plugin');
