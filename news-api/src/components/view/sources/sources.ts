@@ -1,20 +1,44 @@
+import { ISources } from '../../../interfaces/ISourcesResponse';
 import './sources.css';
 
 class Sources {
-    draw(data) {
-        const fragment = document.createDocumentFragment();
-        const sourceItemTemp = document.querySelector('#sourceItemTemp');
+    draw(data: ISources[]): void {
+        const fragment: DocumentFragment = document.createDocumentFragment();
 
-        data.forEach((item) => {
+        //query
+        const sourceItemTemp: HTMLTemplateElement | null = document.querySelector('#sourceItemTemp');
+
+        data.forEach((item: ISources) => {
+            if (!sourceItemTemp) throw new Error(`No foind element with selector ${'#sourceItemTemp'}`);
+
             const sourceClone = sourceItemTemp.content.cloneNode(true);
 
-            sourceClone.querySelector('.source__item-name').textContent = item.name;
-            sourceClone.querySelector('.source__item').setAttribute('data-source-id', item.id);
+            if (sourceClone instanceof DocumentFragment && sourceClone !== null) {
+                sourceClone as DocumentFragment;
+            } else {
+                throw new Error();
+            }
+
+            //query
+            const sourceItemName: HTMLElement | null = sourceClone.querySelector('.source__item-name');
+            const sourceItem: HTMLElement | null = sourceClone.querySelector('.source__item');
+            if (sourceItemName && sourceItem) {
+                sourceItemName.textContent = item.name;
+                sourceItem.setAttribute('data-source-id', item.id);
+            } else {
+                throw new Error('Element not found');
+            }
 
             fragment.append(sourceClone);
         });
 
-        document.querySelector('.sources').append(fragment);
+        //query
+        const sources: HTMLElement | null = document.querySelector('.sources');
+        if (sources) {
+            sources.append(fragment);
+        } else {
+            throw new Error('Element not found');
+        }
     }
 }
 

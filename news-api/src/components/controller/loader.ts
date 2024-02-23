@@ -1,13 +1,10 @@
 import { RespParams } from '../../types/respParams';
 
-
-
 class Loader {
     private baseLink: string;
     private options: { apiKey: string };
 
-    constructor(baseLink: string , options: { apiKey: string }) {
-        /* if (typeof baseLink === 'undefined' || typeof options.apiKey === 'undefined') throw new Error(); */
+    constructor(baseLink: string, options: { apiKey: string }) {
         this.baseLink = baseLink;
         this.options = options;
     }
@@ -16,6 +13,7 @@ class Loader {
         data: RespParams,
         callback = (data: T) => {
             console.error('No callback for GET response');
+            console.log(data);
         }
     ): void {
         this.load('GET', data.endpoint, callback, data.options);
@@ -31,7 +29,7 @@ class Loader {
         return res;
     }
 
-    public makeUrl(options: {}, endpoint: string): string {
+    public makeUrl(options: Record<string, never>, endpoint: string): string {
         const urlOptions: { [apiKey: string]: string } = { ...this.options, ...options };
         let url: string = `${this.baseLink}${endpoint}?`;
 

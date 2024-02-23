@@ -3,7 +3,7 @@ export interface ISourcesResponse {
     sources: ISources[];
 }
 
-export interface ISources{
+export interface ISources {
     category: string;
     country: string;
     description: string;
