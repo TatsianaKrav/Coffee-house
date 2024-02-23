@@ -1,11 +1,11 @@
 import { ISources } from '../../../interfaces/ISourcesResponse';
+import { getTypedElement } from '../../../utilities/utilities';
 import './sources.css';
 
 class Sources {
     draw(data: ISources[]): void {
         const fragment: DocumentFragment = document.createDocumentFragment();
 
-        //query
         const sourceItemTemp: HTMLTemplateElement | null = document.querySelector('#sourceItemTemp');
 
         data.forEach((item: ISources) => {
@@ -19,26 +19,16 @@ class Sources {
                 throw new Error();
             }
 
-            //query
-            const sourceItemName: HTMLElement | null = sourceClone.querySelector('.source__item-name');
-            const sourceItem: HTMLElement | null = sourceClone.querySelector('.source__item');
-            if (sourceItemName && sourceItem) {
-                sourceItemName.textContent = item.name;
-                sourceItem.setAttribute('data-source-id', item.id);
-            } else {
-                throw new Error('Element not found');
-            }
+            const sourceItemName = getTypedElement(sourceClone, '.source__item-name');
+            const sourceItem = getTypedElement(sourceClone, '.source__item');
+            sourceItemName.textContent = item.name;
+            sourceItem.setAttribute('data-source-id', item.id);
 
             fragment.append(sourceClone);
         });
 
-        //query
-        const sources: HTMLElement | null = document.querySelector('.sources');
-        if (sources) {
-            sources.append(fragment);
-        } else {
-            throw new Error('Element not found');
-        }
+        const sources = getTypedElement(document, '.sources');
+        sources.append(fragment);
     }
 }
 
