@@ -1,18 +1,19 @@
 import AppLoader from './appLoader';
 import { CallbackSources } from '../../types/CallbackSources';
 import { CallbackNews } from '../../types/CallbackNews';
+import { ENDPOINT } from '../../utilities/enums';
 
 class AppController extends AppLoader {
-    public getSources(callback: CallbackSources) {
+    public getSources(callback: CallbackSources): void {
         super.getResp(
             {
-                endpoint: 'sources',
+                endpoint: ENDPOINT.sources,
             },
             callback
         );
     }
 
-    public getNews(e: MouseEvent, callback: CallbackNews) {
+    public getNews(e: MouseEvent, callback: CallbackNews): void {
         let target = e.target as HTMLElement;
         const newsContainer = e.currentTarget as HTMLElement;
 
@@ -28,7 +29,7 @@ class AppController extends AppLoader {
 
                     super.getResp(
                         {
-                            endpoint: 'everything',
+                            endpoint: ENDPOINT.everything,
                             options: {
                                 sources: sourceId,
                             },

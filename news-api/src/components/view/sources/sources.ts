@@ -3,7 +3,7 @@ import { getTypedElement } from '../../../utilities/utilities';
 import './sources.css';
 
 class Sources {
-    draw(data: ISources[]): void {
+    public draw(data: ISources[]): void {
         const fragment: DocumentFragment = document.createDocumentFragment();
 
         const sourceItemTemp: HTMLTemplateElement | null = document.querySelector('#sourceItemTemp');
