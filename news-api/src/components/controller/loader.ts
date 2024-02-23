@@ -1,10 +1,13 @@
 import { RespParams } from '../../types/respParams';
 
+
+
 class Loader {
     private baseLink: string;
-    private options: { [apiKey: string]: string };
+    private options: { apiKey: string };
 
-    constructor(baseLink: string, options: { apiKey: string }) {
+    constructor(baseLink: string , options: { apiKey: string }) {
+        /* if (typeof baseLink === 'undefined' || typeof options.apiKey === 'undefined') throw new Error(); */
         this.baseLink = baseLink;
         this.options = options;
     }

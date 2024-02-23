@@ -1,3 +1,3 @@
-import { INewsResponse } from "../interfaces/INews";
+import { INewsResponse } from "../interfaces/INewsResponse";
 
 export type CallbackNews = (data: INewsResponse) => void;

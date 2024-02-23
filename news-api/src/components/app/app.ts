@@ -1,6 +1,6 @@
 import AppController from '../controller/controller';
 import { AppView } from '../view/appView';
-import { INewsResponse } from '../../interfaces/INews';
+import { INewsResponse } from '../../interfaces/INewsResponse';
 import { ISourcesResponse } from '../../interfaces/ISourcesResponse';
 
 class App {
