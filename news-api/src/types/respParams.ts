@@ -1,4 +1,6 @@
+import { ENDPOINT } from '../utilities/enums';
+
 export type RespParams = {
-    endpoint: string;
+    endpoint: ENDPOINT;
     options?: {};
 };

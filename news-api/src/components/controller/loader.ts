@@ -1,10 +1,10 @@
-import { RespParams } from '../../types/respParams';
+import { RespParams } from '../../types/RespParams';
 
 class Loader {
     private baseLink: string;
-    private options: { apiKey: string };
+    private options: { [apiKey: string]: string };
 
-    constructor(baseLink: string, options: { apiKey: string }) {
+    constructor(baseLink: string, options: { [apiKey: string]: string }) {
         this.baseLink = baseLink;
         this.options = options;
     }
@@ -33,14 +33,14 @@ class Loader {
         const urlOptions: { [apiKey: string]: string } = { ...this.options, ...options };
         let url: string = `${this.baseLink}${endpoint}?`;
 
-        Object.keys(urlOptions).forEach((key) => {
+        Object.keys(urlOptions).forEach((key: string) => {
             url += `${key}=${urlOptions[key]}&`;
         });
 
         return url.slice(0, -1);
     }
 
-    load<T>(method: string, endpoint: string, callback: (data: T) => void, options = {}): void {
+    public load<T>(method: string, endpoint: string, callback: (data: T) => void, options = {}): void {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())

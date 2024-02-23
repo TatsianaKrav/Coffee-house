@@ -1,4 +1,5 @@
 import { INews } from '../../../interfaces/INewsResponse';
+import { ATTRIBUTE } from '../../../utilities/enums';
 import { getTypedElement } from '../../../utilities/utilities';
 import './news.css';
 
@@ -42,7 +43,7 @@ class News {
             newsDescriptionContent.textContent = item.description;
 
             const newsReadMoreLink = getTypedElement(newsClone, '.news__read-more a');
-            newsReadMoreLink.setAttribute('href', item.url);
+            newsReadMoreLink.setAttribute(ATTRIBUTE.href, item.url);
 
             fragment.append(newsClone);
         });
