@@ -53,6 +53,7 @@ class Sources {
         allSourcesButton.innerText = 'All';
 
         allSourcesButton.onclick = () => {
+            messageElem.style.display = 'none';
             articlesNames.forEach((name: HTMLElement) => {
                 if (name.parentElement) {
                     name.parentElement.style.display = 'block';

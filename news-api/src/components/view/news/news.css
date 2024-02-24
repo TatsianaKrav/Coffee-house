@@ -79,7 +79,7 @@
 
 .news__item .news__description .news__read-more a {
     color: #5ad67d;
-    display: inline-block;
+  /*   display: inline-block; */
     position: relative;
     text-decoration: none;
     font-weight: 800;
@@ -119,6 +119,14 @@
 
 .news__item:hover .news__meta-details {
     left: 0%;
+}
+
+.news__description-title {
+    font-size: 2em;
+}
+
+.news__description-content {
+    font-size: 1.7em;
 }
 
 @media (min-width: 640px) {
