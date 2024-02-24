@@ -1,6 +1,6 @@
 .sources {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     width: 100%;
     height: 120px;
     overflow: auto;
@@ -18,6 +18,7 @@
     color: #70d6ff;
     transition: 0.25s;
     cursor: pointer;
+    display: none;
 }
 
 .source__item:hover,

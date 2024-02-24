@@ -6,6 +6,7 @@ import './news.css';
 class News {
     public draw(data: INews[]): void {
         const news: INews[] = data.length >= 10 ? data.filter((_item: INews, idx: number) => idx < 10) : data;
+        console.log(news);
 
         const fragment: DocumentFragment = document.createDocumentFragment();
         const newsItemTemp: HTMLTemplateElement | null = document.querySelector('#newsItemTemp');
@@ -49,6 +50,7 @@ class News {
         });
 
         const newsElem = getTypedElement(document, '.news');
+        newsElem.style.visibility = 'visible';
         newsElem.innerHTML = '';
         newsElem.appendChild(fragment);
     }
