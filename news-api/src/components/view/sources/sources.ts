@@ -49,7 +49,7 @@ class Sources {
         }
 
         const allSourcesButton: HTMLElement = document.createElement('button');
-        allSourcesButton.classList.add('all-sourves-btn');
+        allSourcesButton.classList.add('all-sources-btn');
         allSourcesButton.innerText = 'All';
 
         allSourcesButton.onclick = () => {
@@ -73,7 +73,7 @@ class Sources {
         const messageElem: HTMLElement = document.createElement('div');
         messageElem.classList.add('message');
         messageElem.innerText = 'Articles not found';
-        alphabetElem.append(messageElem);
+        alphabetElem.after(messageElem);
 
         letters.forEach((letter: HTMLElement) => {
             letter.onclick = () => {

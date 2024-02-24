@@ -1,3 +1,40 @@
+.alphabet {
+    text-align: center;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.alphabet .btn,
+.all-sources-btn {
+    align-items: center;
+    padding: 0.3em;
+    background: none;
+    border: 2px solid #3fcc59;
+    font: inherit;
+    line-height: 1;
+    color: #69db7e;
+    transition: 0.25s;
+    cursor: pointer;
+}
+
+.btn:hover,
+.all-sources-btn:hover,
+.btn:focus,
+.all-sources-btn:focus {
+    border-color: #30c5ff;
+    color: #70d6ff;
+    box-shadow: 0 0.5em 0.5em -0.4em #30c5ff;
+    transform: translateY(-0.25em);
+}
+
+.message {
+    text-align: center;
+}
+
 .sources {
     display: flex;
     flex-wrap: wrap;
@@ -5,7 +42,9 @@
     height: 120px;
     overflow: auto;
     align-items: center;
-    font: 300 1em 'Fira Sans', sans-serif;
+    font:
+        300 1em 'Fira Sans',
+        sans-serif;
 }
 
 .source__item {
