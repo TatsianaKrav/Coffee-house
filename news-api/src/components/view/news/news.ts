@@ -26,7 +26,7 @@ class News {
             if (idx % 2) newsItem.classList.add('alt');
 
             const newsMetaPhoto = getTypedElement(newsClone, '.news__meta-photo');
-            newsMetaPhoto.style.backgroundImage = `url(${item.urlToImage || 'img/news_placeholder.jpg'})`;
+            newsMetaPhoto.style.backgroundImage = `url(${item.urlToImage})`;
 
             const newsMetaAuthor = getTypedElement(newsClone, '.news__meta-author');
             newsMetaAuthor.textContent = item.author || item.source.name;
