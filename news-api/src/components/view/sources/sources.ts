@@ -73,7 +73,7 @@ class Sources {
 
         const messageElem: HTMLElement = document.createElement('div');
         messageElem.classList.add('message');
-        messageElem.innerText = 'Articles not found';
+        messageElem.innerText = 'Sources not found';
         alphabetElem.after(messageElem);
 
         letters.forEach((letter: HTMLElement) => {
