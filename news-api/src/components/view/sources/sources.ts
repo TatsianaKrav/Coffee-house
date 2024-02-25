@@ -1,6 +1,6 @@
 import { ISources } from '../../../interfaces/ISourcesResponse';
 import { ATTRIBUTE } from '../../../utilities/enums';
-import { getTypedElement } from '../../../utilities/utilities';
+import { getCheckedElem, getTypedElement } from '../../../utilities/utilities';
 import './sources.css';
 
 class Sources {
@@ -12,15 +12,10 @@ class Sources {
 
         data.forEach((item: ISources) => {
             const sourceClone = sourceItemTemp.content.cloneNode(true);
+            const sourceCloneTyped = getCheckedElem(sourceClone);
 
-            if (sourceClone instanceof DocumentFragment && sourceClone !== null) {
-                sourceClone as DocumentFragment;
-            } else {
-                throw new Error();
-            }
-
-            const sourceItemName = getTypedElement(sourceClone, '.source__item-name');
-            const sourceItem = getTypedElement(sourceClone, '.source__item');
+            const sourceItemName = getTypedElement(sourceCloneTyped, '.source__item-name');
+            const sourceItem = getTypedElement(sourceCloneTyped, '.source__item');
             sourceItemName.textContent = item.name;
             sourceItem.setAttribute(ATTRIBUTE.dataSourceId, item.id);
 

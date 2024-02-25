@@ -16,17 +16,11 @@ class News {
             const newsClone = newsItemTemp.content.cloneNode(true);
             const newsCloneTyped = getCheckedElem(newsClone);
 
-            /*  if (newsClone instanceof DocumentFragment && newsClone !== null) {
-                newsClone as DocumentFragment;
-            } else {
-                throw new Error();
-            } */
-
             const newsItem = getTypedElement(newsCloneTyped, '.news__item');
             if (idx % 2) newsItem.classList.add('alt');
 
             const newsMetaPhoto = getTypedElement(newsCloneTyped, '.news__meta-photo');
-            newsMetaPhoto.style.backgroundImage = `url(${item.urlToImage})`;
+            newsMetaPhoto.style.backgroundImage = `url(${item.urlToImage || 'img/news_placeholder.jpg'})`;
 
             const newsMetaAuthor = getTypedElement(newsCloneTyped, '.news__meta-author');
             newsMetaAuthor.textContent = item.author || item.source.name;
