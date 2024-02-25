@@ -98,6 +98,12 @@
         opacity 0.5s;
 }
 
+.no-articles-message {
+    font-size: 1.5em;
+    margin: 0.5em;
+    padding: 1em 2em;
+}
+
 @media (hover: hover) and (pointer: fine) {
     .news__item .news__description .news__read-more a:hover:after {
         margin-left: 5px;

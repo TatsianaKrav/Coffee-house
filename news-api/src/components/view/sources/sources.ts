@@ -33,7 +33,7 @@ class Sources {
         const sourcesElem: HTMLElement = getTypedElement(document, '.sources');
         const alphabetElem: HTMLElement = document.createElement('div');
         alphabetElem.classList.add('alphabet');
-        const newsContainer = getTypedElement(document, '.news');
+        const newsContainer: HTMLElement = getTypedElement(document, '.news');
 
         for (let i = 65; i <= 90; i++) {
             const letterBtn: HTMLElement = document.createElement('button');
@@ -56,6 +56,10 @@ class Sources {
             });
 
             newsContainer.style.visibility = 'hidden';
+            const errorMessage: Element | null = document.querySelector('.no-articles-message');
+            if (errorMessage) {
+                (errorMessage as HTMLElement).style.visibility = 'hidden';
+            }
         };
 
         alphabetElem.appendChild(allSourcesButton);
@@ -73,6 +77,12 @@ class Sources {
 
         letters.forEach((letter: HTMLElement) => {
             letter.onclick = () => {
+                const errorMessage: Element | null = document.querySelector('.no-articles-message');
+                if (errorMessage) {
+                    console.log(1);
+                    (errorMessage as HTMLElement).style.visibility = 'hidden';
+                }
+
                 const currentArticlesNames: Array<HTMLElement> = arrOfArticlesNames.filter((article: HTMLElement) =>
                     article.innerText.toLowerCase().startsWith(letter.innerText.toLowerCase())
                 );
