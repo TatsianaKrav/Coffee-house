@@ -79,7 +79,6 @@ class Sources {
             letter.onclick = () => {
                 const errorMessage: Element | null = document.querySelector('.no-articles-message');
                 if (errorMessage) {
-                    console.log(1);
                     (errorMessage as HTMLElement).style.visibility = 'hidden';
                 }
 
