@@ -56,9 +56,9 @@ class Sources {
             });
 
             newsContainer.style.visibility = 'hidden';
-            const errorMessage: Element | null = document.querySelector('.no-articles-message');
+            const errorMessage = document.querySelector<HTMLElement>('.no-articles-message');
             if (errorMessage) {
-                (errorMessage as HTMLElement).style.visibility = 'hidden';
+                errorMessage.style.visibility = 'hidden';
             }
         };
 
@@ -77,9 +77,9 @@ class Sources {
 
         letters.forEach((letter: HTMLElement) => {
             letter.onclick = () => {
-                const errorMessage: Element | null = document.querySelector('.no-articles-message');
+                const errorMessage = document.querySelector<HTMLElement>('.no-articles-message');
                 if (errorMessage) {
-                    (errorMessage as HTMLElement).style.visibility = 'hidden';
+                    errorMessage.style.visibility = 'hidden';
                 }
 
                 const currentArticlesNames: Array<HTMLElement> = arrOfArticlesNames.filter((article: HTMLElement) =>

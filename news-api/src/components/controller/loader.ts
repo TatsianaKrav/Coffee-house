@@ -1,4 +1,5 @@
-import { RespParams } from '../../types/RespParams';
+import { RespParams } from "../../types/respParams";
+
 
 class Loader {
     private baseLink: string;
