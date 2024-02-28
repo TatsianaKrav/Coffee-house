@@ -14,32 +14,37 @@ class AppController extends AppLoader {
     }
 
     public getNews(e: MouseEvent, callback: CallbackNews): void {
-        let target = e.target as HTMLElement;
-        const newsContainer = e.currentTarget as HTMLElement;
+        let target = e.target;
+        const newsContainer = e.currentTarget;
 
-        if (!target) return;
+        if (!target || !newsContainer) throw new Error(`Element ${target} or ${newsContainer} doesn't exist`);
 
         while (target !== newsContainer) {
-            if (target.classList.contains('source__item')) {
-                const sourceId: string | null = target.getAttribute('data-source-id');
-                if (newsContainer.getAttribute('data-source') !== sourceId) {
-                    if (sourceId) {
-                        newsContainer.setAttribute('data-source', sourceId);
-                    }
+            if (target instanceof HTMLElement && newsContainer instanceof HTMLElement) {
+                if (target.classList.contains('source__item')) {
+                    const sourceId: string | null = target.getAttribute('data-source-id');
+                    if (newsContainer.getAttribute('data-source') !== sourceId) {
+                        if (sourceId) {
+                            newsContainer.setAttribute('data-source', sourceId);
+                        }
 
-                    super.getResp(
-                        {
-                            endpoint: ENDPOINT.everything,
-                            options: {
-                                sources: sourceId,
+                        super.getResp(
+                            {
+                                endpoint: ENDPOINT.everything,
+                                options: {
+                                    sources: sourceId,
+                                },
                             },
-                        },
-                        callback
-                    );
+                            callback
+                        );
+                    }
+                    return;
                 }
-                return;
+
+                target = target.parentNode;
+            } else {
+                throw new Error(`Types of elements ${target} and ${newsContainer} are not supported`);
             }
-            target = target.parentNode as HTMLElement;
         }
     }
 }
