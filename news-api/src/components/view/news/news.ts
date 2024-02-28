@@ -8,7 +8,7 @@ class News {
         const news: INews[] = data.length >= 10 ? data.filter((_item: INews, idx: number) => idx < 10) : data;
 
         const fragment: DocumentFragment = document.createDocumentFragment();
-        const newsItemTemp: HTMLTemplateElement | null = document.querySelector('#newsItemTemp');
+        const newsItemTemp = document.querySelector<HTMLTemplateElement>('#newsItemTemp');
         const newsElem = getTypedElement(document, '.news');
         newsElem.innerHTML = '';
 
