@@ -56,10 +56,6 @@ class News {
                 fragment.append(newsClone);
             });
         } else {
-            /*  const errorMessage: HTMLElement = document.createElement('div');
-            errorMessage.classList.add('no-articles-message');
-            errorMessage.innerText = 'No articles';
-            newsElem.appendChild(errorMessage); */
             errorMessage.style.visibility = 'visible';
         }
 
