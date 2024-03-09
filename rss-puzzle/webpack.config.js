@@ -1,6 +1,7 @@
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 const EslingPlugin = require('eslint-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/index.ts',
@@ -26,9 +27,19 @@ module.exports = {
     filename: 'index.js',
     path: path.resolve(__dirname, 'dist'),
   },
+  devServer: {
+    static: {
+      directory: '.dist',
+    },
+  },
   plugins: [
+    new HtmlWebpackPlugin(),
     new CopyPlugin({
-      patterns: [{ from: './src/index.html' }],
+      patterns: [
+        { from: 'styles', to: 'styles' },
+        { from: 'static/fonts', to: 'fonts' },
+        { from: 'static/images', to: 'images' },
+      ],
     }),
     new EslingPlugin({ extensions: 'ts' }),
   ],

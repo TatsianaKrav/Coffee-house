@@ -30,5 +30,7 @@ module.exports = {
   rules: {
     '@typescript-eslint/no-explicit-any': 2,
     'react/jsx-filename-extension': [0],
+    'linebreak-style': 0,
+    'class-methods-use-this': 'off',
   },
 };
