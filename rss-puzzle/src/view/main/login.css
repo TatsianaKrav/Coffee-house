@@ -5,31 +5,3 @@
   flex-direction: column;
   height: 80vh;
 }
-
-input {
-  padding: 5px;
-  border-radius: 5px;
-  margin-bottom: 15px;
-  width: 250px;
-  outline: none;
-  border: 2px solid transparent;
-  font-family:
-    Nautilus Pompilius,
-    sans-serif;
-  font-size: 20px;
-  box-sizing: border-box;
-}
-
-input:focus {
-  border: 2px solid rgb(213, 177, 247);
-  box-sizing: border-box;
-}
-
-label {
-  font-size: 16px;
-  display: block;
-}
-
-.input:first-child {
-  margin-top: 15px;
-}

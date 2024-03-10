@@ -35,5 +35,15 @@ module.exports = {
     'class-methods-use-this': 0,
     'implicit-arrow-linebreak': 0,
     'linebreak-style': 0,
+    'no-param-reassign': 0,
+    'no-console': 0,
+    '@typescript-eslint/quotes': [
+      'error',
+      'single',
+      {
+        allowTemplateLiterals: true,
+      },
+    ],
+    'operator-linebreak': 0,
   },
 };

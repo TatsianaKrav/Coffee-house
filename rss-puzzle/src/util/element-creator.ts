@@ -51,4 +51,9 @@ export default class ElementCreator {
       this.element.append(element);
     }
   }
+
+  getInnerElements(): HTMLCollection {
+    if (!this.element) throw new Error('No element found');
+    return this.element.children;
+  }
 }
