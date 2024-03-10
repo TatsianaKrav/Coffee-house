@@ -35,6 +35,5 @@ module.exports = {
     'class-methods-use-this': 0,
     'implicit-arrow-linebreak': 0,
     'linebreak-style': 0,
-
   },
 };

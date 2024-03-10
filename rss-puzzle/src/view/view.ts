@@ -2,17 +2,17 @@ import { IElementParams } from '../interfaces/IElementParams';
 import ElementCreator from '../util/element-creator';
 
 export default class View {
-  elementCreator: HTMLElement;
+  elementCreator: ElementCreator;
 
   constructor(params: IElementParams) {
     this.elementCreator = this.createView(params);
   }
 
   getHTMLElement(): HTMLElement {
-    return this.elementCreator;
+    return this.elementCreator.getElement();
   }
 
-  createView(params: IElementParams): HTMLElement {
+  createView(params: IElementParams): ElementCreator {
     const elementParams: IElementParams = {
       tag: params.tag,
       cssClasses: params.cssClasses,
@@ -20,7 +20,7 @@ export default class View {
       attr: params.attr,
     };
     const elementCreator: ElementCreator = new ElementCreator(elementParams);
-    this.elementCreator = elementCreator.getElement();
+    this.elementCreator = elementCreator;
 
     return this.elementCreator;
   }

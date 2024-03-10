@@ -16,7 +16,7 @@ export default class Header extends View {
   }
 
   createLogo(params: IElementParams): HTMLElement {
-    const headerElement: HTMLElement = this.createView(params);
+    const headerComponent: ElementCreator = this.createView(params);
 
     const imgParams: IElementParams = {
       tag: 'img',
@@ -28,13 +28,13 @@ export default class Header extends View {
         },
         {
           name: 'src',
-          value: 'assets/logo.jpg',
+          value: 'images/logo.jpg',
         },
       ],
     };
 
     const elementCreatorImg: ElementCreator = new ElementCreator(imgParams);
-    /*  const headerElement = document.querySelector<HTMLElement>('.header'); */
+    const headerElement = headerComponent.getElement();
     if (!headerElement) throw new Error('Element not found');
     headerElement.append(elementCreatorImg.getElement());
 

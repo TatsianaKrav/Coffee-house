@@ -1,7 +1,7 @@
 import { IElementParams } from '../interfaces/IElementParams';
 
 export default class ElementCreator {
-  private element: HTMLElement | null;
+  element: HTMLElement | null;
 
   constructor(params: IElementParams) {
     this.element = null;
@@ -41,5 +41,14 @@ export default class ElementCreator {
   getElement(): HTMLElement {
     if (!this.element) throw new Error('No element found');
     return this.element;
+  }
+
+  addInnerElement(element: HTMLElement | ElementCreator) {
+    if (!this.element) throw new Error('No element found');
+    if (element instanceof ElementCreator) {
+      this.element.append(element.getElement());
+    } else {
+      this.element.append(element);
+    }
   }
 }

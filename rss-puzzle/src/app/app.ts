@@ -1,12 +1,10 @@
 import Header from '../view/header/header';
+import LoginPage from '../view/main/login';
 
 export default class App {
-  constructor() {
-    this.createView();
-  }
-
   createView(): void {
     const header: Header = new Header();
-    document.body.append(header.getHTMLElement());
+    const loginPage: LoginPage = new LoginPage();
+    document.body.append(header.getHTMLElement(), loginPage.getHTMLElement());
   }
 }

@@ -1,5 +1,5 @@
 import App from './app/app';
-import './global.css';
+import './styles/global.css';
 
 const app: App = new App();
 app.createView();

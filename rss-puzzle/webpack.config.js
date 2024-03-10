@@ -36,9 +36,9 @@ module.exports = {
     new HtmlWebpackPlugin(),
     new CopyPlugin({
       patterns: [
-        { from: 'styles', to: 'styles' },
-        { from: 'static/fonts', to: 'fonts' },
-        { from: 'static/images', to: 'images' },
+        { from: 'src/styles', to: 'styles' },
+        { from: 'src/static/fonts', to: 'fonts' },
+        { from: 'src/static/images', to: 'images' },
       ],
     }),
     new EslingPlugin({ extensions: 'ts' }),
