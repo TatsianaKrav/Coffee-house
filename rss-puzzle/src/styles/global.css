@@ -4,15 +4,13 @@
 }
 
 @font-face {
-  font-family: 'Nautilus Pompilius';
-  src: url('../static/fonts/nautiluspompilius.ttf');
+  font-family: 'Comfortaa';
+  src: url('../static/fonts/Comfortaa-VariableFont_wght.ttf');
 }
 
 body {
   color: black;
-  font-family:
-    Nautilus Pompilius,
-    sans-serif;
+  font-family: Comfortaa, sans-serif;
   font-size: 22px;
   background-color: rgb(231, 220, 241);
   overflow-y: hidden;

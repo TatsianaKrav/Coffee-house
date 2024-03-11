@@ -5,8 +5,18 @@ import View from '../view';
 import './login.css';
 import '../../util/button/button.css';
 import '../../util/input-field/input-field.css';
+import State from '../../state/state';
+import LabelContent from '../../enums/labelContent';
+import {
+  isHtmlElement,
+  isHtmlInputElement,
+} from '../../util/assertion-function';
 
 export default class LoginPage extends View {
+  inputsElements: Array<HTMLInputElement> = [];
+
+  state: State;
+
   constructor() {
     const params: IElementParams = {
       tag: 'div',
@@ -15,23 +25,21 @@ export default class LoginPage extends View {
     };
 
     super(params);
+    this.state = new State();
     this.configureView(params);
   }
 
   configureView(params: IElementParams): HTMLElement {
     const loginComponent: ElementCreator = this.createView(params);
     const loginElement: HTMLElement = loginComponent.getElement();
-    if (!loginElement) throw new Error('Element not found');
 
-    const labelContent = {
-      FIELD1: 'First name',
-      FIELD2: 'Surname',
-    };
+    /*     переход на старстовую страницу */
+    if (!loginElement) throw new Error('Element not found');
 
     let inputParams: IElementParams = {
       tag: 'input',
       cssClasses: ['first-name'],
-      textContent: labelContent.FIELD1,
+      textContent: LabelContent.FIELD1,
     };
 
     let errorParams: IElementParams = {
@@ -49,13 +57,15 @@ export default class LoginPage extends View {
     inputParams = {
       tag: 'input',
       cssClasses: ['surname'],
-      textContent: labelContent.FIELD2,
+      textContent: LabelContent.FIELD2,
     };
 
     creatorInput = new InputFieldCreator(inputParams);
     this.elementCreator.addInnerElement(creatorInput);
 
     loginElement.append(creatorInput.getElement());
+
+    this.findInputElements(loginElement);
 
     const buttonParams: IElementParams = {
       tag: 'button',
@@ -77,14 +87,8 @@ export default class LoginPage extends View {
     errorCreator = new ElementCreator(errorParams);
     creatorInput.addInnerElement(errorCreator);
 
-    const inputs = this.findInputElements(loginElement);
-    const isHtmlElement = (v: Element): v is HTMLInputElement =>
-      v instanceof HTMLInputElement;
-
-    inputs.forEach((input) => {
-      if (isHtmlElement(input)) {
-        this.inputValidation(input, loginElement, buttonCreator.getElement());
-      }
+    this.inputsElements.forEach((input) => {
+      this.inputValidation(input, loginElement, buttonCreator.getElement());
     });
 
     return loginElement;
@@ -98,16 +102,25 @@ export default class LoginPage extends View {
     if (element instanceof HTMLInputElement) {
       element.onchange = () => {
         this.validateField(element);
-        this.toggleButton(loginElement, button);
+        this.toggleButton(button);
+
+        const validForm = this.validateLoginForm();
+        if (validForm) {
+          this.state.saveState('userInfo', {
+            name: this.inputsElements[0].value,
+            surname: this.inputsElements[1].value,
+          });
+        }
       };
     }
   }
 
-  toggleButton(container: HTMLElement, button: HTMLElement): void {
-    const loginFormValid = this.validateLoginForm(container);
+  toggleButton(button: HTMLElement): void {
+    const loginFormValid = this.validateLoginForm();
 
     if (loginFormValid) {
       button.removeAttribute('disabled');
+      localStorage.setItem('name', '');
     } else {
       button.setAttribute('disabled', '');
     }
@@ -126,9 +139,6 @@ export default class LoginPage extends View {
 
     const errorElement = element.nextElementSibling;
 
-    const isHtmlElement = (v: Element): v is HTMLInputElement =>
-      v instanceof HTMLElement;
-
     if (
       !element.value ||
       !element.value.match(regex) ||
@@ -137,17 +147,7 @@ export default class LoginPage extends View {
       element.style.borderColor = 'red';
       element.removeAttribute('valid');
 
-      if (errorElement && isHtmlElement(errorElement)) {
-        errorElement.style.display = 'block';
-
-        if (!element.value) {
-          errorElement.textContent = `Enter ${element.previousElementSibling?.innerHTML}`;
-        } else if (!element.value.match(regex)) {
-          errorElement.textContent = `Only English alphabet letters and ('-') symbol are acceptable. The 1st letter must be in uppercase`;
-        } else if (element.value.length < inputValueLength) {
-          errorElement.textContent = `Minimum ${inputValueLength} characters are required`;
-        }
-      }
+      this.showErrorMessage(element, errorElement, regex, inputValueLength);
     } else {
       element.removeAttribute('style');
       element.setAttribute('valid', 'true');
@@ -157,15 +157,13 @@ export default class LoginPage extends View {
     }
   }
 
-  validateLoginForm(container: HTMLElement): boolean {
-    let isValide: boolean = false;
-    const inputs = this.findInputElements(container);
-    isValide = inputs.every((input) => input.getAttribute('valid') === 'true');
-
-    return isValide;
+  validateLoginForm(): boolean {
+    return this.inputsElements.every(
+      (input) => input.getAttribute('valid') === 'true',
+    );
   }
 
-  findInputElements(container: HTMLElement): Array<Element> {
+  findInputElements(container: HTMLElement) {
     const pageChildren: Array<Element> = Array.from(container.children);
     const divInputs: Array<Element> = pageChildren.filter((child) => {
       return child.tagName !== 'BUTTON';
@@ -174,6 +172,30 @@ export default class LoginPage extends View {
     const inputs: Array<Element> = divInputs.map((item) => {
       return Array.from(item.children)[1];
     });
-    return inputs;
+
+    inputs.forEach((input) => {
+      if (isHtmlInputElement(input)) {
+        this.inputsElements.push(input);
+      }
+    });
+  }
+
+  showErrorMessage(
+    element: HTMLInputElement,
+    errorElement: Element | null,
+    regex: RegExp,
+    inputValueLength: number,
+  ): void {
+    if (errorElement && isHtmlElement(errorElement)) {
+      errorElement.style.display = 'block';
+
+      if (!element.value) {
+        errorElement.textContent = `Enter ${element.previousElementSibling?.innerHTML}`;
+      } else if (!element.value.match(regex)) {
+        errorElement.textContent = `Only English alphabet letters and ('-') symbol are acceptable. The 1st letter must be in uppercase`;
+      } else if (element.value.length < inputValueLength) {
+        errorElement.textContent = `Minimum ${inputValueLength} characters are required`;
+      }
+    }
   }
 }
