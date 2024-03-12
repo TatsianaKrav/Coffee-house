@@ -1,3 +1,5 @@
+import UserInfo from '../types/UserInfo';
+
 export default class State {
   fields: Map<string, string>;
 
@@ -5,16 +7,19 @@ export default class State {
     this.fields = this.loadState();
   }
 
-  saveState(value: string, object: { name: string; surname: string }): void {
-    localStorage.setItem(value, JSON.stringify(object));
+  saveState(value: string, userData: UserInfo): void {
+    localStorage.setItem(value, JSON.stringify(userData));
+  }
+
+  removeState(): void {
+    localStorage.removeItem('userInfo');
   }
 
   loadState(): Map<string, string> {
     const userInfoStored: string | null = localStorage.getItem('userInfo');
 
     if (userInfoStored) {
-      const fieldObject: { name: string; surname: string } =
-        JSON.parse(userInfoStored);
+      const fieldObject: UserInfo = JSON.parse(userInfoStored);
 
       return new Map(Object.entries(fieldObject));
     }

@@ -3,6 +3,7 @@ export interface IElementParams {
   cssClasses: Array<string>;
   textContent?: string;
   attr?: Array<IAttribute>;
+  callback?: () => void;
 
   /*   callback: () => void | null; */
 }

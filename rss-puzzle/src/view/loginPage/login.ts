@@ -11,13 +11,15 @@ import {
   isHtmlElement,
   isHtmlInputElement,
 } from '../../util/assertion-function';
+import Router from '../../router/router';
+import Pages from '../../enums/pages';
 
 export default class LoginPage extends View {
   inputsElements: Array<HTMLInputElement> = [];
 
   state: State;
 
-  constructor() {
+  constructor(router: Router, state: State) {
     const params: IElementParams = {
       tag: 'div',
       cssClasses: ['login-page'],
@@ -25,15 +27,15 @@ export default class LoginPage extends View {
     };
 
     super(params);
-    this.state = new State();
-    this.configureView(params);
+    this.state = state;
+    this.configureView(params, router);
   }
 
-  configureView(params: IElementParams): HTMLElement {
+  configureView(params: IElementParams, router: Router): HTMLElement {
     const loginComponent: ElementCreator = this.createView(params);
     const loginElement: HTMLElement = loginComponent.getElement();
 
-    /*     переход на старстовую страницу */
+    /*  стр ошибки */
     if (!loginElement) throw new Error('Element not found');
 
     let inputParams: IElementParams = {
@@ -72,6 +74,7 @@ export default class LoginPage extends View {
       cssClasses: ['btn'],
       textContent: 'Login',
       attr: [{ name: 'disabled', value: '' }],
+      callback: () => router.navigate(Pages.START),
     };
 
     const buttonCreator: ElementCreator = new ElementCreator(buttonParams);

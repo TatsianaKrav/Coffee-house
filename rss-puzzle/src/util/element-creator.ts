@@ -26,15 +26,8 @@ export default class ElementCreator {
         }
       });
     }
-
-    /*   this.setCallback(params.callback); */
-  }
-
-  private setCallback(callback: (event: MouseEvent) => void): void {
-    if (this.element) {
-      this.element.addEventListener('click', (event: MouseEvent) =>
-        callback(event),
-      );
+    if (params.callback) {
+      this.setCallback(params.callback);
     }
   }
 
@@ -55,5 +48,11 @@ export default class ElementCreator {
   getInnerElements(): HTMLCollection {
     if (!this.element) throw new Error('No element found');
     return this.element.children;
+  }
+
+  setCallback(callback: () => void) {
+    if (typeof callback === 'function' && this.element) {
+      this.element.addEventListener('click', () => callback());
+    }
   }
 }
