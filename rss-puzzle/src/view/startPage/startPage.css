@@ -11,6 +11,31 @@
   background-size: cover;
 }
 
+.greeting {
+  margin-bottom: 35px;
+  animation: fontTransformer 1s ease;
+}
+
+@keyframes fontTransformer {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.user-name {
+  color: rgb(124, 40, 207);
+  font-weight: bold;
+  text-shadow:
+    1px 1px 2px black,
+    0 0 1em rgb(214, 187, 241);
+}
+
 .game-name {
   font-weight: bold;
   text-transform: uppercase;

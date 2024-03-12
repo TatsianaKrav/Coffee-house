@@ -21,6 +21,20 @@ export default class StartPage extends View {
   }
 
   configureView(): void {
+    const greetingParams: IElementParams = {
+      tag: 'div',
+      cssClasses: ['greeting'],
+    };
+
+    const greetingCreator: ElementCreator = new ElementCreator(greetingParams);
+
+    const [name, surname] = this.showPersonalInfo();
+
+    const greetingElement: HTMLElement = greetingCreator.getElement();
+    greetingElement.innerHTML = `Welcome, <span class="user-name">${name} ${surname}</span>`;
+
+    this.elementCreator.addInnerElement(greetingElement);
+
     const nameParams: IElementParams = {
       tag: 'div',
       cssClasses: ['game-name'],
@@ -41,5 +55,16 @@ export default class StartPage extends View {
       descriptionParams,
     );
     this.elementCreator.addInnerElement(descriptionCreator.getElement());
+  }
+
+  showPersonalInfo(): Array<string> {
+    const mappedInfo = this.state.loadState();
+    const [userName, userSurname] = [
+      mappedInfo.get('name'),
+      mappedInfo.get('surname'),
+    ];
+
+    if (userName && userSurname) return [userName, userSurname];
+    return ['', ''];
   }
 }
