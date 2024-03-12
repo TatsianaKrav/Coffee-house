@@ -1,12 +1,17 @@
+import Pages from '../../enums/pages';
 import { IElementParams } from '../../interfaces/IElementParams';
 import Router from '../../router/router';
 import State from '../../state/state';
+import ButtonCreator from '../../util/button/button-creator';
 import ElementCreator from '../../util/element-creator';
 import View from '../view';
 import './startPage.css';
+import '../../util/button/button.css';
 
 export default class StartPage extends View {
   state: State;
+
+  router: Router;
 
   constructor(router: Router, state: State) {
     const params: IElementParams = {
@@ -16,6 +21,7 @@ export default class StartPage extends View {
 
     super(params);
     this.state = state;
+    this.router = router;
 
     this.configureView();
   }
@@ -54,7 +60,19 @@ export default class StartPage extends View {
     const descriptionCreator: ElementCreator = new ElementCreator(
       descriptionParams,
     );
+
     this.elementCreator.addInnerElement(descriptionCreator.getElement());
+
+    const buttonParams: IElementParams = {
+      tag: 'button',
+      cssClasses: ['btn', 'start-btn'],
+      callback: () => this.router.navigate(Pages.GAME),
+    };
+
+    const buttonCreator = new ButtonCreator(buttonParams);
+    const buttonElement = buttonCreator.getElement();
+    buttonElement.innerHTML = '<span> Start <span/>';
+    this.elementCreator.addInnerElement(buttonElement);
   }
 
   showPersonalInfo(): Array<string> {

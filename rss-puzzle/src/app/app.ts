@@ -2,6 +2,7 @@ import Pages from '../enums/pages';
 import Router from '../router/router';
 import State from '../state/state';
 import Route from '../types/Route';
+import GamePage from '../view/gamePage/gamePage';
 import Header from '../view/header/header';
 import LoginPage from '../view/loginPage/login';
 import StartPage from '../view/startPage/startPage';
@@ -29,8 +30,6 @@ export default class App {
 
     this.header = new Header(this.router);
     this.main = new Main();
-
-    /*   this.main.setContent(new LoginPage(this.router, state)); */
 
     if (state.fields.size === 0) {
       this.main.setContent(new LoginPage(this.router, state));
@@ -66,7 +65,9 @@ export default class App {
       },
       {
         path: `${Pages.GAME}`,
-        callback: () => {},
+        callback: () => {
+          this.setContent(new GamePage(this.router));
+        },
       },
       {
         path: `${Pages.RESULT}`,
