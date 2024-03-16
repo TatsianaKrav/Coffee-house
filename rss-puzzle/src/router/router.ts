@@ -19,6 +19,8 @@ export default class Router {
 
     const route = this.routes.find((item) => item.path === pathForFound);
 
+    /*  window.history.pushState(null, '', `/${url}`); */
+
     if (!route) {
       this.navigate(Pages.LOGIN);
       return;

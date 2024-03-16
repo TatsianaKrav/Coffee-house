@@ -4,8 +4,6 @@ export interface IElementParams {
   textContent?: string;
   attr?: Array<IAttribute>;
   callback?: () => void;
-
-  /*   callback: () => void | null; */
 }
 
 interface IAttribute {

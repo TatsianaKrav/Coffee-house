@@ -1,0 +1,20 @@
+.sourceContainer {
+  width: 718px;
+  height: 40px;
+  border-bottom: 2px solid purple;
+  display: flex;
+  gap: 3px;
+}
+
+.puzzle-wrapper {
+  flex-grow: 1;
+  height: 100%;
+}
+
+.puzzle {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}

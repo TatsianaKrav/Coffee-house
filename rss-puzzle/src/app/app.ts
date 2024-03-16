@@ -45,12 +45,12 @@ export default class App {
 
   createRoutes(state: State): Array<Route> {
     return [
-      {
+      /*    {
         path: ``,
         callback: () => {
           this.setContent(new LoginPage(this.router, state));
         },
-      },
+      }, */
       {
         path: `${Pages.LOGIN}`,
         callback: () => {

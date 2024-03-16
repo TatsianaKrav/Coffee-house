@@ -1,0 +1,22 @@
+.game-page {
+  display: flex;
+  align-items: center;
+  padding-right: 30px;
+  padding-left: 30px;
+  /*   justify-content: center; */
+  gap: 10px;
+  height: 90vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.translate {
+  text-align: center;
+  align-self: center;
+  font-size: 18px;
+}

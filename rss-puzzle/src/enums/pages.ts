@@ -1,5 +1,5 @@
 enum Pages {
-  LOGIN = ' login',
+  LOGIN = 'login',
   START = 'start',
   GAME = 'game',
   RESULT = 'result',
