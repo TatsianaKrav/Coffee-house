@@ -20,12 +20,10 @@ export default class Header extends View {
     super(params);
     this.router = router;
     this.state = new State();
-    this.configureView(params);
+    this.configureView();
   }
 
-  configureView(params: IElementParams): HTMLElement {
-    const headerComponent: ElementCreator = this.createView(params);
-
+  configureView() {
     const imgParams: IElementParams = {
       tag: 'img',
       cssClasses: ['logo'],
@@ -39,12 +37,12 @@ export default class Header extends View {
           value: 'images/logo.jpg',
         },
       ],
+      callback: () => this.router.navigate(Pages.START),
     };
 
     const elementCreatorImg: ElementCreator = new ElementCreator(imgParams);
-    const headerElement = headerComponent.getElement();
-    if (!headerElement) throw new Error('Element not found');
-    headerElement.append(elementCreatorImg.getElement());
+
+    this.elementCreator.addInnerElement(elementCreatorImg.getElement());
 
     const logoutParams: IElementParams = {
       tag: 'a',
@@ -58,8 +56,6 @@ export default class Header extends View {
     };
 
     const logoutComponent: ElementCreator = new ElementCreator(logoutParams);
-    headerElement.append(logoutComponent.getElement());
-
-    return headerElement;
+    this.elementCreator.addInnerElement(logoutComponent.getElement());
   }
 }

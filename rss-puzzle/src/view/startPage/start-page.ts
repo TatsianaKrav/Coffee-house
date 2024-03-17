@@ -7,6 +7,8 @@ import ElementCreator from '../../util/element-creator';
 import View from '../view';
 import './startPage.css';
 import '../../util/button/button.css';
+import checkUserInfo from '../../util/check-user-info';
+import toggleLogout from '../../util/toggle-logout';
 
 export default class StartPage extends View {
   state: State;
@@ -22,7 +24,15 @@ export default class StartPage extends View {
     super(params);
     this.state = state;
     this.router = router;
+    if (checkUserInfo(state)) {
+      /*   this.router.navigate(Pages.LOGIN); */
+      window.location.pathname = '/login';
+    }
 
+    const logoutElement = document.querySelector<HTMLElement>('.logout');
+    if (logoutElement) {
+      toggleLogout(checkUserInfo(this.state), logoutElement);
+    }
     this.configureView();
   }
 

@@ -1,13 +1,13 @@
-import Pages from '../enums/pages';
-import Router from '../router/router';
-import State from '../state/state';
-import Route from '../types/Route';
-import GamePage from '../view/gamePage/gamePage';
-import Header from '../view/header/header';
-import LoginPage from '../view/loginPage/login';
-import StartPage from '../view/startPage/startPage';
-import View from '../view/view';
-import Main from './main/main';
+import Pages from './enums/pages';
+import Router from './router/router';
+import State from './state/state';
+import Route from './types/Route';
+import GamePage from './view/gamePage/game-page';
+import Header from './view/header/header';
+import LoginPage from './view/login-page/login';
+import StartPage from './view/startPage/start-page';
+import View from './view/view';
+import Main from './view/main/main';
 
 export default class App {
   router: Router;
@@ -32,7 +32,7 @@ export default class App {
     this.main = new Main();
 
     if (state.fields.size === 0) {
-      this.main.setContent(new LoginPage(this.router, state));
+      this.main.setContent(new LoginPage(this.router));
     } else {
       this.main.setContent(new StartPage(this.router, state));
     }
@@ -45,16 +45,10 @@ export default class App {
 
   createRoutes(state: State): Array<Route> {
     return [
-      /*    {
-        path: ``,
-        callback: () => {
-          this.setContent(new LoginPage(this.router, state));
-        },
-      }, */
       {
         path: `${Pages.LOGIN}`,
         callback: () => {
-          this.setContent(new LoginPage(this.router, state));
+          this.setContent(new LoginPage(this.router));
         },
       },
       {

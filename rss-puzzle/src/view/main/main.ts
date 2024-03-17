@@ -1,5 +1,5 @@
 import { IElementParams } from '../../interfaces/IElementParams';
-import View from '../../view/view';
+import View from '../view';
 
 export default class Main extends View {
   constructor() {

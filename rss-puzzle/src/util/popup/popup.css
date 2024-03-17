@@ -1,0 +1,69 @@
+.modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 20px;
+  display: flex;
+  z-index: 10;
+  border: 2px solid black;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.2s linear;
+  overflow-y: hidden;
+}
+
+.modal.show {
+  visibility: visible;
+  opacity: 1;
+  transition: all 0.2s linear;
+  overflow-y: auto;
+}
+
+.modal-window {
+  max-width: 500px;
+  padding: 100px;
+  border-radius: 15px;
+  background-color: #fbe4b7;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  font-size: 24px;
+  box-sizing: border-box;
+  cursor: pointer;
+  position: relative;
+}
+
+.close {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.close:before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 11px;
+  width: 1px;
+  height: 30px;
+  background-color: purple;
+  transform: rotate(45deg);
+}
+
+.close:after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 11px;
+  width: 1px;
+  height: 30px;
+  background-color: purple;
+  transform: rotate(-45deg);
+}

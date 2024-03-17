@@ -4,7 +4,7 @@ const EslingPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.ts',
+  entry: './index.ts',
   mode: 'development',
   devtool: 'inline-source-map',
   module: {
@@ -31,14 +31,15 @@ module.exports = {
     static: {
       directory: '.dist',
     },
+    historyApiFallback: true,
   },
   plugins: [
     new HtmlWebpackPlugin(),
     new CopyPlugin({
       patterns: [
-        { from: 'src/styles', to: 'styles' },
-        { from: 'src/static/fonts', to: 'fonts' },
-        { from: 'src/static/images', to: 'images' },
+        { from: 'styles', to: 'styles' },
+        { from: 'static/fonts', to: 'fonts' },
+        { from: 'static/images', to: 'images' },
       ],
     }),
     new EslingPlugin({ extensions: 'ts' }),

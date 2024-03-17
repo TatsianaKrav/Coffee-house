@@ -13,13 +13,17 @@ import {
 } from '../../util/assertion-function';
 import Router from '../../router/router';
 import Pages from '../../enums/pages';
+import toggleLogout from '../../util/toggle-logout';
+import checkUserInfo from '../../util/check-user-info';
 
 export default class LoginPage extends View {
   inputsElements: Array<HTMLInputElement> = [];
 
   state: State;
 
-  constructor(router: Router, state: State) {
+  router: Router;
+
+  constructor(router: Router) {
     const params: IElementParams = {
       tag: 'div',
       cssClasses: ['login-page'],
@@ -27,16 +31,19 @@ export default class LoginPage extends View {
     };
 
     super(params);
-    this.state = state;
-    this.configureView(params, router);
+    this.router = router;
+    this.state = new State();
+
+    const logoutElement = document.querySelector<HTMLElement>('.logout');
+    if (logoutElement) {
+      toggleLogout(checkUserInfo(this.state), logoutElement);
+    }
+
+    this.configureView();
   }
 
-  configureView(params: IElementParams, router: Router): HTMLElement {
-    const loginComponent: ElementCreator = this.createView(params);
-    const loginElement: HTMLElement = loginComponent.getElement();
-
-    /*  стр ошибки */
-    if (!loginElement) throw new Error('Element not found');
+  configureView() {
+    const loginElement: HTMLElement = this.elementCreator.getElement();
 
     let inputParams: IElementParams = {
       tag: 'input',
@@ -74,7 +81,7 @@ export default class LoginPage extends View {
       cssClasses: ['btn'],
       textContent: 'Login',
       attr: [{ name: 'disabled', value: '' }],
-      callback: () => router.navigate(Pages.START),
+      callback: () => this.router.navigate(Pages.START),
     };
 
     const buttonCreator: ElementCreator = new ElementCreator(buttonParams);
@@ -91,17 +98,11 @@ export default class LoginPage extends View {
     creatorInput.addInnerElement(errorCreator);
 
     this.inputsElements.forEach((input) => {
-      this.inputValidation(input, loginElement, buttonCreator.getElement());
+      this.inputValidation(input, buttonCreator.getElement());
     });
-
-    return loginElement;
   }
 
-  inputValidation(
-    element: HTMLInputElement,
-    loginElement: HTMLElement,
-    button: HTMLElement,
-  ): void {
+  inputValidation(element: HTMLInputElement, button: HTMLElement): void {
     if (element instanceof HTMLInputElement) {
       element.onchange = () => {
         this.validateField(element);

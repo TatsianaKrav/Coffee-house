@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "prettier --write .",
-    "ci:format": "prettier --check .",
+    "format": "prettier --write . src/**/*",
+    "ci:format": "prettier --check . src/**/*",
     "lint": "eslint . --ext .ts",
     "prepare": "cd .. && husky rss-puzzle/.husky",
     "build": "webpack",
