@@ -50,9 +50,9 @@ export default class ElementCreator {
     return this.element.children;
   }
 
-  setCallback(callback: () => void) {
+  setCallback(callback: (e: MouseEvent) => void) {
     if (typeof callback === 'function' && this.element) {
-      this.element.addEventListener('click', () => callback());
+      this.element.addEventListener('click', (e) => callback(e));
     }
   }
 }

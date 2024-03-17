@@ -10,6 +10,8 @@ import './source.css';
 export default class SourceContainer extends View {
   top: number = 0;
 
+  currentSentence: number = 0;
+
   constructor(level: number, round: number, sentence: number) {
     const params: IElementParams = {
       tag: 'div',
@@ -17,6 +19,7 @@ export default class SourceContainer extends View {
     };
 
     super(params);
+    this.currentSentence = sentence;
 
     this.configureView(level, round, sentence);
   }
@@ -36,6 +39,7 @@ export default class SourceContainer extends View {
           { name: 'draggable', value: 'true' },
           { name: 'id', value: `${i}` },
         ],
+        callback: this.moveCard.bind(this),
       };
 
       const puzzleWrapperParams: IElementParams = {
@@ -90,6 +94,44 @@ export default class SourceContainer extends View {
       gap = 3;
     }
 
+    this.setWrapperWidth();
     this.top -= heigthOfPuzzle;
+  }
+
+  moveCard(event: Event) {
+    const currentPuzzle = event.target;
+
+    if (currentPuzzle && currentPuzzle instanceof HTMLElement) {
+      const puzzleId = currentPuzzle.getAttribute('id');
+      const elemetWidth = getComputedStyle(currentPuzzle).width;
+      const rows = document.querySelectorAll<HTMLElement>('.row');
+      const wrappers = this.elementCreator.getElement().children;
+
+      if (currentPuzzle.parentElement?.classList.contains('row')) {
+        const targetCell = Array.from(wrappers).find(
+          (item) => item.getAttribute('id') === puzzleId,
+        );
+
+        if (targetCell) {
+          targetCell.appendChild(currentPuzzle);
+        }
+      } else if (
+        currentPuzzle.parentElement?.classList.contains('puzzle-wrapper')
+      ) {
+        rows[this.currentSentence].append(currentPuzzle);
+        currentPuzzle.style.width = elemetWidth;
+      }
+    }
+  }
+
+  setWrapperWidth() {
+    const wrappers = Array.from(this.elementCreator.getElement().children);
+    const puzzles = wrappers.map((item) => item.children[0]);
+
+    wrappers.forEach((item, index) => {
+      if (item instanceof HTMLElement) {
+        item.style.width = getComputedStyle(puzzles[index]).width;
+      }
+    });
   }
 }

@@ -3,7 +3,7 @@ export interface IElementParams {
   cssClasses: Array<string>;
   textContent?: string;
   attr?: Array<IAttribute>;
-  callback?: () => void;
+  callback?: (e: MouseEvent) => void;
 }
 
 interface IAttribute {

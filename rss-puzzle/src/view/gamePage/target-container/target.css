@@ -5,10 +5,6 @@
   grid-gap: 3px;
   background-color: grey;
   border: 1px solid rgb(77, 76, 76);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  position: relative;
 }
 
 .row {
@@ -16,4 +12,8 @@
   gap: 3px;
   height: 40px;
   /*   display: none; */
+}
+
+.row .puzzle {
+  flex-grow: initial;
 }
