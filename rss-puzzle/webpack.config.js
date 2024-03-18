@@ -36,7 +36,12 @@ module.exports = {
     historyApiFallback: true,
   },
   plugins: [
-    new HtmlWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      base:
+        process.env.NODE_ENV === 'development'
+          ? '/'
+          : 'https://rolling-scopes-school.github.io/tatsianakrav-JSFE2023Q4/rss-puzzle/',
+    }),
     new CopyPlugin({
       patterns: [
         { from: 'styles', to: 'styles' },
