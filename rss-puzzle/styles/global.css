@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: 'Comfortaa';
+  src: url('../static/fonts/Comfortaa-VariableFont_wght.ttf');
+}
+
+body {
+  color: black;
+  font-family: Comfortaa, sans-serif;
+  font-size: 22px;
+  background-color: rgb(231, 220, 241);
+  overflow-y: hidden;
+}
