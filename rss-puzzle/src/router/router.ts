@@ -19,55 +19,11 @@ export default class Router {
     document.addEventListener('DOMContentLoaded', () => {
       this.handler.navigate(this.getCurrentPath());
     });
-
-    /*   document.addEventListener('DOMContentLoaded', () => {
-      const path = this.getCurrentPath();
-      if (this.state.fields.size > 0) {
-        this.navigate(Pages.START);
-      } else {
-        this.navigate(path);
-      }
-    });
-    window.addEventListener('popstate', this.browserChangeHandler.bind(this));
-    window.addEventListener('hashchange', this.browserChangeHandler.bind(this)); */
   }
-
-  /*   navigate(url: string) {
-    const request = this.parseUrl(url);
-
-    const pathForFound =
-      request.resource === ''
-        ? request.path
-        : `${request.path}/${request.resource}`;
-
-    const route = this.routes.find((item) => item.path === pathForFound);
-
-    window.history.pushState(null, '', `/${url}`);
-
-    if (!route) {
-      this.navigate(Pages.LOGIN);
-      return;
-    }
-
-    route?.callback();
-  } */
 
   navigate(url: string) {
     this.handler.navigate(url);
   }
-
-  /*  parseUrl(url: string): UrlInfo {
-    const result: UrlInfo = { path: '', resource: '' };
-    const path: Array<string> = url.split('/');
-    [result.path, result.resource = ''] = path;
-
-    return result;
-  } */
-
-  /*  browserChangeHandler() {
-    const path = this.getCurrentPath();
-    this.navigate(path);
-  } */
 
   getCurrentPath(): string {
     if (window.location.hash) {
