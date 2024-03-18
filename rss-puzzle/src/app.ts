@@ -19,9 +19,7 @@ export default class App {
   constructor() {
     this.header = null;
     this.main = null;
-
-    const state = new State();
-    const routes = this.createRoutes(state);
+    const routes = this.createRoutes();
     this.router = new Router(routes);
   }
 
@@ -34,7 +32,7 @@ export default class App {
     if (state.fields.size === 0) {
       this.main.setContent(new LoginPage(this.router));
     } else {
-      this.main.setContent(new StartPage(this.router, state));
+      this.main.setContent(new StartPage(this.router));
     }
 
     document.body.append(
@@ -43,7 +41,7 @@ export default class App {
     );
   }
 
-  createRoutes(state: State): Array<Route> {
+  createRoutes(): Array<Route> {
     return [
       {
         path: `${Pages.LOGIN}`,
@@ -54,7 +52,7 @@ export default class App {
       {
         path: `${Pages.START}`,
         callback: () => {
-          this.setContent(new StartPage(this.router, state));
+          this.setContent(new StartPage(this.router));
         },
       },
       {

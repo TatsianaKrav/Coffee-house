@@ -15,16 +15,16 @@ export default class StartPage extends View {
 
   router: Router;
 
-  constructor(router: Router, state: State) {
+  constructor(router: Router) {
     const params: IElementParams = {
       tag: 'div',
       cssClasses: ['start-page'],
     };
 
     super(params);
-    this.state = state;
+    this.state = new State();
     this.router = router;
-    if (checkUserInfo(state)) {
+    if (checkUserInfo(this.state)) {
       /*   this.router.navigate(Pages.LOGIN); */
       window.location.pathname = '/login';
     }

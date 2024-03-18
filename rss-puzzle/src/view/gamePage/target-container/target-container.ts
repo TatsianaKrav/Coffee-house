@@ -9,7 +9,7 @@ export default class TargetContainer extends View {
   constructor(level: number, round: number) {
     const params: IElementParams = {
       tag: 'div',
-      cssClasses: ['targetContainer'],
+      cssClasses: ['target-container'],
     };
 
     super(params);

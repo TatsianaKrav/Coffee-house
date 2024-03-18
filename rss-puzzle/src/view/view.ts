@@ -24,4 +24,11 @@ export default class View {
 
     return this.elementCreator;
   }
+
+  removeChilds() {
+    const currentElement = this.getHTMLElement();
+    while (currentElement.firstChild) {
+      currentElement.firstChild.remove();
+    }
+  }
 }

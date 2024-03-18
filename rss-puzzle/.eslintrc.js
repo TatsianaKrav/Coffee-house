@@ -47,5 +47,6 @@ module.exports = {
     'operator-linebreak': 0,
     'prefer-destructuring': 0,
     'no-plusplus': 0,
+    'lines-between-class-members': 0,
   },
 };

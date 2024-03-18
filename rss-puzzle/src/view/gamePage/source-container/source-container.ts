@@ -20,6 +20,8 @@ export default class SourceContainer extends View {
 
   wordsCollection: IWordCollection | null = null;
 
+  currentRoundWords: Array<IWord> | null = null;
+
   constructor(level: number, round: number, sentence: number, top: number) {
     const params: IElementParams = {
       tag: 'div',
@@ -43,9 +45,11 @@ export default class SourceContainer extends View {
   ) {
     this.wordsCollection = await getWordsCollection(level);
     this.currentSentence = currentSentence;
+    this.currentRoundWords = this.wordsCollection.rounds[this.round].words;
 
     const words: Array<IWord> = this.wordsCollection.rounds[round].words;
-    const currentWords = words[currentSentence].textExample.split(' ');
+
+    const currentWords = words[this.currentSentence].textExample.split(' ');
 
     for (let i = 0; i < currentWords.length; i++) {
       const puzzleParams: IElementParams = {
@@ -138,12 +142,12 @@ export default class SourceContainer extends View {
         currentPuzzle.style.width = elemetWidth;
       }
     }
-    if (!this.wordsCollection) return;
-    const words: Array<IWord> = this.wordsCollection.rounds[this.round].words;
-    const currentSentence = words[this.currentSentence].textExample;
+    if (!this.wordsCollection || !this.currentRoundWords) return;
+    const currentSentence =
+      this.currentRoundWords[this.currentSentence].textExample;
     const arrFromSentenceWords = currentSentence.split(' ');
     if (rowItems.length === arrFromSentenceWords.length) {
-      this.checkPhrase(currentSentence, words);
+      this.checkPhrase(currentSentence, this.currentRoundWords);
     }
   }
 
@@ -165,7 +169,7 @@ export default class SourceContainer extends View {
         rows[this.currentSentence].style.boxShadow = '0 0 5px red';
       }
     } else {
-      console.log('show new round');
+      button?.removeAttribute('disabled');
     }
   }
 }
