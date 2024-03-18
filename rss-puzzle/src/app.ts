@@ -30,6 +30,7 @@ export default class App {
     this.main = new Main();
 
     if (state.fields.size === 0) {
+      window.history.pushState(null, '', `/${Pages.LOGIN}`);
       this.main.setContent(new LoginPage(this.router));
     } else {
       this.main.setContent(new StartPage(this.router));
