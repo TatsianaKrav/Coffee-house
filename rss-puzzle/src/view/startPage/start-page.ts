@@ -24,10 +24,9 @@ export default class StartPage extends View {
     super(params);
     this.state = new State();
     this.router = router;
-    if (checkUserInfo(this.state)) {
-      /*   this.router.navigate(Pages.LOGIN); */
+    /*  if (checkUserInfo(this.state)) {
       window.location.pathname = '/login';
-    }
+    } */
 
     const logoutElement = document.querySelector<HTMLElement>('.logout');
     if (logoutElement) {
