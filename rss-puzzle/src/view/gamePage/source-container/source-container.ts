@@ -90,6 +90,8 @@ export default class SourceContainer extends View {
         this.elementCreator.addInnerElement(item);
       }
     });
+
+    this.dragAndDrop();
   }
 
   changeBgPosition(top: number) {
@@ -147,18 +149,18 @@ export default class SourceContainer extends View {
       this.currentRoundWords[this.currentSentence].textExample;
     const arrFromSentenceWords = currentSentence.split(' ');
     if (rowItems.length === arrFromSentenceWords.length) {
-      this.checkPhrase(currentSentence, this.currentRoundWords);
+      this.checkPhrase(currentSentence);
     }
   }
 
-  checkPhrase(currentSentence: string, words: Array<IWord>) {
+  checkPhrase(currentSentence: string) {
     const button = document.querySelector<HTMLElement>('.continue');
     const rows = document.querySelectorAll<HTMLElement>('.row');
     const rowItems = rows[this.currentSentence].children;
 
-    if (!rows) return;
+    if (!rows || !this.currentRoundWords) return;
 
-    if (this.currentSentence !== words.length - 1) {
+    if (this.currentSentence !== this.currentRoundWords.length - 1) {
       const resultSentence = getSentence(rowItems);
       if (resultSentence === currentSentence) {
         if (button && button instanceof HTMLElement) {
@@ -171,5 +173,74 @@ export default class SourceContainer extends View {
     } else {
       button?.removeAttribute('disabled');
     }
+  }
+
+  dragAndDrop() {
+    let dragged: HTMLElement | null = null;
+
+    const targetContainer =
+      document.querySelector<HTMLElement>('.target-container');
+    const sourceContainer = this.elementCreator.getElement();
+    const targetRow = targetContainer?.children[this.currentSentence];
+
+    sourceContainer.addEventListener('dragstart', (e) => {
+      const draggableElem = e.target;
+
+      if (
+        draggableElem &&
+        draggableElem instanceof HTMLElement &&
+        e.dataTransfer
+      ) {
+        e.dataTransfer.setData('width', getComputedStyle(draggableElem).width);
+
+        const draggableElemId = draggableElem.getAttribute('id');
+
+        if (draggableElemId) {
+          e.dataTransfer.setData('id', draggableElemId);
+        }
+        e.dataTransfer.setData('html', draggableElem.outerHTML);
+
+        const draggableElemParent = draggableElem.parentElement;
+
+        if (draggableElemParent) {
+          e.dataTransfer.setData('parent', draggableElemParent.className);
+        }
+        dragged = draggableElem;
+      }
+    });
+
+    if (!targetRow || !(targetRow instanceof HTMLElement)) return;
+    targetRow.addEventListener('dragover', (e) => {
+      e.preventDefault();
+    });
+
+    targetRow.addEventListener('drop', (e) => {
+      if (!e.dataTransfer) return;
+      if (e.target instanceof HTMLElement && e.target.className === 'puzzle') {
+        return;
+      }
+
+      if (!(e.target instanceof HTMLElement)) return;
+
+      if (dragged && dragged.parentNode) {
+        dragged.parentNode.removeChild(dragged);
+      }
+
+      const width = e.dataTransfer.getData('width');
+      if (dragged) {
+        e.target.append(dragged);
+        dragged.style.width = width;
+      }
+
+      const currentSentence = this.currentRoundWords
+        ? this.currentRoundWords[this.currentSentence].textExample
+        : '';
+
+      const rows = document.querySelectorAll<HTMLElement>('.row');
+      const rowItems = rows[this.currentSentence].children;
+      if (rowItems.length === currentSentence.split(' ').length) {
+        this.checkPhrase(currentSentence);
+      }
+    });
   }
 }
