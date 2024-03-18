@@ -2,32 +2,49 @@ import { IElementParams } from '../../../interfaces/IElementParams';
 import { IWord, IWordCollection } from '../../../interfaces/IWordCollection';
 import { isHtmlElement } from '../../../util/assertion-function';
 import ElementCreator from '../../../util/element-creator';
+import getSentence from '../../../util/get-sentence';
 import getWordsCollection from '../../../util/get-words-collection';
+import setWrapperWidth from '../../../util/set-wrapper-width';
 import shuffle from '../../../util/shuffle-array';
 import View from '../../view';
 import './source.css';
 
 export default class SourceContainer extends View {
-  top: number = 0;
+  top: number;
+
+  level: number;
+
+  round: number;
 
   currentSentence: number = 0;
 
-  constructor(level: number, round: number, sentence: number) {
+  wordsCollection: IWordCollection | null = null;
+
+  constructor(level: number, round: number, sentence: number, top: number) {
     const params: IElementParams = {
       tag: 'div',
-      cssClasses: ['sourceContainer'],
+      cssClasses: ['source-container'],
     };
 
     super(params);
+    this.level = level;
+    this.round = round;
+    this.top = top;
     this.currentSentence = sentence;
 
-    this.configureView(level, round, sentence);
+    this.configureView(level, round, sentence, top);
   }
 
-  async configureView(level: number, round: number, currentSentence: number) {
-    const wordsCollection: IWordCollection = await getWordsCollection(level);
+  async configureView(
+    level: number,
+    round: number,
+    currentSentence: number,
+    top: number,
+  ) {
+    this.wordsCollection = await getWordsCollection(level);
+    this.currentSentence = currentSentence;
 
-    const words: Array<IWord> = wordsCollection.rounds[round].words;
+    const words: Array<IWord> = this.wordsCollection.rounds[round].words;
     const currentWords = words[currentSentence].textExample.split(' ');
 
     for (let i = 0; i < currentWords.length; i++) {
@@ -50,7 +67,7 @@ export default class SourceContainer extends View {
 
       const puzzleCreator: ElementCreator = new ElementCreator(puzzleParams);
       const puzzle = puzzleCreator.getElement();
-      puzzle.style.backgroundImage = `url(https://github.com/rolling-scopes-school/rss-puzzle-data/blob/main/images/${wordsCollection.rounds[round].levelData.imageSrc}?raw=true)`;
+      puzzle.style.backgroundImage = `url(https://github.com/rolling-scopes-school/rss-puzzle-data/blob/main/images/${this.wordsCollection.rounds[round].levelData.imageSrc}?raw=true)`;
 
       const puzzleWrapperCreator: ElementCreator = new ElementCreator(
         puzzleWrapperParams,
@@ -59,7 +76,7 @@ export default class SourceContainer extends View {
       this.elementCreator.addInnerElement(puzzleWrapperCreator.getElement());
     }
 
-    this.changeBgPosition();
+    this.changeBgPosition(top);
 
     const wordsInSource = Array.from(this.elementCreator.getElement().children);
     shuffle(wordsInSource);
@@ -71,10 +88,9 @@ export default class SourceContainer extends View {
     });
   }
 
-  changeBgPosition() {
+  changeBgPosition(top: number) {
     let puzzleWidthWithGap = 0;
     let gap = 0;
-    const heigthOfPuzzle = 43;
 
     const currentContainer = this.elementCreator.getElement();
 
@@ -88,24 +104,24 @@ export default class SourceContainer extends View {
       puzzleWidthWithGap = puzzleWidth + gap;
 
       if (isHtmlElement(piecePuzzle)) {
-        piecePuzzle.style.backgroundPosition = `${left}px ${this.top}px`;
+        piecePuzzle.style.backgroundPosition = `${left}px ${top}px`;
       }
 
       gap = 3;
     }
 
-    this.setWrapperWidth();
-    this.top -= heigthOfPuzzle;
+    setWrapperWidth(this.elementCreator);
   }
 
   moveCard(event: Event) {
     const currentPuzzle = event.target;
+    const rows = document.querySelectorAll<HTMLElement>('.row');
+    const rowItems = rows[this.currentSentence].children;
+    const wrappers = this.elementCreator.getElement().children;
 
     if (currentPuzzle && currentPuzzle instanceof HTMLElement) {
       const puzzleId = currentPuzzle.getAttribute('id');
       const elemetWidth = getComputedStyle(currentPuzzle).width;
-      const rows = document.querySelectorAll<HTMLElement>('.row');
-      const wrappers = this.elementCreator.getElement().children;
 
       if (currentPuzzle.parentElement?.classList.contains('row')) {
         const targetCell = Array.from(wrappers).find(
@@ -122,16 +138,34 @@ export default class SourceContainer extends View {
         currentPuzzle.style.width = elemetWidth;
       }
     }
+    if (!this.wordsCollection) return;
+    const words: Array<IWord> = this.wordsCollection.rounds[this.round].words;
+    const currentSentence = words[this.currentSentence].textExample;
+    const arrFromSentenceWords = currentSentence.split(' ');
+    if (rowItems.length === arrFromSentenceWords.length) {
+      this.checkPhrase(currentSentence, words);
+    }
   }
 
-  setWrapperWidth() {
-    const wrappers = Array.from(this.elementCreator.getElement().children);
-    const puzzles = wrappers.map((item) => item.children[0]);
+  checkPhrase(currentSentence: string, words: Array<IWord>) {
+    const button = document.querySelector<HTMLElement>('.continue');
+    const rows = document.querySelectorAll<HTMLElement>('.row');
+    const rowItems = rows[this.currentSentence].children;
 
-    wrappers.forEach((item, index) => {
-      if (item instanceof HTMLElement) {
-        item.style.width = getComputedStyle(puzzles[index]).width;
+    if (!rows) return;
+
+    if (this.currentSentence !== words.length - 1) {
+      const resultSentence = getSentence(rowItems);
+      if (resultSentence === currentSentence) {
+        if (button && button instanceof HTMLElement) {
+          button.removeAttribute('disabled');
+        }
+        rows[this.currentSentence].style.boxShadow = 'none';
+      } else {
+        rows[this.currentSentence].style.boxShadow = '0 0 5px red';
       }
-    });
+    } else {
+      console.log('show new round');
+    }
   }
 }

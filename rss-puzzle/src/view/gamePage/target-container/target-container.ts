@@ -22,9 +22,6 @@ export default class TargetContainer extends View {
 
     const words: Array<IWord> = wordsCollection.rounds[round].words;
 
-    /*   console.log(wordsCollection);
-    console.log(words); */
-
     this.elementCreator.getElement().style.gridTemplateRows = `repeat(${words.length}, 40px)`;
 
     for (let i = 0; i < words.length; i += 1) {

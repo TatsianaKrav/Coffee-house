@@ -1,4 +1,4 @@
-.sourceContainer {
+.source-container {
   width: 718px;
   height: 40px;
   border-bottom: 2px solid purple;
@@ -21,4 +21,6 @@
   justify-content: center;
   height: 100%;
   cursor: pointer;
+  color: blueviolet;
+  font-weight: bold;
 }
