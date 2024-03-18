@@ -42,10 +42,10 @@ export default class GamePage extends View {
     this.router = router;
     this.state = new State();
 
-    if (checkUserInfo(this.state)) {
+    /*  if (checkUserInfo(this.state)) {
       window.location.pathname = '/login';
     }
-
+ */
     const logoutElement = document.querySelector<HTMLElement>('.logout');
     if (logoutElement) {
       toggleLogout(checkUserInfo(this.state), logoutElement);
