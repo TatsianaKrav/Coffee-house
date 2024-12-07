@@ -63,55 +63,6 @@ function handleAnimation() {
     slide.addEventListener("mouseout", function (e) {
       document.querySelector(".line.active").style.animationPlayState =
         "running";
-
-      /*  let list = e.currentTarget.parentNode.nextElementSibling.children;
-
-      e.preventDefault();
-      e.stopPropagation();
-
-      console.log(list);
-      let activeBar = null;
-      Array.from(list).forEach((item) => {
-        if (item.children[0].classList.contains("active")) {
-          activeBar = item.children[0];
-          if (activeBar != null) return;
-        }
-      });
-      console.log(activeBar);
-      let styles = getComputedStyle(activeBar);
-      let activeBarWidth = parseInt(styles.width);
-
-      fulledBarArea = (activeBarWidth * 100) / 40;
-
-      let leftFullBarArea = 100 - fulledBarArea;
-
-      leftTimeAnimation = (leftFullBarArea * 1500) / 100;
-
-      const removeBars = `
-            @keyframes removeBars {
-                from {
-                  width: ${fulledBarArea}%;
-                }
-                to {
-                  width: 100%;
-                }
-              }
-            `; */
-
-      /*  console.log(leftTimeAnimation); */
-      /* document.querySelector(
-        ".line.active"
-      ).style.animation = `removeBars ${leftTimeAnimation}ms linear infinite `; */
-      /* document
-            .querySelector(".line.active")
-            .animate([
-              { width: `${fulledBarArea}`},
-              { width: "100%" },
-            ],
-            {
-              duration: leftTimeAnimation,
-              iterations: Infinity
-            }); */
     });
 
     slide.addEventListener("mouseout", autoSliding);

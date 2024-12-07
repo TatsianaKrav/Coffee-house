@@ -1,16 +1,33 @@
 import products from "../../data/products.json" with { type: "json" };
 
-/* window.onload = () => { */
 const allProducts = products;
 const menuTabs = document.querySelectorAll(".menu-choice");
 const listOfDrinks = document.getElementsByClassName("menu-list-drinks")[0];
 const loadProductsButton = document.getElementById("load");
 const modal = document.getElementById("modal");
 const modalWindowElement = document.getElementById("modal-window");
+let screenWidth = parseInt(window.innerWidth);
+console.log(screenWidth);
 
 showDrinks("coffee");
 filterDrinks();
 loadMoreProducts();
+
+if (screenWidth <= 768) {
+  loadProductsButton.classList.add('active');
+} else {
+  loadProductsButton.classList.remove('active');
+}
+
+window.addEventListener('resize', () => {
+  screenWidth = parseInt(window.innerWidth);
+
+  if (screenWidth <= 768) {
+    loadProductsButton.classList.add('active');
+  } else {
+    loadProductsButton.classList.remove('active');
+  }
+})
 
 function filterDrinks() {
   listOfDrinks.addEventListener("click", (e) => {
@@ -40,12 +57,12 @@ function showDrinks(drink) {
       coffeeItemElement.setAttribute(
         "data-img",
         "../../assets/images/menu-page/" +
-          item.category +
-          "/" +
-          item.category +
-          "-" +
-          count +
-          ".png"
+        item.category +
+        "/" +
+        item.category +
+        "-" +
+        count +
+        ".png"
       );
 
       const coffeeItemImageElement = document.createElement("div");
@@ -55,12 +72,12 @@ function showDrinks(drink) {
       imageElement.setAttribute(
         "src",
         "../../assets/images/menu-page/" +
-          item.category +
-          "/" +
-          item.category +
-          "-" +
-          count +
-          ".png"
+        item.category +
+        "/" +
+        item.category +
+        "-" +
+        count +
+        ".png"
       );
       imageElement.setAttribute("alt", "coffee1");
 
@@ -110,26 +127,6 @@ function showDrinks(drink) {
       };
     });
   }
-
-  const mediaQuery = window.matchMedia("(max-width: 768px)");
-  let isNotDesktop = false;
-
-  function handleTabletChange(e) {
-    if (e.matches) {
-      return (isNotDesktop = true);
-    }
-    return false;
-  }
-
-  mediaQuery.addEventListener("change", handleTabletChange);
-
-  if (count <= 5) {
-    document.getElementById("load").style.display = "none";
-  } else if (count > 5 && handleTabletChange(mediaQuery)) {
-    document.getElementById("load").style.display = "flex";
-  }
-
-  isNotDesktop = false;
 }
 
 function showModal(elem) {
@@ -353,188 +350,3 @@ function calcAddsSum(product) {
     };
   });
 }
-/* }; */
-
-/* function showModal(elem) {
-  modal.innerHTML = "";
-  const product = products.find(
-    (product) => product.name === elem.dataset.name
-  );
-
-  const tabsSize = [
-    {
-      size: "S",
-      ml: "200ml",
-    },
-
-    {
-      size: "M",
-      ml: "300ml",
-    },
-    {
-      size: "L",
-      ml: "400ml",
-    },
-  ];
-
-  const tabsAdd = [
-    {
-      s: "1",
-      ml: "Sugar",
-    },
-
-    {
-      s: "2",
-      ml: "Lemon",
-    },
-    {
-      s: "3",
-      ml: "Syrup",
-    },
-  ];
-
-  const productImageElement = document.createElement("div");
-  productImageElement.className = "product-image";
-
-  const imageProduct = document.createElement("img");
-  imageProduct.setAttribute(
-    "src",
-    "../../assets/images/menu-page/coffee/coffee-1.png"
-  );
-  imageProduct.setAttribute("alt", "coffee-1");
-
-  productImageElement.appendChild(imageProduct);
-
-  const productInfoElement = document.createElement("div");
-  productInfoElement.className = "product-info";
-
-  const productNameElement = document.createElement("div");
-  productInfoElement.className = "product-name";
-  productInfoElement.innerText = product.name;
-
-  const productInfoWrapElement = document.createElement("div");
-  productInfoWrapElement.className = "product-info-wrap";
-
-  productInfoElement.appendChild(productNameElement);
-
-  const productDescriptionElement = document.createElement("div");
-  productDescriptionElement.className = "product-description";
-  productDescriptionElement.innerText = product.description;
-
-  const productSizeElement = document.createElement("div");
-  productSizeElement.className = "product-size";
-
-  const productSizeSpan = document.createElement("span");
-  productSizeSpan.innerText = "Size";
-
-  const sizeChoiceELement = document.createElement("div");
-  sizeChoiceELement.className = "size-choice";
-
-  const tabsELement = document.createElement("ul");
-  tabsELement.className = "tabs";
-
-  for (let i = 0; i < tabsSize.length; i++) {
-    const tabELement = document.createElement("li");
-    tabsELement.className = "tab";
-
-    const sizeELement = document.createElement("div");
-    sizeELement.className = "size";
-    sizeELement.innerText = tabsSize[i].size;
-
-    const btnTextELement = document.createElement("div");
-    btnTextELement.className = "btn-text";
-    sizeELement.innerText = tabsSize[i].size;
-
-    tabELement.appendChild(sizeELement);
-    tabELement.appendChild(btnTextELement);
-
-    tabsELement.appendChild(tabELement);
-  }
-
-  sizeChoiceELement.appendChild(tabsELement);
-
-  const productAdditivesELement = document.createElement("div");
-  productAdditivesELement.className = "product-additives";
-
-  const productAdditivesSpan = document.createElement("span");
-  productAdditivesSpan.innerText = "Additives";
-
-  const additivesChoiceELement = document.createElement("div");
-  additivesChoiceELement.className = "additives-choice";
-
-  const tabsAddELement = document.createElement("ul");
-  tabsAddELement.className = "tabs";
-
-  for (let i = 0; i < tabsAdd.length; i++) {
-    const tabELement = document.createElement("li");
-    tabsELement.className = "tab";
-
-    const sizeELement = document.createElement("div");
-    sizeELement.className = "size";
-    sizeELement.innerText = tabsAdd[i].size;
-
-    const btnTextELement = document.createElement("div");
-    btnTextELement.className = "btn-text";
-    sizeELement.innerText = tabsAdd[i].size;
-
-    tabELement.appendChild(sizeELement);
-    tabELement.appendChild(btnTextELement);
-
-    tabsAddELement.appendChild(tabELement);
-  }
-
-  productAdditivesELement.appendChild(tabsELement);
-
-  const totalELement = document.createElement("div");
-  totalELement.className = "total";
-
-  const totalSpanText = document.createElement("span");
-  totalSpanText.innerText = "Total:";
-
-  const totalSpanPrice = document.createElement("span");
-  totalSpanPrice.className = "total-price";
-  totalSpanPrice.innerText = "$" + +product.price;
-
-  totalELement.appendChild(totalSpanText);
-  totalELement.appendChild(totalSpanPrice);
-
-  const noteELement = document.createElement("div");
-  noteELement.className = "note";
-
-  const svgELement = document.createElement("img");
-  svgELement.setAttribute(
-    "src",
-    "../../assets/images/menu-page/info-empty.svg"
-  );
-  svgELement.setAttribute("alt", "empty");
-
-  const noteText = document.createElement("p");
-  noteText.innerText = `
-The cost is not final. Download our mobile app to see the
-                  final price and place your order. Earn loyalty points and
-                  enjoy your favorite coffee with up to 20% discount.`;
-
-  noteELement.appendChild(svgELement);
-  noteELement.appendChild(noteText);
-
-  const buttonCloseElement = document.createElement("button");
-  buttonCloseElement.setAttribute("id", "modal-close");
-  buttonCloseElement.innerText = "Close";
-
-  productInfoWrapElement.appendChild(productDescriptionElement);
-  productInfoWrapElement.appendChild(productSizeElement);
-  productInfoWrapElement.appendChild(productAdditivesELement);
-  productInfoWrapElement.appendChild(totalELement);
-  productInfoWrapElement.appendChild(noteELement);
-  productInfoWrapElement.appendChild(buttonCloseElement);
-
-  productInfoElement.appendChild(productInfoWrapElement);
-
-  modalWindowElement.appendChild(productImageElement);
-  modalWindowElement.appendChild(productInfoElement);
-
-  const modalCloseButton = document.getElementById("modal-close");
-  console.log(modalWindowElement);
-
-
- /*  handleModal(); */

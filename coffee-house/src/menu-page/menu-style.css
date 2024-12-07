@@ -194,8 +194,16 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  display: none;
+  /*   display: none; */
+  opacity: 0;
+  visibility: hidden;
   cursor: pointer;
+  transition: all 0.5s linear;
+}
+
+.more-items.active {
+  opacity: 1;
+  visibility: visible;
 }
 
 .modal {
@@ -304,7 +312,7 @@ label span:first-child {
   margin-right: 8px;
 }
 
-input[type="radio"]:checked ~ label {
+input[type="radio"]:checked~label {
   cursor: default;
 }
 
@@ -313,15 +321,17 @@ input[type="radio"]:checked ~ label {
 }
 
 @media (hover: hover) and (pointer: fine) {
+
   .modal-tab:hover,
-  input:checked ~ .modal-tab {
+  input:checked~.modal-tab {
     background-color: #403f3d;
   }
 }
 
 @media (hover: hover) and (pointer: fine) {
+
   .modal-tab:hover label span:first-child,
-  input:checked ~ label span:first-child {
+  input:checked~label span:first-child {
     background-color: #e1d4c9;
   }
 }
@@ -332,9 +342,10 @@ input[type="radio"]:checked ~ label {
   }
 }
 
-input:checked ~ label span:last-child {
+input:checked~label span:last-child {
   color: #e1d4c9;
 }
+
 .modal-tab input {
   cursor: pointer;
 }
@@ -385,7 +396,8 @@ input:checked ~ label span:last-child {
   color: #403f3d;
   text-align: center;
   font-size: 16px;
-  line-height: 150%; /* 24px */
+  line-height: 150%;
+  /* 24px */
   cursor: pointer;
 }
 
